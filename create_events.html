@@ -14,7 +14,7 @@
       <h1>Create Event</h1>
       <h2>Fill in the details to create a new event</h2>
 
-      <form class="image-grid">
+      <div class="image-grid">
         <figure>
           <img width="300" height="200" src="images/yoga.jpg" alt="yoga" />
         </figure>
@@ -46,7 +46,8 @@
           <img width="300" height="200" src="images/lan.jpg" alt="lan" />
         </figure>
       </div>
-      <div class="event-form">
+
+      <form class="event-form">
         <div>
           <label for="event-title">Event title:</label>
           <input
@@ -148,25 +149,23 @@
         <button type="submit">Create and post event</button>
         <button type="reset">Cancel</button>
 
-      <fieldset>
-        <!-- bruges til at gruppere relaterede form felter-->
-        <legend>Financial Support</legend>
-        <label>
-          <input type="checkbox" name="financial-support" />
-          Request financial support for this event
-        </label>
-      </fieldset>
+        <fieldset>
+          <!-- bruges til at gruppere relaterede form felter-->
+          <legend>Financial Support</legend>
+          <label>
+            <input type="checkbox" name="financial-support" />
+            Request financial support for this event
+          </label>
+        </fieldset>
 
-      <fieldset>
-        <legend>Room Booking (optional)</legend>
-        <label>
-          <input type="checkbox" name="room-booking" />
-          Request room booking for this event
-        </label>
-      </fieldset>
-
-       </form>
-
+        <fieldset>
+          <legend>Room Booking (optional)</legend>
+          <label>
+            <input type="checkbox" name="room-booking" />
+            Request room booking for this event
+          </label>
+        </fieldset>
+      </form>
     </main>
 
     <footer>
