@@ -5,5 +5,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <p>(Dette er headeren - mangler at blive lavet)</p>
+    </header>
+
+    <main>
+      <h1>Create Event</h1>
+      <h2>Fill in the details to create a new event</h2>
+
+      <form class="image-grid">
+        <figure>
+          <img width="300" height="200" src="images/yoga.jpg" alt="yoga" />
+        </figure>
+        <figure>
+          <img
+            width="300"
+            height="200"
+            src="images/orangestage.jpg"
+            alt="orangestage"
+          />
+        </figure>
+        <figure>
+          <img
+            width="300"
+            height="200"
+            src="images/betaboulders.jpg"
+            alt="boulders"
+          />
+        </figure>
+        <figure>
+          <img
+            width="300"
+            height="200"
+            src="images/basket.jpg.webp"
+            alt="basket"
+          />
+        </figure>
+        <figure>
+          <img width="300" height="200" src="images/lan.jpg" alt="lan" />
+        </figure>
+      </div>
+      <div class="event-form">
+        <div>
+          <label for="event-title">Event title:</label>
+          <input
+            type="text"
+            id="event-title"
+            name="event-title"
+            placeholder="E.g Late night bouldering at Sydhavn"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="event-description">Event Description:</label>
+          <br />
+          <textarea
+            id="event-description"
+            name="event-description"
+            placeholder="Describe your event"
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="event-category">Category:</label>
+          <select id="event-category" name="event-category" required>
+            <option value="">Select a category</option>
+            <option value="sports">Sports</option>
+            <option value="academic">Academic</option>
+            <option value="social">Social</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="event-organizer">Organizer:</label>
+          <input
+            type="text"
+            id="event-organizer"
+            name="event-organizer"
+            placeholder="E.g Bouldering Crew"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="event-date">Date:</label>
+          <input type="date" id="event-date" name="event-date" required />
+        </div>
+
+        <div>
+          <label for="event-starttime">Start Time:</label>
+          <input
+            type="time"
+            id="event-starttime"
+            name="event-starttime"
+            required
+          />
+        </div>
+        <div>
+          <label for="event-endtime">End Time:</label>
+          <input type="time" id="event-endtime" name="event-endtime" required />
+        </div>
+
+        <div>
+          <label for="event-location">Location:</label>
+          <input
+            type="text"
+            id="event-location"
+            name="event-location"
+            placeholder="E.g Boulders Sydhavn"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="event-visibility">Visibility:</label>
+          <select id="event-visibility" name="event-visibility" required>
+            <option value="">Select who can see this event</option>
+            <option value="ALL">ALL</option>
+            <option value="1 semester">1 semester</option>
+            <option value="2 semester">2 semester</option>
+            <option value="3 semester">3 semester</option>
+            <option value="4 semester">4 semester</option>
+            <option value="5 semester">5 semester</option>
+            <option value="6 semester">6 semester</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="event-image">Event Image URL:</label>
+          <input
+            type="text"
+            id="event-image"
+            name="event-image"
+            placeholder="https://example.com/image.jpg"
+          />
+        </div>
+
+        <button type="button">Save for later</button>
+        <button type="submit">Create and post event</button>
+        <button type="reset">Cancel</button>
+
+      <fieldset>
+        <!-- bruges til at gruppere relaterede form felter-->
+        <legend>Financial Support</legend>
+        <label>
+          <input type="checkbox" name="financial-support" />
+          Request financial support for this event
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Room Booking (optional)</legend>
+        <label>
+          <input type="checkbox" name="room-booking" />
+          Request room booking for this event
+        </label>
+      </fieldset>
+
+       </form>
+
+    </main>
+
+    <footer>
+      <p>(Dette er footeren - Mangler at blive lavet)</p>
+    </footer>
+  </body>
+
+  <style></style>
 </html>
