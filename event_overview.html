@@ -1,9 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniEvent - Event Oversigt</title>
+    
+    <link rel="stylesheet" href="styles/styles(event_overview).css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo-section">
+            <img src="images/aau_students logo.png" alt="Students Logo" class="logo-image">
+        </div>
+
+        <div class="center-section">
+            <h1 class="main-title">UniEvent</h1>
+            <nav class="nav-menu">
+                <a href="#" class="nav-btn active">Event overview</a>
+                <a href="#" class="nav-btn">Calendar</a>
+                <a href="#" class="nav-btn">Create events</a>
+            </nav>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-icon">👤</div>
+            <div class="profile-name">Hady Ghabour</div>
+        </div>
+    </header>
+
+
+    <section class="search-section">
+        <span class="search-icon">🔍</span>
+        
+        <input type="text" class="search-input" placeholder="Search for events">
+        
+        <button class="filter-btn">
+            Filters <span class="filter-icon">⚏</span>
+        </button>
+    </section>
+
+
+    <section class="events-section">
+        <h2 class="section-title">My events</h2>
+        <div class="events-grid" id="my-events">
+            </div>
+    </section>
+
+    <section class="events-section">
+        <h2 class="section-title">Upcoming events</h2>
+        <div class="events-grid" id="upcoming-events">
+            </div>
+    </section>
+
+    <section class="events-section">
+        <h2 class="section-title">Newly added events</h2>
+        <div class="events-grid" id="newly-added-events">
+            </div>
+    </section>
+
+    <section class="events-section">
+        <h2 class="section-title">Past events</h2>
+        <div class="events-grid" id="past-events">
+            </div>
+    </section>
+
+    <script src="scripts/eventoverview.js"></script>
+
+</body>
 </html>
