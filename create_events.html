@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
   </head>
-  <link rel="stylesheet" href="styles/styles(create_events).css">
-  <link rel="stylesheet" href="styles/styles(header_footer).css">
+  <link rel="stylesheet" href="styles/styles(create_events).css" />
+  <link rel="stylesheet" href="styles/styles(header_footer).css" />
 
   <body>
-
-    
-  <header class="main-header">
-    <div class="header-container">
-        
+    <!-- header -->
+    <header class="main-header">
+      <div class="header-container">
         <div class="logo-container">
-            <img src="images/aau_students.png" class="logo-img">
+          <img src="images/aau_students.png" class="logo-img" />
         </div>
 
+        <!-- Navigation menu -->
         <nav class="nav-menu">
-            <h1 class="site-title">UniEvent</h1>
+          <h1 class="site-title">UniEvent</h1>
 
             <div class="nav-links-container">
                <a href="event_overview.html" class="nav-link">Event Overview</a>
@@ -65,6 +64,34 @@
         </figure>
 
       </div>
+    </header>
+
+    <!-- Image grid for visual inspiration / event types -->
+    <div class="image-grid">
+      <figure>
+        <img src="images/yoga.jpg" alt="yoga" />
+      </figure>
+
+      <figure>
+        <img src="images/orangestage.jpg" alt="orangestage" />
+      </figure>
+
+      <figure>
+        <img src="images/betaboulders.jpg" alt="boulders" />
+      </figure>
+
+      <figure>
+        <img src="images/basket.jpg.webp" alt="basket" />
+      </figure>
+
+      <figure>
+        <img src="images/lan.jpg" alt="lan" />
+      </figure>
+
+      <figure>
+        <img src="images/magic.png" alt="magic" />
+      </figure>
+    </div>
 
     <main>
       <h1 class="title_with_icon">
@@ -87,6 +114,7 @@
           />
         </div>
 
+        <!-- Event description -->
         <div>
           <label for="event-description">Event Description:</label>
           <textarea
@@ -97,6 +125,7 @@
           ></textarea>
         </div>
 
+        <!-- Category selection -->
         <div>
           <label for="event-category">Category:</label>
           <select id="event-category" name="event-category" required>
@@ -107,6 +136,7 @@
           </select>
         </div>
 
+        <!-- Organizer name -->
         <div>
           <label for="event-organizer">Organizer:</label>
           <input
@@ -118,6 +148,7 @@
           />
         </div>
 
+        <!-- Date and time inputs -->
         <div>
           <label for="event-date">Date:</label>
           <input type="date" id="event-date" name="event-date" required />
@@ -137,6 +168,7 @@
           <input type="time" id="event-endtime" name="event-endtime" required />
         </div>
 
+        <!-- Event location -->
         <div>
           <label for="event-location">Location:</label>
           <input
@@ -148,6 +180,7 @@
           />
         </div>
 
+        <!-- Visibility settings -->
         <div>
           <label for="event-visibility">Visibility:</label>
           <select id="event-visibility" name="event-visibility" required>
@@ -162,6 +195,7 @@
           </select>
         </div>
 
+        <!-- Optional image URL -->
         <div>
           <label for="event-image">Event Image URL:</label>
           <input
@@ -178,6 +212,7 @@
         <br />
         <br />
         <br />
+        <!-- Optional financial support -->
         <fieldset>
           <!-- bruges til at gruppere relaterede form felter-->
           <legend>Financial Support</legend>
@@ -198,69 +233,94 @@
         <br />
         <br />
       </form>
+
+      <div id="event-list"></div>
     </main>
 
-
-
-
-
-
+    <!-- Footer with contact info and links -->
     <footer class="main-footer">
-    <div class="footer-top">
-        <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo">
-    </div>
+      <div class="footer-top">
+        <img
+          src="images/aau_logo_footer.png"
+          alt="AAU Logo"
+          class="footer-logo"
+        />
+      </div>
 
-    <div class="footer-columns">
+      <div class="footer-columns">
         <div class="footer-col col-left">
-            <h3>KONTAKT</h3>
-            <p>Fredrik Bajers Vej 7K</p>
-            <p>9220 Aalborg Ø</p>
-            <p>Tlf.: 9940 9940</p>
-            <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
-            <br>
-            <p>CVR: 29102384</p>
+          <h3>KONTAKT</h3>
+          <p>Fredrik Bajers Vej 7K</p>
+          <p>9220 Aalborg Ø</p>
+          <p>Tlf.: 9940 9940</p>
+          <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+          <br />
+          <p>CVR: 29102384</p>
         </div>
 
         <div class="footer-col col-center">
-            <h3>OM AAU</h3>
-            <a href="https://www.studerende.aau.dk">For studerende</a>
-            <a href="https://www.ansatte.aau.dk">For ansatte</a>
-            <a href="https://www.aau.dk/alumni">For alumni</a>
-            <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
-            <a href="https://www.aau.dk/om-aau">Om AAU</a>
-            <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
+          <h3>OM AAU</h3>
+          <a href="https://www.studerende.aau.dk">For studerende</a>
+          <a href="https://www.ansatte.aau.dk">For ansatte</a>
+          <a href="https://www.aau.dk/alumni">For alumni</a>
+          <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
+          <a href="https://www.aau.dk/om-aau">Om AAU</a>
+          <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
         </div>
 
         <div class="footer-col col-right">
-            <h3>GENVEJE</h3>
-            <a href="https://www.design.aau.dk/">Designguide</a>
-            <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
-            <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
-            <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+          <h3>GENVEJE</h3>
+          <a href="https://www.design.aau.dk/">Designguide</a>
+          <a
+            href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre"
+            >EAN</a
+          >
+          <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
+          <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
         </div>
-    </div>
-    <div class="footer-bottom">
+      </div>
+      <div class="footer-bottom">
         <div class="service-links">
-            <a href="https://www.aau.dk/om-websitet">Om websitet</a>
-            <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
-            <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
-            <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
+          <a href="https://www.aau.dk/om-websitet">Om websitet</a>
+          <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
+          <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
+          <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning"
+            >Whistleblowerordning</a
+          >
         </div>
-        
+
         <div class="social-icons">
-            <a href="https://www.facebook.com/AalborgUniversitet/"><img src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg" alt="Facebook"></a>
-            <a href="https://www.instagram.com/aalborguni/"><img src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg" alt="Instagram"></a>
-            <a href="https://www.youtube.com/aalborguniversitet"><img src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg" alt="YouTube"></a>
-            <a href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"><img src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg" alt="LinkedIn"></a>
-            <a href="https://www.snapchat.com/add/aauuni"><img src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat"></a>
+          <a href="https://www.facebook.com/AalborgUniversitet/"
+            ><img
+              src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg"
+              alt="Facebook"
+          /></a>
+          <a href="https://www.instagram.com/aalborguni/"
+            ><img
+              src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg"
+              alt="Instagram"
+          /></a>
+          <a href="https://www.youtube.com/aalborguniversitet"
+            ><img
+              src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg"
+              alt="YouTube"
+          /></a>
+          <a
+            href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"
+            ><img
+              src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg"
+              alt="LinkedIn"
+          /></a>
+          <a href="https://www.snapchat.com/add/aauuni"
+            ><img
+              src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg"
+              alt="Snapchat"
+          /></a>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-
-
-
-
-
+    <!-- link to JavaScript file -->
+    <script src="scripts/createEvent.js"></script>
   </body>
 </html>
