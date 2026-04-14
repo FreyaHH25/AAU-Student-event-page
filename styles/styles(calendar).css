@@ -1,0 +1,169 @@
+/*Kalender: Her er CSS koden For Kalenderen som er i calendar.html*/
+
+/* Background For the Calendar page. */
+.calendar-page {
+    background-color: #F8F9FA;
+    padding: 40px 41px;
+    width: 100%;
+    min-height: 800px;
+}
+
+/*Calendar Title*/
+.page-title {
+    font-family: 'Barlow', sans-serif;
+    color: #211951;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/*Controls and Filtres*/
+.filtre-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.left-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.control-btn, .view-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+}
+
+.view-btn.active {
+    background-color: white;
+    border: 2px solid #E0E0E0;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    width: 300px;
+}
+
+/* Calender Grid */
+
+.calendar-container {
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.today-display {
+    font-family: 'Barlow', sans-serif;
+    color: #666;
+}
+
+.today-btn {
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: #211951;
+}
+
+/* GRID */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 1px solid #EEE;
+    border-left: 1px solid #EEE;
+}
+
+.day-name {
+    padding: 15px;
+    text-align: center;
+    font-weight: 500;
+    color: #666;
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+}
+
+.day-cell {
+    min-height: 120px;
+    padding: 10px;
+    background-color: white;
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+    display: flex;
+    flex-direction: column; 
+    gap: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.day-number {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+}
+
+/* JS. will manualy add this box for the correct date.*/
+.day-cell.is-today .day-number {
+    background-color: #3B82F6;
+    color: white;
+    border-radius: 50%;
+}
+/* JS. will manualy add this box for the correct month. This is the part of the css that give the blue box on the day it is today*/
+
+.day-cell.not-current-month {
+    background-color: #FBFBFB;
+    color: #CCC;
+}
+
+/*Hover Effect*/
+.day-cell:hover {
+    background-color: #F0F7FF; 
+    border: 1px solid #211951; 
+    z-index: 1;
+}
+.day-cell.today {
+    background-color: #FFFFFF;
+}
+.day-cell.is-today .day-number {
+    background-color: #3B82F6;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -23,17 +23,19 @@
 
             <div class="nav-links-container">
                <a href="event_overview.html" class="nav-link">Event Overview</a>
-               <a href="calendar.html" class="nav-link active">Calendar</a>
-               <a href="create_events.html" class="nav-link">Create Events</a>
+               <a href="calendar.html" class="nav-link">Calendar</a>
+               <a href="create_events.html" class="nav-link active">Create Events</a>
             </div>
             
         </nav>
 
-        <div class="user-container">
-            <img src="images/user_icon.jpg" class="user-img" alt="User Profile">
-        </div>
-
+<div class="user-container">
+    <div class="user-profile">
+        <img src="images/user_icon.jpeg" class="user-img" alt="User Profile">
+        <p class="user-name">John Doe</p>
     </div>
+</div>
+
 </header>
 
 <div class="image-grid">
@@ -65,10 +67,15 @@
       </div>
 
     <main>
-      <h1>Create Event</h1>
-      <h2>Fill in the details to create a new event</h2>
+      <h1 class="title_with_icon">
+            <img src="images/icons/create_icon.png" alt="icon" class="title-icon">
+            Create Event
+          </h1>
+      <h2 class="create_description">Fill in the details to create a new event</h2>
 
       <form class="event-form">
+        <h1 class="details1">Event Details</h1>
+        <h2 class="details2">Provide information about your event to help students find and join it</h2>
         <div>
           <label for="event-title">Event title:</label>
           <input
@@ -165,9 +172,9 @@
           />
         </div>
 
-        <button type="button">Save for later</button>
-        <button type="submit">Create and post event</button>
-        <button type="reset">Cancel</button>
+        <button type="button" class="button btn-save">Save for later</button>
+        <button type="submit" class="button btn-create">Create and post event</button>
+        <button type="reset"  class="button btn-cancel">Cancel</button>
         <br />
         <br />
         <br />
