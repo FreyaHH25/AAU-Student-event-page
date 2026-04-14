@@ -1,297 +1,246 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Document</title>
-  </head>
-  <link rel="stylesheet" href="styles/styles(create_events).css" />
-  <link rel="stylesheet" href="styles/styles(header_footer).css" />
 
-  <body>
-    <!-- header -->
-    <header class="main-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="images/aau_students.png" class="logo-img" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="styles/styles(create_events).css" />
+<link rel="stylesheet" href="styles/styles(header_footer).css" />
+
+<body>
+  <!-- header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="images/aau_students.png" class="logo-img" />
+      </div>
+
+      <!-- Navigation menu -->
+      <nav class="nav-menu">
+        <h1 class="site-title">UniEvent</h1>
+
+        <!-- Navigation links -->
+        <div class="nav-links-container">
+          <a href="event_overview.html" class="nav-link">Event Overview</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="create_events.html" class="nav-link active">Create Events</a>
         </div>
+      </nav>
 
-        <!-- Navigation menu -->
-        <nav class="nav-menu">
-          <h1 class="site-title">UniEvent</h1>
+      <!-- User profile icon -->
+      <div class="user-container">
+        <div class="user-profile">
+          <img src="images/user_icon.jpeg" class="user-img" alt="User Profile">
+          <p class="user-name">John Doe</p>
+        </div>
+      </div>
+  </header>
 
-            <div class="nav-links-container">
-               <a href="event_overview.html" class="nav-link">Event Overview</a>
-               <a href="calendar.html" class="nav-link">Calendar</a>
-               <a href="create_events.html" class="nav-link active">Create Events</a>
-            </div>
-            
-        </nav>
+  <!-- Image grid for visual inspiration / event types -->
+  <div class="image-grid">
+    <figure>
+      <img src="images/yoga.jpg" alt="yoga" />
+    </figure>
 
-<div class="user-container">
-    <div class="user-profile">
-        <img src="images/user_icon.jpeg" class="user-img" alt="User Profile">
-        <p class="user-name">John Doe</p>
+    <figure>
+      <img src="images/orangestage.jpg" alt="orangestage" />
+    </figure>
+
+    <figure>
+      <img src="images/betaboulders.jpg" alt="boulders" />
+    </figure>
+
+    <figure>
+      <img src="images/basket.jpg.webp" alt="basket" />
+    </figure>
+
+    <figure>
+      <img src="images/lan.jpg" alt="lan" />
+    </figure>
+
+    <figure>
+      <img src="images/magic.png" alt="magic" />
+    </figure>
+  </div>
+
+  <main>
+    <!-- Page title -->
+    <h1 class="title_with_icon">
+      <img src="images/icons/create_icon.png" alt="icon" class="title-icon">
+      Create Event
+    </h1>
+    <h2 class="create_description">Fill in the details to create a new event</h2>
+
+    <!-- Main event creation form -->
+    <form class="event-form" id="event-form">
+      <h1 class="details1">Event Details</h1>
+      <h2 class="details2">Provide information about your event to help students find and join it</h2>
+      <div>
+        <label for="event-title">Event title:</label>
+        <input type="text" id="event-title" name="event-title" placeholder="E.g Late night bouldering at Sydhavn"
+          required />
+      </div>
+
+      <!-- Event description -->
+      <div>
+        <label for="event-description">Event Description:</label>
+        <textarea id="event-description" name="event-description" placeholder="Describe your event" required></textarea>
+      </div>
+
+      <!-- Category selection -->
+      <div>
+        <label for="event-category">Category:</label>
+        <select id="event-category" name="event-category" required>
+          <option value="">Select a category</option>
+          <option value="sports">Sports</option>
+          <option value="academic">Academic</option>
+          <option value="social">Social</option>
+        </select>
+      </div>
+
+      <!-- Organizer name -->
+      <div>
+        <label for="event-organizer">Organizer:</label>
+        <input type="text" id="event-organizer" name="event-organizer" placeholder="E.g Bouldering Crew" required />
+      </div>
+
+      <!-- Date and time inputs -->
+      <div>
+        <label for="event-date">Date:</label>
+        <input type="date" id="event-date" name="event-date" required />
+      </div>
+
+      <div>
+        <label for="event-starttime">Start Time:</label>
+        <input type="time" id="event-starttime" name="event-starttime" required />
+      </div>
+      <div>
+        <label for="event-endtime">End Time:</label>
+        <input type="time" id="event-endtime" name="event-endtime" required />
+      </div>
+
+      <!-- Event location -->
+      <div>
+        <label for="event-location">Location:</label>
+        <input type="text" id="event-location" name="event-location" placeholder="E.g Boulders Sydhavn" required />
+      </div>
+
+      <!-- Visibility settings -->
+      <div>
+        <label for="event-visibility">Visibility:</label>
+        <select id="event-visibility" name="event-visibility" required>
+          <option value="">Select who can see this event</option>
+          <option value="ALL">ALL</option>
+          <option value="1 semester">1 semester</option>
+          <option value="2 semester">2 semester</option>
+          <option value="3 semester">3 semester</option>
+          <option value="4 semester">4 semester</option>
+          <option value="5 semester">5 semester</option>
+          <option value="6 semester">6 semester</option>
+        </select>
+      </div>
+
+      <!-- Optional image URL -->
+      <div>
+        <label for="event-image">Event Image URL:</label>
+        <input type="text" id="event-image" name="event-image" placeholder="https://example.com/image.jpg" />
+      </div>
+
+      <!-- Form action buttons -->
+      <button type="button" class="button btn-save">Save for later</button>
+      <button type="submit" class="button btn-create">Create and post event</button>
+      <button type="reset" class="button btn-cancel">Cancel</button>
+      <br />
+      <br />
+      <br />
+      
+      <!-- Optional financial support -->
+      <fieldset>
+        <!-- bruges til at gruppere relaterede form felter-->
+        <legend>Financial Support</legend>
+        <label>
+          <input type="checkbox" name="financial-support" />
+          Request financial support for this event
+        </label>
+      </fieldset>
+      <br />
+      <br />
+      <fieldset>
+        <legend>Room Booking (optional)</legend>
+        <label>
+          <input type="checkbox" name="room-booking" />
+          Request room booking for this event
+        </label>
+      </fieldset>
+      <br />
+      <br />
+    </form>
+
+    <div id="event-list"></div>
+  </main>
+
+  <!-- Footer with contact info and links -->
+  <footer class="main-footer">
+    <div class="footer-top">
+      <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
     </div>
-</div>
 
-</header>
+    <div class="footer-columns">
+      <div class="footer-col col-left">
+        <h3>KONTAKT</h3>
+        <p>Fredrik Bajers Vej 7K</p>
+        <p>9220 Aalborg Ø</p>
+        <p>Tlf.: 9940 9940</p>
+        <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+        <br />
+        <p>CVR: 29102384</p>
+      </div>
 
-    <!-- Image grid for visual inspiration / event types -->
-    <div class="image-grid">
-      <figure>
-        <img src="images/yoga.jpg" alt="yoga" />
-      </figure>
+      <div class="footer-col col-center">
+        <h3>OM AAU</h3>
+        <a href="https://www.studerende.aau.dk">For studerende</a>
+        <a href="https://www.ansatte.aau.dk">For ansatte</a>
+        <a href="https://www.aau.dk/alumni">For alumni</a>
+        <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
+        <a href="https://www.aau.dk/om-aau">Om AAU</a>
+        <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
+      </div>
 
-      <figure>
-        <img src="images/orangestage.jpg" alt="orangestage" />
-      </figure>
-
-      <figure>
-        <img src="images/betaboulders.jpg" alt="boulders" />
-      </figure>
-
-      <figure>
-        <img src="images/basket.jpg.webp" alt="basket" />
-      </figure>
-
-      <figure>
-        <img src="images/lan.jpg" alt="lan" />
-      </figure>
-
-      <figure>
-        <img src="images/magic.png" alt="magic" />
-      </figure>
+      <div class="footer-col col-right">
+        <h3>GENVEJE</h3>
+        <a href="https://www.design.aau.dk/">Designguide</a>
+        <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
+        <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
+        <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+      </div>
     </div>
-
-    <main>
-      <h1 class="title_with_icon">
-            <img src="images/icons/create_icon.png" alt="icon" class="title-icon">
-            Create Event
-          </h1>
-      <h2 class="create_description">Fill in the details to create a new event</h2>
-
-      <form class="event-form">
-        <h1 class="details1">Event Details</h1>
-        <h2 class="details2">Provide information about your event to help students find and join it</h2>
-        <div>
-          <label for="event-title">Event title:</label>
-          <input
-            type="text"
-            id="event-title"
-            name="event-title"
-            placeholder="E.g Late night bouldering at Sydhavn"
-            required
-          />
-        </div>
-
-        <!-- Event description -->
-        <div>
-          <label for="event-description">Event Description:</label>
-          <textarea
-            id="event-description"
-            name="event-description"
-            placeholder="Describe your event"
-            required
-          ></textarea>
-        </div>
-
-        <!-- Category selection -->
-        <div>
-          <label for="event-category">Category:</label>
-          <select id="event-category" name="event-category" required>
-            <option value="">Select a category</option>
-            <option value="sports">Sports</option>
-            <option value="academic">Academic</option>
-            <option value="social">Social</option>
-          </select>
-        </div>
-
-        <!-- Organizer name -->
-        <div>
-          <label for="event-organizer">Organizer:</label>
-          <input
-            type="text"
-            id="event-organizer"
-            name="event-organizer"
-            placeholder="E.g Bouldering Crew"
-            required
-          />
-        </div>
-
-        <!-- Date and time inputs -->
-        <div>
-          <label for="event-date">Date:</label>
-          <input type="date" id="event-date" name="event-date" required />
-        </div>
-
-        <div>
-          <label for="event-starttime">Start Time:</label>
-          <input
-            type="time"
-            id="event-starttime"
-            name="event-starttime"
-            required
-          />
-        </div>
-        <div>
-          <label for="event-endtime">End Time:</label>
-          <input type="time" id="event-endtime" name="event-endtime" required />
-        </div>
-
-        <!-- Event location -->
-        <div>
-          <label for="event-location">Location:</label>
-          <input
-            type="text"
-            id="event-location"
-            name="event-location"
-            placeholder="E.g Boulders Sydhavn"
-            required
-          />
-        </div>
-
-        <!-- Visibility settings -->
-        <div>
-          <label for="event-visibility">Visibility:</label>
-          <select id="event-visibility" name="event-visibility" required>
-            <option value="">Select who can see this event</option>
-            <option value="ALL">ALL</option>
-            <option value="1 semester">1 semester</option>
-            <option value="2 semester">2 semester</option>
-            <option value="3 semester">3 semester</option>
-            <option value="4 semester">4 semester</option>
-            <option value="5 semester">5 semester</option>
-            <option value="6 semester">6 semester</option>
-          </select>
-        </div>
-
-        <!-- Optional image URL -->
-        <div>
-          <label for="event-image">Event Image URL:</label>
-          <input
-            type="text"
-            id="event-image"
-            name="event-image"
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
-
-        <button type="button" class="button btn-save">Save for later</button>
-        <button type="submit" class="button btn-create">Create and post event</button>
-        <button type="reset"  class="button btn-cancel">Cancel</button>
-        <br />
-        <br />
-        <br />
-        <!-- Optional financial support -->
-        <fieldset>
-          <!-- bruges til at gruppere relaterede form felter-->
-          <legend>Financial Support</legend>
-          <label>
-            <input type="checkbox" name="financial-support" />
-            Request financial support for this event
-          </label>
-        </fieldset>
-        <br />
-        <br />
-        <fieldset>
-          <legend>Room Booking (optional)</legend>
-          <label>
-            <input type="checkbox" name="room-booking" />
-            Request room booking for this event
-          </label>
-        </fieldset>
-        <br />
-        <br />
-      </form>
-
-      <div id="event-list"></div>
-    </main>
-
-    <!-- Footer with contact info and links -->
-    <footer class="main-footer">
-      <div class="footer-top">
-        <img
-          src="images/aau_logo_footer.png"
-          alt="AAU Logo"
-          class="footer-logo"
-        />
+    <div class="footer-bottom">
+      <div class="service-links">
+        <a href="https://www.aau.dk/om-websitet">Om websitet</a>
+        <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
+        <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
+        <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
       </div>
 
-      <div class="footer-columns">
-        <div class="footer-col col-left">
-          <h3>KONTAKT</h3>
-          <p>Fredrik Bajers Vej 7K</p>
-          <p>9220 Aalborg Ø</p>
-          <p>Tlf.: 9940 9940</p>
-          <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
-          <br />
-          <p>CVR: 29102384</p>
-        </div>
-
-        <div class="footer-col col-center">
-          <h3>OM AAU</h3>
-          <a href="https://www.studerende.aau.dk">For studerende</a>
-          <a href="https://www.ansatte.aau.dk">For ansatte</a>
-          <a href="https://www.aau.dk/alumni">For alumni</a>
-          <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
-          <a href="https://www.aau.dk/om-aau">Om AAU</a>
-          <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
-        </div>
-
-        <div class="footer-col col-right">
-          <h3>GENVEJE</h3>
-          <a href="https://www.design.aau.dk/">Designguide</a>
-          <a
-            href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre"
-            >EAN</a
-          >
-          <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
-          <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
-        </div>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/AalborgUniversitet/"><img
+            src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/aalborguni/"><img
+            src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg" alt="Instagram" /></a>
+        <a href="https://www.youtube.com/aalborguniversitet"><img
+            src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg" alt="YouTube" /></a>
+        <a href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"><img
+            src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg" alt="LinkedIn" /></a>
+        <a href="https://www.snapchat.com/add/aauuni"><img
+            src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat" /></a>
       </div>
-      <div class="footer-bottom">
-        <div class="service-links">
-          <a href="https://www.aau.dk/om-websitet">Om websitet</a>
-          <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
-          <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
-          <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning"
-            >Whistleblowerordning</a
-          >
-        </div>
+    </div>
+  </footer>
 
-        <div class="social-icons">
-          <a href="https://www.facebook.com/AalborgUniversitet/"
-            ><img
-              src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg"
-              alt="Facebook"
-          /></a>
-          <a href="https://www.instagram.com/aalborguni/"
-            ><img
-              src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg"
-              alt="Instagram"
-          /></a>
-          <a href="https://www.youtube.com/aalborguniversitet"
-            ><img
-              src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg"
-              alt="YouTube"
-          /></a>
-          <a
-            href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"
-            ><img
-              src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg"
-              alt="LinkedIn"
-          /></a>
-          <a href="https://www.snapchat.com/add/aauuni"
-            ><img
-              src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg"
-              alt="Snapchat"
-          /></a>
-        </div>
-      </div>
-    </footer>
+  <!-- link to JavaScript file -->
+  <script src="scripts/createEvent.js"></script>
+</body>
 
-    <!-- link to JavaScript file -->
-    <script src="scripts/createEvent.js"></script>
-  </body>
 </html>
