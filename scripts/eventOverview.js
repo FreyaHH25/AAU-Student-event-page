@@ -1,72 +1,71 @@
+// 1. TEST DATA
 const myEventsData = [
-  {
-    kategori: "Sports",
-    titel: "Basketball Tournament",
-    beskrivelse: "Come play basket in Hafniahallen",
-    dato: "Thursday, april 19, 2026",
-    tid: "15:00 - 19:00",
-    sted: "Hafniahallen, Copenhagen",
-    deltagere: 30,
-    arrangoer: "sportsudvalget",
-    billede: "images/basket.webp", // her pager vi på basket-billefet
-  },
-  {
-    kategori: "Party",
-    titel: "fest hos Japot",
-    beskrivelse: "First beer is free!",
-    dato: "Friday, april 26, 2026",
-    tid: "18:00 - 04:00",
-    sted: "Hos Jap ",
-    deltagere: 120,
-    arrangoer: "Japjot",
-    billede: "images/jap.jpg", // her pager vi på jap's-billedet
-  },
+    {
+        category: "Sports",
+        title: "Basketball Tournament",
+        description: "Come play basket in Hafniahallen",
+        date: "Thursday, April 19, 2026",
+        time: "15:00 - 19:00",
+        location: "Hafniahallen, Copenhagen",
+        attendees: 30,
+        organizer: "Sports Committee",
+        image: "images/basket.webp" 
+    },
+    {
+        category: "Party",
+        title: "Party at Jap's house",
+        description: "First beer is free!",
+        date: "Friday, April 26, 2026",
+        time: "18:00 - 04:00",
+        location: "At Jap's house",
+        attendees: 120,
+        organizer: "Japjot",
+        image: "images/jap.jpg" 
+    }
 ];
 
 const upcomingEventsData = [
-  {
-    kategori: "Sports",
-    titel: "Yoga & Wellness",
-    beskrivelse: "Weekly yoga session for stress relief",
-    dato: "Saturday, april 21, 2026",
-    tid: "07:00 - 08:00",
-    sted: "Recreation Center",
-    deltagere: 25,
-    arrangoer: "Wellness Club",
-    billede: "images/yoga.jpg", // her peger vi på yoga-billedet
-  },
-  {
-    kategori: "Party",
-    titel: "Software party at Hattenbar",
-    beskrivelse: "First beer is free!",
-    dato: "Friday, april 26, 2026",
-    tid: "18:00 - 04:00",
-    sted: "hos hady",
-    deltagere: 120,
-    arrangoer: "Overflow_SW",
-    billede: "images/hattenbar.png", // her pager vi på hattenbar-billedet
-  },
+    {
+        category: "Sports",
+        title: "Yoga & Wellness",
+        description: "Weekly yoga session for stress relief",
+        date: "Saturday, April 21, 2026",
+        time: "07:00 - 08:00",
+        location: "Recreation Center",
+        attendees: 25,
+        organizer: "Wellness Club",
+        image: "images/yoga.jpg" 
+    },
+    {
+        category: "Party",
+        title: "Software party at Hattenbar",
+        description: "First beer is free!",
+        date: "Friday, April 26, 2026",
+        time: "18:00 - 04:00",
+        location: "At Hady's house ",
+        attendees: 120,
+        organizer: "Overflow_SW",
+        image: "images/hattenbar.png" 
+    },
+  
 ];
 
-// (tilføje events manual til 'newly added' og past senere)
+// Empty arrays for future events
 const newlyAddedEventsData = [];
 const pastEventsData = [];
 
-// FUNCTION that builds the cards (TEMPLATE)
-// This function takes one event at a time and transforms it into HTML.
+// 2. FUNCTION TO BUILD EVENT CARDS
 function createEventCardHTML(event) {
-  return `
+    return `
         <div class="event-card">
-
-            <img src="${event.image}" alt="Billede af ${event.title}" class="card-image">
-
+            <img src="${event.image}" alt="Image of ${event.title}" class="card-image">
             <div class="card-content">
                 <span class="category-tag">${event.category}</span>
                 <h3 class="card-title">${event.title}</h3>
                 <p class="card-desc">${event.description}</p>
                 <div class="card-info">
                     <p>📅 ${event.date}</p>
-                    <p>🕒 ${event.startTime} - ${event.endTime}</p>
+                    <p>🕒 ${event.time}</p>
                     <p>📍 ${event.location}</p>
                 </div>
                 <div class="card-footer">
@@ -79,24 +78,21 @@ function createEventCardHTML(event) {
     `;
 }
 
-// Denne funktion går igennem en liste med events og sætter dem ind i den rigtige kasse.
-function visEventsPåSiden(eventListe, htmlKasseId) {
-  const kasse = document.getElementById(htmlKasseId);
-
-  // Hvis kassen findes på siden
-  if (kasse) {
-    // Tøm kassen først (så vi ikke får dubletter)
-    kasse.innerHTML = "";
-
-    // Gå igennem hvert event i listen og tilføj dets HTML til kassen
-    eventListe.forEach(function (enkeltEvent) {
-      kasse.innerHTML += skabEventKortHTML(enkeltEvent);
-    });
-  }
+// 3. SHOW EVENTS ON PAGE
+function showEventsOnPage(eventList, containerId) {
+    const container = document.getElementById(containerId);
+    
+    if (container) {
+        container.innerHTML = ""; // Clear the container first
+        
+        eventList.forEach(function(singleEvent) {
+            container.innerHTML += createEventCardHTML(singleEvent);
+        });
+    }
 }
 
-// vise vores test-data i de rigtige kasser:
-visEventsPåSiden(myEventsData, "my-events");
-visEventsPåSiden(upcomingEventsData, "upcoming-events");
-visEventsPåSiden(newlyAddedEventsData, "newly-added-events");
-visEventsPåSiden(pastEventsData, "past-events");
+// Execute the function to display data
+showEventsOnPage(myEventsData, "my-events");
+showEventsOnPage(upcomingEventsData, "upcoming-events");
+showEventsOnPage(newlyAddedEventsData, "newly-added-events");
+showEventsOnPage(pastEventsData, "past-events");
