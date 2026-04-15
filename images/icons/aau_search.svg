@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle 
+    cx="45" 
+    cy="45" 
+    r="30" 
+    fill="none" 
+    stroke="#1A154B" 
+    stroke-width="8" 
+  />
+  
+  <line 
+    x1="78" 
+    y1="78" 
+    x2="86" 
+    y2="86" 
+    stroke="#1A154B" 
+    stroke-width="10" 
+    stroke-linecap="square" 
+  />
+</svg>
