@@ -1,63 +1,238 @@
-/*Kalender: Her er CSS koden For Kalenderen som er i calendar.html*/
+/* UniEvent Font*/
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    overflow-x: hidden; 
+}
+/* Buttons and Navigation Menu*/
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-arrow {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;         /* Makes it a perfect circle */
+    border: 1px solid #E0E0E0;  /* Subtle light border */
+    background-color: #FFFFFF;  /* Clean white background */
+    color: #211951;             /* Your Navy theme color */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Professional smooth timing */
+    outline: none;
+}
+
+/* Hover Animation */
+.nav-arrow:hover {
+    background-color: #211951;  /* Swaps to Navy background */
+    color: #FFFFFF;            /* Arrow turns white */
+    border-color: #211951;
+    transform: translateY(-2px); /* Lifts up slightly */
+    box-shadow: 0 4px 10px rgba(33, 25, 81, 0.15); /* Soft shadow */
+}
+
+/* Click Animation */
+.nav-arrow:active {
+    transform: translateY(0);   /* Pushes back down when clicked */
+    background-color: #3b337a;  /* Slightly lighter navy */
+}
+
+/* Refresh the Today button to match the premium look */
+.today-btn {
+    background-color: #F2F2F4;
+    border: 1px solid #E0E0E0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    color: #211951;
+    transition: 0.3s ease;
+}
+
+.today-btn:hover {
+    background-color: #E0E0E0;
+    color: #211951;
+}
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nav-links-container {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+/*Button Texst Design*/
+.nav-link {
+    font-family: "Barlow", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #211951;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+ /* Button Design */
+   width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #F2F2F4; 
+    color: #211951;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    border: none;
+    transition: 0.3s;
+}
+
+.nav-link.active {
+    background-color: #211951;
+    color: #F2F2F4;
+}
+
+.nav-link:hover {
+    background-color: #D1D1D4;
+    color: #211951;
+}
 
 /* Background For the Calendar page. */
 .calendar-page {
     background-color: #F8F9FA;
     padding: 40px 41px;
-    width: 100%;
     min-height: 800px;
 }
 
 /*Calendar Title*/
-.page-title {
-    font-family: 'Barlow', sans-serif;
-    color: #211951;
-    font-size: 32px;
-    margin-bottom: 20px;
+.filtre-row {
+    display: flex;
+    flex-direction: column; /* Stacks them vertically */
+    align-items: flex-start; /* Forces everything to stay on the LEFT side */
+    width: 100%;
+    
+    /* Distance from "Calendar" Title and the Calendar Grid */
+    margin-top: 70px;    
+    margin-bottom: 80px; 
+    
+    /* This creates the gap between Search Bar and the Buttons below it */
+    gap: 50px; 
 }
 
 /*Controls and Filtres*/
-.filtre-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
 
 .left-controls {
     display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Keeps items on the left */
     gap: 15px;
+    width: 100%;
 }
 
-.control-btn, .view-btn {
+.control-btn, 
+.search-container input {
+    height: 52px; /* Set a specific height */
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    background-color: white;
+}
+
+.control-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
+    justify-content: center;
+    padding: 0 52px;
+    cursor: pointer;
+    font-weight: 500;
+    gap: 8px; 
+}
+
+.view-switch {
+    display: flex;
+    justify-content: flex-start; /* Keeps buttons on the left */
+    gap: 15px;
+    width: 100%;
+}
+
+.view-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+    padding: 0 60px;
+    font-size: 18px;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
     background: white;
     cursor: pointer;
     font-family: 'Barlow', sans-serif;
     font-weight: 500;
+    
 }
 
 .view-btn.active {
-    background-color: white;
-    border: 2px solid #E0E0E0;
+    background-color: #211951; /* Dark Navy */
+    color: white;              /* White Text */
+    border: 2px solid #211951;
+}
+/*Month and Week Button Hover*/
+.view-btn.active .btn-icon {
+    filter: brightness(0) invert(1);
+}
+
+.view-btn:hover:not(.active) {
+    background-color: #F2F2F4;
 }
 
 .search-container {
     position: relative;
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    max-width: 600px; 
+    margin-right: 40px; 
 }
 
 .search-container input {
-    padding: 10px 15px 10px 40px;
+    height: 52px; 
+    width: 100%;
+    padding: 0 15px 0 40px;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
-    width: 300px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+    background-color: white;
 }
+
+.search-icon {
+    position: absolute;
+    left: 12px;         
+    top: 50%;          
+    transform: translateY(-50%); 
+    width: 18px;        
+    height: 18px;
+    opacity: 0.5;       
+    pointer-events: none; 
+}
+
 
 /* Calender Grid */
 
@@ -101,7 +276,15 @@
     border-top: 1px solid #EEE;
     border-left: 1px solid #EEE;
 }
-
+/* When in weekly view, we use 8 columns (1 for time, 7 for days) */
+.calendar-grid.weekly-view {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr); 
+    border: 1px solid #EEE;
+    background-color: white;
+    max-height: 700px; /* Makes the calendar scrollable */
+    overflow-y: auto;
+}
 .day-name {
     padding: 15px;
     text-align: center;
@@ -109,6 +292,16 @@
     color: #666;
     border-right: 1px solid #EEE;
     border-bottom: 1px solid #EEE;
+}
+
+/* The header cells (Sun, Mon, etc.) in Weekly View */
+.calendar-grid.weekly-view .day-name {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 10;
+    font-weight: 700;
+    border-bottom: 2px solid #EEE;
 }
 
 .day-cell {
@@ -124,6 +317,17 @@
     cursor: pointer;
 }
 
+/* The 00:00, 01:00 time labels */
+.time-cell {
+    padding: 15px 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #F5F5F5;
+    background: #fafafa;
+}
+
 .day-number {
     font-size: 14px;
     font-weight: 600;
@@ -134,14 +338,35 @@
     width: 28px;
     height: 28px;
 }
+/* The actual clickable slots for events */
+.slot-cell {
+    height: 60px; /* Each hour is 60px tall */
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #F5F5F5;
+    transition: background 0.1s;
+}
 
+.slot-cell:hover {
+    background-color: #F0F7FF;
+}
+
+/* Corner piece top-left */
+.time-corner {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: #f8f9fa;
+    z-index: 11;
+    border-right: 1px solid #EEE;
+    border-bottom: 2px solid #EEE;
+}
 /* JS. will manualy add this box for the correct date.*/
 .day-cell.is-today .day-number {
     background-color: #3B82F6;
     color: white;
     border-radius: 50%;
 }
-/* JS. will manualy add this box for the correct month. This is the part of the css that give the blue box on the day it is today*/
+/* JS. will manualy add this box for the correct month.*/
 
 .day-cell.not-current-month {
     background-color: #FBFBFB;

@@ -1,86 +1,82 @@
-/* 1. Generel opsætning af hele siden */
+/* 1. GENERAL SETUP */
 body {
-    margin: 0; /* Fjerner den hvide kant, browsere normalt laver omkring siden */
+    margin: 0; 
     padding: 0;
-    font-family: Arial, sans-serif; /* bruger en standard, ren skrifttype */
-    background-color: #fdfdfd; /* lys grå/hvid baggrund */
+    font-family: Arial, sans-serif; 
+    background-color: #fdfdfd; 
 }
 
-/* 2. Selve Header-boksen */
+/* 2. TOP HEADER  */
 .top-header {
-    display: flex; /* 'Flexbox' lader at stille kasserne på en række */
-    justify-content: space-between; /* Skubber venstre, midte og højre sektion helt ud til siderne */
-    align-items: center; /* Sørger for, at alt står pænt på linje lodret */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
     background-color: white; 
-    padding: 20px 50px; /* gør tesksten brede eller fed 20px top/bund, 50px siderne */
-    border-bottom: 1px solid #eaeaea; /* En tynd, lysegrå streg under headeren */
+    padding: 20px 50px; 
+    border-bottom: 1px solid #eaeaea; 
 }
 
-/* 3. VENSTRE SIDE (LOGO)*/
+/* 3. LEFT SECTION (LOGO) */
 .logo-section {
     display: flex;
     align-items: center;
 }
 
-/* Styrer størrelsen på logoet */
 .logo-image {
-    height: 120px; /* man kan gør tallet større/mindre hvis logoet skal være større/mindre */
-    width: auto; /* Sørger for, at tingene op bevares */
+    height: 120px; 
+    width: auto; 
 }
 
-/* 4. Midten (Titel og Navigationsmenu) */
+/* 4. CENTER SECTION (TITLE & NAV)*/
 .center-section {
     display: flex;
-    flex-direction: column; /* 'Column' betyder, at titel og menu står ovenpå hinanden */
-    align-items: center; /* Centrerer dem over hinanden */
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .main-title {
-    color: #1a1654; /* Mørkeblå */
-    margin: 0 0 15px 0; /* Fjerner standard margin på toppen, men giver 15px luft i bunden */
+    color: #1a1654; 
+    margin: 0 0 15px 0; 
     font-size: 36px;
-    font-weight: 900; /* Gør teksten ekstra tyk */
+    font-weight: 900; 
 }
 
 .nav-menu {
     display: flex;
-    gap: 15px; /* Skaber 15px mellemrum mellem hver knap */
+    gap: 15px; 
 }
 
-/* 5. Knapperne i menuen */
 .nav-btn {
-    text-decoration: none; /* Fjerner blå streg under links */
-    color: #555; /* Mørkegrå tekst */
-    background-color: #f0f0f5; /* Lysegrå baggrund */
-    padding: 10px 25px; /* Luft indeni knappen */
-    border-radius: 20px; /* Dette gør hjørnerne helt runde (pilleform) */
+    text-decoration: none; 
+    background-color: #f0f0f5; 
+    padding: 10px 25px;
+    border-radius: 20px; 
     font-weight: bold;
     font-size: 14px;
 }
 
-/* Den aktive knap (Event overview) */
 .nav-btn.active {
-    background-color: #1a1654; /* Skifter baggrunden til mørkeblå */
-    color: white; /* Skifter teksten til hvid */
+    background-color: #1a1654; 
+    color: white; 
 }
 
-/* 6. Højre side (Brugerprofil) */
+/* 5. RIGHT SECTION (PROFILE) */
 .profile-section {
     display: flex;
-    flex-direction: column; /* Stabler ikon og navn ovenpå hinanden */
+    flex-direction: column; 
     align-items: center;
-    gap: 8px; /* Lidt afstand mellem ikon og navn */
+    gap: 8px; 
 }
 
 .profile-icon {
     font-size: 30px;
-    background-color: #e0f8f5; /* Lysegrøn/blå cirkel under profil billedet */
-    width: 60px; /* Fast bredde */
-    height: 60px; /* og fast højde */
-    border-radius: 50%; /* border-radius på 50% laver en perfekt cirkel! */
+    background-color: #e0f8f5; 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
     display: flex;
     justify-content: center;
-    align-items: center; /* Disse to centrerer '👤' inde i cirklen */
+    align-items: center; 
 }
 
 .profile-name {
@@ -92,48 +88,44 @@ body {
     border-radius: 15px;
 }
 
-/* 7. SØGESEKTIONEN   */           
+/* 7. SEARCH SECTION */
 .search-section {
     display: flex;
     align-items: center; 
     padding: 20px 50px; 
-    gap: 20px; /* mellemrum mellem ikon, felt og knap */
+    gap: 20px; 
 }
 
-/* Forstørrelsesglasset frit til venstre */
 .search-icon {
-    font-size: 24px; /* størelsen  */
-    color: #1a1654; /* mørkeblå farve */
+    font-size: 24px; 
+    color: #1a1654; 
 }
 
-/* skrivefeltet (den grå kasse) */
 .search-input {
-    flex-grow: 1; /* Dette får feltet til at strække sig og fylde alt overskydende plads */
+    flex-grow: 1; 
     background-color: #f5f5f7; 
     border: none;
-    padding: 12px 20px; /* Gør kassen lidt højere og giver luft indeni */
+    padding: 12px 20px; 
     border-radius: 8px; 
     font-size: 16px;
     outline: none;
 }
 
-/* Filter-knappen */
 .filter-btn {
     display: flex;
     align-items: center;
     gap: 10px; 
     background-color: #f5f5f7; 
     border: none; 
-    padding: 12px 20px; /* Samme højde som skrivefeltet */
+    padding: 12px 20px; 
     border-radius: 8px; 
     font-weight: bold;
     font-size: 14px;
-    color: #1a1654; /* Mørkeblå tekst */
+    color: #1a1654; 
     cursor: pointer; 
 }
 
-/* 8. EVENTS SEKTION & KORT    */
-/* Sørger for at der er luft omkring hele sektionen */
+/* 8. EVENTS SECTION & CARDS */
 .events-section {
     padding: 20px 50px;
 }
@@ -143,43 +135,37 @@ body {
     margin-bottom: 20px;
 }
 
-/* Her beder vi kortene om at stå ved siden af hinanden */
 .events-grid {
     display: grid;
-    /* Dette laver kolonner, der automatisk tilpasser sig skærmen (mindst 300px brede) */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 30px; /* Luft mellem kortene */
+    gap: 30px; 
 }
 
-/* Selve det hvide kort */
 .event-card {
     background-color: white;
-    border: 1px solid #eaeaea; /* Lysegrå ramme */
-    border-radius: 12px; /* Runde hjørner */
-    overflow: hidden; /* Sørger for at billedet ikke stikker ud over de runde hjørner */
+    border: 1px solid #eaeaea; 
+    border-radius: 12px; 
+    overflow: hidden; 
     display: flex;
     flex-direction: column;
 }
 
-/* Billedet */
 .card-image {
     width: 100%;
-    height: 200px; /* Sætter en fast højde, så alle kort er lige høje heroppe */
-    object-fit: cover; /* Beskærer billedet pænt, så det ikke bliver mast */
+    height: 200px; 
+    object-fit: cover; 
 }
 
-/* Kassen til al teksten under billedet */
 .card-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Får kassen til at strække sig, så knappen altid er i bunden */
+    flex-grow: 1; 
 }
 
-/* Det lysegrønne "Sports" tag */
 .category-tag {
-    background-color: #e0f8eb; /* Lysegrøn baggrund */
-    color: #17c964; /* Mørkegrøn tekst */
+    background-color: #e0f8eb; 
+    color: #17c964; 
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 12px;
@@ -200,7 +186,6 @@ body {
     color: #777;
 }
 
-/* Listen med dato, tid og sted */
 .card-info p {
     margin: 8px;
     font-size: 13px;
@@ -209,7 +194,6 @@ body {
     gap: 10px;
 }
 
-/* Deltagere og arrangør i bunden */
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -220,10 +204,9 @@ body {
     margin-bottom: 20px;
 }
 
-/* Den brede "Read More" knap i bunden */
 .read-more-btn {
-    margin-top: auto; /* Skubber knappen helt i bund */
-    width: 100%; /* Gør knappen lige så bred som kortet */
+    margin-top: auto; 
+    width: 100%; 
     background-color: transparent;
     border: 1px solid #eaeaea;
     padding: 12px;

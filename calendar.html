@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/styles(calendar).css">
+    <link rel="stylesheet" href="styles/styles(header_footer).css" />
 </head>
 <body>
     <header class="main-header">
@@ -24,7 +25,7 @@
             <div class="nav-links-container">
                <a href="event_overview.html" class="nav-link">Event Overview</a>
                <a href="calendar.html" class="nav-link active">Calendar</a>
-               <a href="creat-events.html" class="nav-link">Create Events</a>
+               <a href="create_events.html" class="nav-link">Create Events</a>
             </div>
             
         </nav>
@@ -36,26 +37,33 @@
     </div>
 </header>
   <main class="calendar-page">
-    <section class="calendar-controls">
-        <h1 class="page-title">Calendar</h1>
-        
-        <div class="filter-row">
-            <div class="left-controls">
-                <button class="control-btn filter-btn">
-                    <img src="images/filter-icon.png" alt="" class="btn-icon"> Filters
-                </button>
-                <div class="search-container">
-                    <img src="images/search-icon.png" alt="" class="search-icon">
-                    <input type="text" id="event-search" placeholder="Search events...">
-                </div>
-            </div>
-            
-            <div class="view-switch">
-                <button class="view-btn active" data-view="monthly">Monthly View</button>
-                <button class="view-btn" data-view="weekly">Weekly View</button>
+ <section class="calendar-controls">
+    <h1 class="page-title">Calendar</h1>
+    
+    <div class="filtre-row"> <div class="left-controls">
+            <button class="control-btn filter-btn">
+                <img src="images/icons/filter-icon.svg" alt="" class="btn-icon"> 
+                Filters
+            </button>
+
+            <div class="search-container">
+                <img src="images/icons/aau_search.svg" alt="" class="search-icon">
+                <input type="text" id="event-search" placeholder="Search events...">
             </div>
         </div>
-    </section>
+
+        <div class="view-switch">
+            <button class="view-btn active" data-view="monthly">
+                <img src="images/icons/calendar.svg" alt="" class="btn-icon"> 
+                Monthly View
+            </button>
+            <button class="view-btn" data-view="weekly">
+                <img src="images/icons/calendar.svg" alt="" class="btn-icon"> 
+                Weekly View
+            </button>
+        </div>
+</section>
+ 
 
     <section class="calendar-container">
         <div class="calendar-header">
@@ -133,7 +141,7 @@
         </div>
     </div>
 </footer>
-    <script src="script.js"></script>
+    <script src="scripts/calendar.js"></script>
 </body>
 </html>
 
