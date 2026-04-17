@@ -4,16 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Document</title>
+  <title>Create event</title>
 </head>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+  rel="stylesheet">
 <link rel="stylesheet" href="styles/styles(create_events).css" />
 <link rel="stylesheet" href="styles/styles(header_footer).css" />
 
 <body>
+
+
+
+
+
+
   <!-- header -->
   <header class="main-header">
     <div class="header-container">
@@ -42,6 +50,11 @@
       </div>
   </header>
 
+
+
+
+
+
   <!-- Image grid for visual inspiration / event types -->
   <div class="image-grid">
     <figure>
@@ -69,119 +82,159 @@
     </figure>
   </div>
 
+
+
+
+
+
   <main>
     <!-- Page title -->
-    <h1 class="title_with_icon">
-      <img src="images/icons/create_icon.png" alt="icon" class="title-icon">
-      Create Event
-    </h1>
-    <h2 class="create_description">Fill in the details to create a new event</h2>
+    <div class="page-wrapper">
+      <h1 class="title_with_icon">
+        <img src="images/icons/create_icon.png" alt="icon" class="title-icon">
+        Create Event
+      </h1>
+      <h2 class="create_description">Fill in the details to create a new event</h2>
 
-    <!-- Main event creation form -->
-    <form class="event-form" id="event-form">
-      <h1 class="details1">Event Details</h1>
-      <h2 class="details2">Provide information about your event to help students find and join it</h2>
-      <div>
-        <label for="event-title">Event title:</label>
-        <input type="text" id="event-title" name="event-title" placeholder="E.g Late night bouldering at Sydhavn"
-          required />
-      </div>
+      <!-- Main event creation form -->
+      <form class="event-form" id="event-form">
+        <h1 class="details1">Event Details</h1>
+        <h2 class="details2">Provide information about your event to help students find and join it</h2>
+        <div>
+          <label for="event-title">Event title:</label>
+          <input type="text" id="event-title" name="event-title" placeholder="E.g Late night bouldering at Sydhavn"
+            required />
+        </div>
 
-      <!-- Event description -->
-      <div>
-        <label for="event-description">Event Description:</label>
-        <textarea id="event-description" name="event-description" placeholder="Describe your event" required></textarea>
-      </div>
+        <!-- Event description -->
+        <div>
+          <label for="event-description">Event Description:</label>
+          <textarea id="event-description" name="event-description" placeholder="Describe your event"
+            required></textarea>
+        </div>
 
-      <!-- Category selection -->
-      <div>
-        <label for="event-category">Category:</label>
-        <select id="event-category" name="event-category" required>
-          <option value="">Select a category</option>
-          <option value="sports">Sports</option>
-          <option value="academic">Academic</option>
-          <option value="social">Social</option>
-        </select>
-      </div>
 
-      <!-- Organizer name -->
-      <div>
-        <label for="event-organizer">Organizer:</label>
-        <input type="text" id="event-organizer" name="event-organizer" placeholder="E.g Bouldering Crew" required />
-      </div>
+        <!-- Category selection -->
+        <div class="row_1">
+          <div>
+            <label for="event-category">Category:</label>
+            <select id="event-category" name="event-category" required>
+              <option value="">Select a category</option>
+              <option value="sports">Sports</option>
+              <option value="academic">Academic</option>
+              <option value="social">Social</option>
+            </select>
+          </div>
 
-      <!-- Date and time inputs -->
-      <div>
-        <label for="event-date">Date:</label>
-        <input type="date" id="event-date" name="event-date" required />
-      </div>
+          <!-- Organizer name -->
+          <div>
+            <label for="event-organizer">Organizer:</label>
+            <input type="text" id="event-organizer" name="event-organizer" placeholder="E.g Bouldering Crew" required />
+          </div>
+        </div>
 
-      <div>
-        <label for="event-starttime">Start Time:</label>
-        <input type="time" id="event-starttime" name="event-starttime" required />
-      </div>
-      <div>
-        <label for="event-endtime">End Time:</label>
-        <input type="time" id="event-endtime" name="event-endtime" required />
-      </div>
 
-      <!-- Event location -->
-      <div>
-        <label for="event-location">Location:</label>
-        <input type="text" id="event-location" name="event-location" placeholder="E.g Boulders Sydhavn" required />
-      </div>
 
-      <!-- Visibility settings -->
-      <div>
-        <label for="event-visibility">Visibility:</label>
-        <select id="event-visibility" name="event-visibility" required>
-          <option value="">Select who can see this event</option>
-          <option value="ALL">ALL</option>
-          <option value="1 semester">1 semester</option>
-          <option value="2 semester">2 semester</option>
-          <option value="3 semester">3 semester</option>
-          <option value="4 semester">4 semester</option>
-          <option value="5 semester">5 semester</option>
-          <option value="6 semester">6 semester</option>
-        </select>
-      </div>
+        <!-- Date and time inputs -->
+        <div>
+          <label for="event-date">Date:</label>
+          <input type="date" id="event-date" name="event-date" required />
+        </div>
 
-      <!-- Optional image URL -->
-      <div>
-        <label for="event-image">Event Image URL:</label>
-        <input type="text" id="event-image" name="event-image" placeholder="https://example.com/image.jpg" />
-      </div>
+        <div class="row_2">
+          <div>
+            <label for="event-starttime">Start Time:</label>
+            <input type="time" id="event-starttime" name="event-starttime" required />
+          </div>
 
-      <!-- Form action buttons -->
-      <button type="button" class="button btn-save">Save for later</button>
-      <button type="submit" class="button btn-create">Create and post event</button>
-      <button type="reset" class="button btn-cancel">Cancel</button>
-      <br />
-      <br />
-      <br />
-      
-      <!-- Optional financial support -->
-      <fieldset>
-        <!-- bruges til at gruppere relaterede form felter-->
-        <legend>Financial Support</legend>
-        <label>
-          <input type="checkbox" name="financial-support" />
-          Request financial support for this event
-        </label>
-      </fieldset>
-      <br />
-      <br />
-      <fieldset>
-        <legend>Room Booking (optional)</legend>
-        <label>
-          <input type="checkbox" name="room-booking" />
-          Request room booking for this event
-        </label>
-      </fieldset>
-      <br />
-      <br />
-    </form>
+          <div>
+            <label for="event-endtime">End Time:</label>
+            <input type="time" id="event-endtime" name="event-endtime" required />
+          </div>
+        </div>
 
+
+
+        <!-- Event location -->
+        <div>
+          <label for="event-location">Location:</label>
+          <input type="text" id="event-location" name="event-location" placeholder="E.g Boulders Sydhavn" required />
+        </div>
+
+
+
+        <!-- Visibility settings -->
+        <div>
+          <label for="event-visibility">Visibility:</label>
+          <select id="event-visibility" name="event-visibility" required>
+            <option value="">Select who can see this event</option>
+            <option value="ALL">ALL</option>
+            <option value="1 semester">1 semester</option>
+            <option value="2 semester">2 semester</option>
+            <option value="3 semester">3 semester</option>
+            <option value="4 semester">4 semester</option>
+            <option value="5 semester">5 semester</option>
+            <option value="6 semester">6 semester</option>
+          </select>
+        </div>
+
+
+
+        <!-- Optional image URL -->
+        <div>
+          <label for="event-image">Event Image URL:</label>
+          <input type="text" id="event-image" name="event-image" placeholder="https://example.com/image.jpg" />
+        </div>
+
+
+
+
+
+
+        <!-- Optional financial support -->
+        <fieldset>
+          <h1 class="financial1">
+            <img src="images/icons/financial_support.png" class="legend-icon">
+            Financial Support (optional)
+          </h1>
+          <h1 class="financial2">Request financial support for your event</h1>
+          <label>
+            <input type="checkbox" name="financial-support" />
+            Request financial support for this event
+          </label>
+        </fieldset>
+
+
+
+        <fieldset>
+          <h1 class="room1">
+            <img src="images/icons/room.png" class="legend-icon">
+            Room Booking (optional)
+          </h1>
+          <h2 class="room2">Request a room for your event</h2>
+
+          <label>
+            <input type="checkbox" name="room-booking" />
+            Request room booking for this event
+          </label>
+        </fieldset>
+
+
+
+
+        <!-- Form action buttons -->
+        <div class="button-row">
+
+          <button type="submit" class="button btn-create">Create and post event</button>
+          <button type="reset" class="button btn-cancel">Cancel</button>
+          <br />
+          <br />
+          <br />
+        </div>
+
+
+      </form>
+    </div>
     <div id="event-list"></div>
   </main>
 

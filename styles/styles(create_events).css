@@ -1,3 +1,4 @@
+/*Page standard layout*/
 body {
     font-family: "Barlow", sans-serif;
     flex-direction: column;
@@ -7,31 +8,68 @@ body {
     background-color: #211951;
 }
 
-main {
-    background-color: #f2f2f4;
-    border-radius: 25px;
-    width: 50vw;
-    height: 80vw;
-    padding: 20px;
-    margin: -125px auto 0 auto; /* 👈 pulls it upward */
-    position: relative;
-
-}
 
 
 /*Image-grid under header*/
 .image-grid {
     display: flex;
-    width: 100%;
 }
+
 .image-grid figure {
     flex: 1;
     margin: 0;
 }
+
 .image-grid img {
     width: 100%;
     height: 250px;
     object-fit: cover;
+}
+
+
+/*Create event main container*/
+main {
+    background-color: #f2f2f4;
+    border-radius: 25px;
+    width: 50vw;
+    min-width: 450px;
+    padding: 20px;
+    margin: -125px auto 0 auto; /* pulls it upward */
+    position: relative;
+}
+
+/*Makes "Create Event" and the event-form line up*/
+.page-wrapper,
+.event-form{
+    width: 40vw;
+    min-width: 350px;
+    margin: 0 auto;
+}
+
+/*"Create Event*/
+.title_with_icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #211951;
+    margin-top: 35px;    
+    margin-bottom: 10px;
+}
+
+/*The icon before "Create event"*/
+.title-icon {
+    width: 40px;
+    height: 40px;
+}
+
+
+/*"Fill in the details to create a new event"*/
+.create_description {
+    font-size: 16px;
+    font-weight: 400;
+    color: #211951;
+    margin-bottom: 40px;
 }
 
 
@@ -40,103 +78,139 @@ main {
 /*Box for event-form*/
 .event-form {
     background-color: #ffffff;
-    color: #211951;
     border-radius: 25px;
-    width: 40vw;
+    min-width: 350px;
     padding: 40px;
-    margin: 0 auto;
 }
 
 .event-form label {
     display: block;
-    padding-top: 10px;
-    font-weight: 600;
+    padding-top: 15px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.event-form input {
-    width: 100%;
-    height: 45px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #f2f2f4;
-    border: 1px solid #f2f2f4;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
 
-.title_with_icon {
-    display: flex;
-    font-family: "Barlow", sans-serif;
-    font-weight: 600;
-    color: #211951;
-    height: 100px;
-    margin-left: 80px;
-    align-items: center; /* vertical alignment */
-    gap: 10px; /* space between icon and text */
-}
 
-.title-icon {
-    width: 40px;
-    height: 40px;
-}
-
-.create_description{
-    display: flex;
-    font-family: "Barlow", sans-serif;
-    font-size: 16px;
-    font-weight: 1;
-    color: #211951;
-    height: 60px;
-    margin: -25px auto 0 auto;
-    margin-left: 80px;
-}
-
-.details1{
+/*"Event Details"*/
+.details1 {
     display: block;
     font-size: 20px;
     font-weight: 600;
 }
-.details2{
+
+/*"Provide information about your event to help students find and join it"*/
+.details2 {
     display: block;
     font-size: 16px;
-    font-weight: 10;
-    height: 60px;
+    font-weight: 300;
+    height: 40px;
 }
 
-/* Base button */
-.button {
-    border: none;
-    margin-top: 60px;
-    border-radius: 8px;
 
+
+/*Targets all <input>, <select>, and <textarea> elements that are inside the class event-form*/
+.event-form input,
+.event-form select,
+.event-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f2f2f4;
+    color: #717182;
+    border: 1px solid #f2f2f4;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/*Event Description text-box (specific tweak)*/
+#event-description {
+    min-height: 150px;
+    resize: vertical; /* users can drag to expand but only down */
+}
+
+/*row_1 Puts "Category" and "Organizer" on the same row*/
+/*ro2_2 Puts "Start Time" and "End Time" on the same row*/
+.row_1,
+.row_2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/*Financial Support and Room Booking*/
+fieldset {
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #ffffff;
+}
+
+
+.financial1, 
+.room1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.financial2,
+.room2 {
+    font-size: 16px;
+    font-weight: 300;
+    height: 40px;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #211951;
+    cursor: pointer;
+}
+
+/*Size of both icons in Financial Support and Room Booking*/
+.legend-icon{
+    width: 40px;
+    height: 40px;
+}
+
+/* Button row :) */
+.button-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* Buttons general look */
+.button {
+    height: 45px;
+    border: none;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Primary (Create Event) */
+/* Create Event button */
 .btn-create {
     background-color: #0f6f82;
-    padding: 10px 69px;
-    color: white;
-}
-
-/* Secondary (Save for later) */
-.btn-save {
-    background-color: #0f6f82;
-    padding: 10px 100px;
-    color: white;
+    color: #ffffff;
+    flex: 3;
 }
 
 /* Cancel button */
 .btn-cancel {
     background-color: #ffffff;
-    padding: 10px 19px;
     color: #333;
+    flex: 1;
 }
 
 /* Hover effect */
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+.button:hover {
+    transform: translateY(-2px); /*Makes it jump*/
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /*Gives extra shadow*/
 }

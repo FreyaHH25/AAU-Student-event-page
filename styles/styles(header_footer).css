@@ -1,6 +1,7 @@
 /* UniEvent Font*/
 @import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
 
+/*Resets browser-defaults*/
 * {
     margin: 0;
     padding: 0;
@@ -20,25 +21,29 @@
 }
 
 .header-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;   
-    padding: 0 41px;  /* Border lenght control */
     display: flex;
-    justify-content: space-between; 
     align-items: center;
+    justify-content: space-between; 
+    padding: 0 41px;  /* Border lenght control */
+
+    width: 100%;
 }
 
-.logo-container, .user-container {
+/*Left + right sections of*/
+.logo-container, 
+.user-container {
     flex: 1;
     display: flex;
-        height: 150px;
+    height: 150px;
+
 }
 
 .user-container {
     justify-content: flex-end;
+    overflow: hidden;
+    min-width: 10;
     background: #ffffff;
-    height: 150px;
+    height: 150prgb(211, 40, 40)
 }
 
 .user-profile {
@@ -62,15 +67,16 @@
 }
 
 .logo-container {
-       justify-content: flex-START;
+    justify-content: flex-START;
+    object-fit:scale-down ;
+    overflow: hidden;
 }
 
 /* Logo AAU*/
 
 .logo-img {
-    width: auto;
+    max-width: 240px;
     height: auto;
-    
 }
 
 /*Main Logo*/
@@ -96,7 +102,10 @@
 .nav-links-container {
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    gap: clamp(10px, 3vw, 60px);
+    width: 100%;
+    padding-right: 5px;
+
 }
 
 /*Button Texst Design*/
@@ -179,14 +188,14 @@
     flex-direction: column;
 }
 
-/* Venstre kolonne */
-.col-left { text-align: left; align-items: flex-start; }
+/*Link columns*/
+.col-left,
+.col-center,
+.col-right {
+    text-align: left; 
+    align-items: flex-start; 
+}
 
-/* Midter kolonne */
-.col-center { text-align: center; align-items: center; }
-
-/* Højre kolonne */
-.col-right { text-align: right; align-items: flex-end; }
 
 .footer-col h3 {
     font-size: 14px;
@@ -195,13 +204,15 @@
     font-weight: 800;
 }
 
-.footer-col a, .footer-col p {
+.footer-col a, 
+.footer-col p {
     color: white;
     text-decoration: none;
     font-size: 16px;
     line-height: 2;
     transition: 0.3s;
 }
+
 
 /* Bundlinjen */
 .footer-bottom {
@@ -244,30 +255,4 @@
     filter: brightness(0) invert(1); /* Gør dem hvide */
     display: block;
 }
-
-
-.col-left { 
-    text-align: left; 
-    align-items: flex-start; 
-}
-
-.col-center { 
-    text-align: center; 
-    align-items: center; 
-}
-
-.col-right { 
-    text-align: right; 
-    align-items: flex-end; 
-}
-
-.footer-bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 30px;
-}
-
 

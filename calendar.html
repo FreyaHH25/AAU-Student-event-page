@@ -1,147 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calendar</title>
+    <title>Calendar</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles/styles(calendar).css">
     <link rel="stylesheet" href="styles/styles(header_footer).css" />
 </head>
+
 <body>
-    <header class="main-header">
+<!-- header -->
+  <header class="main-header">
     <div class="header-container">
-        
-        <div class="logo-container">
-            <img src="images/aau_students.png" class="logo-img">
+      <div class="logo-container">
+        <img src="images/aau_students.png" class="logo-img" />
+      </div>
+
+      <!-- Navigation menu -->
+      <nav class="nav-menu">
+        <h1 class="site-title">UniEvent</h1>
+
+        <!-- Navigation links -->
+        <div class="nav-links-container">
+          <a href="event_overview.html" class="nav-link">Event Overview</a>
+          <a href="calendar.html" class="nav-link active">Calendar</a>
+          <a href="create_events.html" class="nav-link">Create Events</a>
         </div>
+      </nav>
 
-        <nav class="nav-menu">
-            <h1 class="site-title">UniEvent</h1>
-
-            <div class="nav-links-container">
-               <a href="event_overview.html" class="nav-link">Event Overview</a>
-               <a href="calendar.html" class="nav-link active">Calendar</a>
-               <a href="create_events.html" class="nav-link">Create Events</a>
-            </div>
-            
-        </nav>
-
-        <div class="user-container">
-            <img src="images/user_icon.jpg" class="user-img" alt="User Profile">
+      <!-- User profile icon -->
+      <div class="user-container">
+        <div class="user-profile">
+          <img src="images/user_icon.jpeg" class="user-img" alt="User Profile">
+          <p class="user-name">John Doe</p>
         </div>
+      </div>
+  </header>
 
-    </div>
-</header>
-  <main class="calendar-page">
- <section class="calendar-controls">
-    <h1 class="page-title">Calendar</h1>
-    
-    <div class="filtre-row"> <div class="left-controls">
-            <button class="control-btn filter-btn">
-                <img src="images/icons/filter-icon.svg" alt="" class="btn-icon"> 
-                Filters
-            </button>
 
-            <div class="search-container">
-                <img src="images/icons/aau_search.svg" alt="" class="search-icon">
-                <input type="text" id="event-search" placeholder="Search events...">
-            </div>
-        </div>
 
-        <div class="view-switch">
-            <button class="view-btn active" data-view="monthly">
-                <img src="images/icons/calendar.svg" alt="" class="btn-icon"> 
-                Monthly View
-            </button>
-            <button class="view-btn" data-view="weekly">
-                <img src="images/icons/calendar.svg" alt="" class="btn-icon"> 
-                Weekly View
-            </button>
-        </div>
-</section>
- 
 
-    <section class="calendar-container">
-        <div class="calendar-header">
-            <h2 id="display-month-year">March 2026</h2>
-            <div class="calendar-nav">
-                <span class="today-display">Today: <span id="dynamic-date-display">March 18</span></span>
-                <div class="nav-buttons">
-                    <button class="nav-arrow" id="prev-month">&lt;</button>
-                    <button class="today-btn" id="go-to-today">Today</button>
-                    <button class="nav-arrow" id="next-month">&gt;</button>
+
+
+    <main class="calendar-page">
+        <section class="calendar-controls">
+            <h1 class="page-title">Calendar</h1>
+
+            <div class="filtre-row">
+                <div class="left-controls">
+                    <button class="control-btn filter-btn">
+                        <img src="images/icons/filter-icon.svg" alt="" class="btn-icon">
+                        Filters
+                    </button>
+
+                    <div class="search-container">
+                        <img src="images/icons/aau_search.svg" alt="" class="search-icon">
+                        <input type="text" id="event-search" placeholder="Search events...">
+                    </div>
+                </div>
+
+                <div class="view-switch">
+                    <button class="view-btn active" data-view="monthly">
+                        <img src="images/icons/calendar.svg" alt="" class="btn-icon">
+                        Monthly View
+                    </button>
+                    <button class="view-btn" data-view="weekly">
+                        <img src="images/icons/calendar.svg" alt="" class="btn-icon">
+                        Weekly View
+                    </button>
+                </div>
+        </section>
+
+
+        <section class="calendar-container">
+            <div class="calendar-header">
+                <h2 id="display-month-year">March 2026</h2>
+                <div class="calendar-nav">
+                    <span class="today-display">Today: <span id="dynamic-date-display">March 18</span></span>
+                    <div class="nav-buttons">
+                        <button class="nav-arrow" id="prev-month">&lt;</button>
+                        <button class="today-btn" id="go-to-today">Today</button>
+                        <button class="nav-arrow" id="next-month">&gt;</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="calendar-grid" id="calendar-grid">
-            <div class="day-name">Sun</div>
-            <div class="day-name">Mon</div>
-            <div class="day-name">Tue</div>
-            <div class="day-name">Wed</div>
-            <div class="day-name">Thu</div>
-            <div class="day-name">Fri</div>
-            <div class="day-name">Sat</div>
+            <div class="calendar-grid" id="calendar-grid">
+                <div class="day-name">Sun</div>
+                <div class="day-name">Mon</div>
+                <div class="day-name">Tue</div>
+                <div class="day-name">Wed</div>
+                <div class="day-name">Thu</div>
+                <div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
             </div>
-    </section>
-</main>
-    
+        </section>
+    </main>
+
+    <!-- Footer with contact info and links -->
     <footer class="main-footer">
-    <div class="footer-top">
-        <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo">
-    </div>
-
-    <div class="footer-columns">
-        <div class="footer-col col-left">
-            <h3>KONTAKT</h3>
-            <p>Fredrik Bajers Vej 7K</p>
-            <p>9220 Aalborg Ø</p>
-            <p>Tlf.: 9940 9940</p>
-            <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
-            <br>
-            <p>CVR: 29102384</p>
+        <div class="footer-top">
+            <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
         </div>
 
-        <div class="footer-col col-center">
-            <h3>OM AAU</h3>
-            <a href="https://www.studerende.aau.dk">For studerende</a>
-            <a href="https://www.ansatte.aau.dk">For ansatte</a>
-            <a href="https://www.aau.dk/alumni">For alumni</a>
-            <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
-            <a href="https://www.aau.dk/om-aau">Om AAU</a>
-            <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
-        </div>
+        <div class="footer-columns">
+            <div class="footer-col col-left">
+                <h3>KONTAKT</h3>
+                <p>Fredrik Bajers Vej 7K</p>
+                <p>9220 Aalborg Ø</p>
+                <p>Tlf.: 9940 9940</p>
+                <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+                <br />
+                <p>CVR: 29102384</p>
+            </div>
 
-        <div class="footer-col col-right">
-            <h3>GENVEJE</h3>
-            <a href="https://www.design.aau.dk/">Designguide</a>
-            <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
-            <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
-            <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+            <div class="footer-col col-center">
+                <h3>OM AAU</h3>
+                <a href="https://www.studerende.aau.dk">For studerende</a>
+                <a href="https://www.ansatte.aau.dk">For ansatte</a>
+                <a href="https://www.aau.dk/alumni">For alumni</a>
+                <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
+                <a href="https://www.aau.dk/om-aau">Om AAU</a>
+                <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
+            </div>
+
+            <div class="footer-col col-right">
+                <h3>GENVEJE</h3>
+                <a href="https://www.design.aau.dk/">Designguide</a>
+                <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
+                <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
+                <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="service-links">
-            <a href="https://www.aau.dk/om-websitet">Om websitet</a>
-            <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
-            <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
-            <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
+        <div class="footer-bottom">
+            <div class="service-links">
+                <a href="https://www.aau.dk/om-websitet">Om websitet</a>
+                <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
+                <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
+                <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/AalborgUniversitet/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg" alt="Facebook" /></a>
+                <a href="https://www.instagram.com/aalborguni/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg" alt="Instagram" /></a>
+                <a href="https://www.youtube.com/aalborguniversitet"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg" alt="YouTube" /></a>
+                <a href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg" alt="LinkedIn" /></a>
+                <a href="https://www.snapchat.com/add/aauuni"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat" /></a>
+            </div>
         </div>
-        
-        <div class="social-icons">
-            <a href="https://www.facebook.com/AalborgUniversitet/"><img src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg" alt="Facebook"></a>
-            <a href="https://www.instagram.com/aalborguni/"><img src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg" alt="Instagram"></a>
-            <a href="https://www.youtube.com/aalborguniversitet"><img src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg" alt="YouTube"></a>
-            <a href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"><img src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg" alt="LinkedIn"></a>
-            <a href="https://www.snapchat.com/add/aauuni"><img src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat"></a>
-        </div>
-    </div>
-</footer>
+    </footer>
+
+
     <script src="scripts/calendar.js"></script>
 </body>
-</html>
 
+</html>
