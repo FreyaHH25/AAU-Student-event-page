@@ -8,6 +8,7 @@ console.log("JS loaded!");
   addEventListener: attaches an event handler to an element/lytter efter en handling
   */
 
+//EVENTHANDLER
 // retrieve event data
 document.getElementById("event-form").addEventListener("submit", function (e) {
   //e means information about the submit-action
@@ -31,17 +32,27 @@ document.getElementById("event-form").addEventListener("submit", function (e) {
   saveEvent(eventData);
 });
 
-// save event data to localStorage (the data can therefore be retrieved from localStorage in eventoverview.js to create the cards)
-function saveEvent(event) {
-  // Retrieve existing events from localStorage
-  // JSON.parse: converts string back to array
-  // || []: if nothing exists yet, start with empty array
-  let events = JSON.parse(localStorage.getItem("events")) || [];
-
-  // Add the new event to the array
-  events.push(event);
-
-  // Save the updated array back to localStorage
-  // JSON.stringify: converts array to string (localStorage can only store strings)
-  localStorage.setItem("events", JSON.stringify(events));
+// FUNCTION THAT SENDS DATA TO SERVER
+// async makes it possible to use await inside the function
+async function saveEvent(event) {
+  try {
+    // Sends a POST request to backend (the server)
+    const res = await fetch("http://..", {
+      //MANGLER
+      method: "POST", // we want to create (send) data
+      headers: {
+        "Content-Type": "application/json",
+        // tells the server that we are sending JSON data
+      },
+      body: JSON.stringify(event),
+      // converts JavaScript object → JSON string
+    });
+    // Waits for a response from the server and converts it to JSON
+    const data = await res.json();
+    console.log(data);
+    // shows the saved event (which comes back from the database)
+  } catch (err) {
+    console.error(err);
+    // if something goes wrong (e.g. server down), show the error in console
+  }
 }
