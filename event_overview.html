@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event overview</title>
-    
+
     <link rel="stylesheet" href="styles/styles(event_overview).css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/styles(header_footer).css">
 
-    <header class="top-header">
-        <div class="logo-section">
-            <img src="images/aau_students logo.png" alt="Students Logo" class="logo-image">
-        </div>
 
-        <div class="center-section">
-            <h1 class="main-title">UniEvent</h1>
+
+
+
+
+    <!-- header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="images/aau_students.png" class="logo-img" />
+            </div>
+
+            <!-- Navigation menu -->
             <nav class="nav-menu">
-                <a href="#" class="nav-btn active">Event overview</a>
-                <a href="#" class="nav-btn">Calendar</a>
-                <a href="#" class="nav-btn">Create events</a>
-            </nav>
-        </div>
+                <h1 class="site-title">UniEvent</h1>
 
-        <div class="profile-section">
-            <div class="profile-icon">👤</div>
-            <div class="profile-name">Hady Ghabour</div>
-        </div>
+                <!-- Navigation links -->
+                <div class="nav-links-container">
+                    <a href="event_overview.html" class="nav-link active">Event Overview</a>
+                    <a href="calendar.html" class="nav-link">Calendar</a>
+                    <a href="create_events.html" class="nav-link">Create Events</a>
+                </div>
+            </nav>
+
+            <!-- User profile icon -->
+            <div class="user-container">
+                <div class="user-profile">
+                    <img src="images/user_icon.jpeg" class="user-img" alt="User Profile">
+                    <p class="user-name">John Doe</p>
+                </div>
+            </div>
     </header>
+
+
+
+
 
 
     <section class="search-section">
         <span class="search-icon">🔍</span>
-        
+
         <input type="text" class="search-input" placeholder="Search for events">
-        
+
         <button class="filter-btn">
             Filters <span class="filter-icon">⚏</span>
         </button>
@@ -44,28 +61,93 @@
     <section class="events-section">
         <h2 class="section-title">My events</h2>
         <div class="events-grid" id="my-events">
-            </div>
+        </div>
     </section>
 
     <section class="events-section">
         <h2 class="section-title">Upcoming events</h2>
         <div class="events-grid" id="upcoming-events">
-            </div>
+        </div>
     </section>
 
     <section class="events-section">
         <h2 class="section-title">Newly added events</h2>
         <div class="events-grid" id="newly-added-events">
-            </div>
+        </div>
     </section>
 
     <section class="events-section">
         <h2 class="section-title">Past events</h2>
         <div class="events-grid" id="past-events">
-            </div>
+        </div>
     </section>
 
     <script src="scripts/eventoverview.js"></script>
 
-</body>
+
+
+
+
+
+    <!-- Footer with contact info and links -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
+        </div>
+
+        <div class="footer-columns">
+            <div class="footer-col col-left">
+                <h3>KONTAKT</h3>
+                <p>Fredrik Bajers Vej 7K</p>
+                <p>9220 Aalborg Ø</p>
+                <p>Tlf.: 9940 9940</p>
+                <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+                <br />
+                <p>CVR: 29102384</p>
+            </div>
+
+            <div class="footer-col col-center">
+                <h3>OM AAU</h3>
+                <a href="https://www.studerende.aau.dk">For studerende</a>
+                <a href="https://www.ansatte.aau.dk">For ansatte</a>
+                <a href="https://www.aau.dk/alumni">For alumni</a>
+                <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
+                <a href="https://www.aau.dk/om-aau">Om AAU</a>
+                <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
+            </div>
+
+            <div class="footer-col col-right">
+                <h3>GENVEJE</h3>
+                <a href="https://www.design.aau.dk/">Designguide</a>
+                <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
+                <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
+                <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="service-links">
+                <a href="https://www.aau.dk/om-websitet">Om websitet</a>
+                <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
+                <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
+                <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/AalborgUniversitet/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/gltjimjo/icon-some-facebook.svg" alt="Facebook" /></a>
+                <a href="https://www.instagram.com/aalborguni/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/kecelbck/instagram.svg" alt="Instagram" /></a>
+                <a href="https://www.youtube.com/aalborguniversitet"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/5rdbipsk/icon-some-youtube.svg" alt="YouTube" /></a>
+                <a href="https://www.linkedin.com/school/aalborg-universitet/mycompany/"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/1p2by1sy/linkedin.svg" alt="LinkedIn" /></a>
+                <a href="https://www.snapchat.com/add/aauuni"><img
+                        src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat" /></a>
+            </div>
+        </div>
+    </footer>
+
+
+    </body>
+
 </html>
