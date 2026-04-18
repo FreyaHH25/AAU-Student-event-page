@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/styles(login_page).css">
+</head>
+<body>
+
+    <div class="login-card">
+        <header>
+            <h1>Welcome to AAU StudentEvents</h1>
+            <p>Login with your student account or club/committee account</p>
+        </header>
+
+        <div class="toggle-container">
+            <button type="button" class="toggle-btn active">
+            <img src="images/icons/login.svg" alt="Login Icon" class="btn-icon"> 
+            Login
+    </button>
+        </div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+
+            <p id="error-message" style="text-align: center; font-size: 13px; margin-bottom: 10px; font-weight: 600;"></p>
+
+            <button type="submit" class="submit-btn">
+            <img src="images/icons/login.svg" alt="Login Icon" class="btn-icon"> 
+            Login
+    </button>
+        </form>
+
+        
+    </div>
+
+    <script src="scripts/login_handler.js"></script>
+</body>
+</html>
