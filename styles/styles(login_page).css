@@ -116,7 +116,7 @@ header p {
     background-color: #2e2a6e;
 }
 
-// This is the code for the inverted SVG image
+/* This is the code for the inverted SVG image */
 .submit-btn .btn-icon {
     /* brightness(0) turns it completely black, 
        invert(1) flips black to white */
