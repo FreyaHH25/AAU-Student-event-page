@@ -1,6 +1,7 @@
 /* UniEvent Font*/
 @import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
 
+
 /*Resets browser-defaults*/
 * {
     margin: 0;
@@ -94,12 +95,12 @@
 
 /* Buttons and Navigation Menu*/
 
-.nav-menu {
+.nav-menu-header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.nav-links-container {
+.nav-links-container-header {
     display: flex;
     flex-direction: row;
     gap: clamp(10px, 3vw, 60px);
@@ -109,7 +110,7 @@
 }
 
 /*Button Texst Design*/
-.nav-link {
+.nav-link-header {
     font-family: "Barlow", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -132,16 +133,15 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.nav-link.active {
+.nav-link-header.active {
     background-color: #211951;
     color: #F2F2F4;
 }
 
-.nav-link:hover {
+.nav-link-header:hover {
     background-color: #D1D1D4;
     color: #211951;
 }
-
 
 
 
