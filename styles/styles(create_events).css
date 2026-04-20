@@ -6,8 +6,8 @@ body {
     width: 100%;
     margin: 0;
     background-color: #211951;
+    overflow-x: hidden;
 }
-
 
 
 /*Image-grid under header*/
