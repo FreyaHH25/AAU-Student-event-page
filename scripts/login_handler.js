@@ -1,89 +1,111 @@
 /**
- * DOMContentLoaded: This event waits for the browser to finish loading the HTML.
- * If we don't use this, the script might try to find the 'loginForm' before 
- * the browser has even drawn it on the screen, causing a "null" error.
+  DOMContentLoaded: Ensures the script waits for the HTML to load 
+ before trying to find the 'loginForm'.
  */
 document.addEventListener('DOMContentLoaded', function() {
     console.log("JS loaded and HTML is ready!");
 
-    // We 'grab' the form from the HTML using its unique ID
     const loginForm = document.getElementById('loginForm');
 
-    /**
-     * IF Check: We make sure 'loginForm' actually exists before doing anything.
-     * This prevents the code from crashing if this script is loaded on the wrong page.
-     */
     if (loginForm) {
         
-        // We 'listen' for when the user clicks the Submit button or presses Enter
         loginForm.addEventListener('submit', function(event) {
-            
-            /**
-             * event.preventDefault(): By default, HTML forms try to refresh the whole page.
-             * We stop that behavior so we can handle the login ourselves with JS.
-             */
+            // Stops the page from refreshing automatically
             event.preventDefault();
 
-            // We grab the text the user actually typed into the input fields
+            // 1. Grab user input
             const emailInput = document.getElementById('email').value;
             const passwordInput = document.getElementById('password').value;
-            
-            // We grab the <p> tag where we want to display error messages
             const errorDisplay = document.getElementById('error-message');
 
-            /**
-             * The 'Fake' Database: An array of objects.
-             * In a real website, these would be stored safely on a server.
-             */
-            const users = [
-                { email: "jg60qk@student.aau.dk", password: "12345" },
-                { email: "on64ow@student.aau.dk", password: "12345" },
-                { email: "jz84bu@student.aau.dk", password: "12345" },
-                { email: "wj04vk@student.aau.dk", password: "12345" },
-                { email: "hi57op@student.aau.dk", password: "12345" },
-                { email: "kn87ue@student.aau.dk", password: "12345" },
-                { email: "aaam25@student.aau.dk", password: "12345" }
-            ];
+            // 2. Clear previous error messages
+            if (errorDisplay) {
+                errorDisplay.innerText = "";
+            }
 
-            /**
-             * .find(): This looks through our 'users' list. 
-             * It checks if ANY user has an email AND a password that match 
-             * exactly what the user typed in the boxes.
+            /*
+              FETCH: Sends the email and password to your local server.
+              Your server then checks the MongoDB Atlas 'users' collection.
              */
-            const userExists = users.find(user => 
-                user.email === emailInput && user.password === passwordInput
-            );
+            fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailInput,
+                    password: passwordInput
+                })
+            })
+            .then(response => {
+                // If the server finds the user, response.ok is true
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    // If login is wrong (401), we jump to the .catch() block
+                    throw new Error('Invalid login credentials');
+                }
+            })
+            .then(data => {
+                console.log("Success! Server found the user.");
 
-            // If a matching user was found, userExists will be true (an object)
-            if (userExists) {
-                console.log("Success! Redirecting...");
-                
-                // This tells the browser to change the URL and go to the overview page
+                /*
+                  LocalStorage: We save the User ID and Email in the browser.
+                  This is CRITICAL so other pages (like the calendar) know 
+                  which student is currently logged in.
+                 */
+                localStorage.setItem('userId', data.userId);
+                localStorage.setItem('userEmail', emailInput);
+                // 2. SAVE THE REAL NAME (Crucial for the header!)
+                localStorage.setItem('realName', data.userName);
+
+                // Redirect to the event overview page
                 window.location.href = "event_overview.html";
-            } 
-            // If no match was found, userExists will be 'undefined'
-            else {
-                console.log("Login failed.");
+            })
+            .catch(error => {
+                console.error("Login Error:", error.message);
                 
-                // We check if the error message element exists in HTML
+                // Show error message to the user
                 if (errorDisplay) {
-                    // We inject the text into the HTML and change the color to red
                     errorDisplay.innerText = "Invalid student email or password.";
                     errorDisplay.style.color = "#ff6b6b"; 
                 } else {
-                    /**
-                     * Fallback: If you forgot to add <p id="error-message"></p> 
-                     * to your HTML, we show a popup alert instead.
-                     */
                     alert("Invalid credentials.");
                 }
-            }
+            });
         });
+
     } else {
-        /**
-         * Error logging: If the script can't find 'loginForm', 
-         * we print a message in the browser console to help us debug.
-         */
         console.error("Critical Error: Could not find 'loginForm' in your HTML. Check your ID!");
+    }
+});
+
+/* HEADER NAME CHANCE: */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Accesses the 'realName' we saved during the login process earlier
+    const savedName = localStorage.getItem('realName');
+    const userNameElement = document.querySelector('.user-name');
+// Locates the paragraph tag in the header where the name should be displayed
+    if (savedName && userNameElement && savedName !== "undefined") {
+        // 1. Split the name into an array of words
+        /*
+          NAME FORMATTING: To keep the UI clean, we shorten long names.
+          Example: "Marius Piasecki Frey Hansen" becomes "Marius Hansen".
+         */
+        const nameParts = savedName.trim().split(' '); // Turns the name into a list of words
+
+        if (nameParts.length > 1) {
+            // 2. Take the first word and the last word
+            const firstName = nameParts[0];
+            const lastName = nameParts[nameParts.length - 1];
+            // Injects the shortened name into the HTML header
+            userNameElement.innerText = `${firstName} ${lastName}`;
+        } else {
+            // If they only have one name, just show that
+            userNameElement.innerText = savedName;
+        }
+        
+        console.log("Header show name.");
     }
 });
