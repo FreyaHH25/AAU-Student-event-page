@@ -1,76 +1,79 @@
-// 1. TEST DATA
 const myEventsData = [
     {
-        category: "Sports",
-        title: "Basketball Tournament",
-        description: "Come play basket in Hafniahallen",
-        date: "Thursday, April 19, 2026",
-        time: "15:00 - 19:00",
-        location: "Hafniahallen, Copenhagen",
-        attendees: 30,
-        organizer: "Sports Committee",
-        image: "images/basket.webp" 
+        kategori: "Sports",
+        titel: "Basketball Tournament",
+        beskrivelse: "Come play basket in Hafniahallen",
+        dato: "Thursday, april 19, 2026",
+        tid: "15:00 - 19:00",
+        sted: "Hafniahallen, Copenhagen",
+        deltagere: 30,
+        arrangoer: "sportsudvalget",
+        billede: "images/basket.webp" // her pager vi på basket-billefet 
     },
     {
-        category: "Party",
-        title: "Party at Jap's house",
-        description: "First beer is free!",
-        date: "Friday, April 26, 2026",
-        time: "18:00 - 04:00",
-        location: "At Jap's house",
-        attendees: 120,
-        organizer: "Japjot",
-        image: "images/jap.jpg" 
+        kategori: "Party",
+        titel: "fest hos Japot",
+        beskrivelse: "First beer is free!",
+        dato: "Friday, april 26, 2026",
+        tid: "18:00 - 04:00",
+        sted: "Hos Jap ",
+        deltagere: 120,
+        arrangoer: "Japjot",       
+        billede: "images/jap.jpg"   // her pager vi på jap's-billedet
     }
+    
 ];
 
 const upcomingEventsData = [
     {
-        category: "Sports",
-        title: "Yoga & Wellness",
-        description: "Weekly yoga session for stress relief",
-        date: "Saturday, April 21, 2026",
-        time: "07:00 - 08:00",
-        location: "Recreation Center",
-        attendees: 25,
-        organizer: "Wellness Club",
-        image: "images/yoga.jpg" 
+        kategori: "Sports",
+        titel: "Yoga & Wellness",
+        beskrivelse: "Weekly yoga session for stress relief",
+        dato: "Saturday, april 21, 2026",
+        tid: "07:00 - 08:00",
+        sted: "Recreation Center",
+        deltagere: 25,
+        arrangoer: "Wellness Club",
+        billede: "images/yoga.jpg" // her peger vi på yoga-billedet
     },
     {
-        category: "Party",
-        title: "Software party at Hattenbar",
-        description: "First beer is free!",
-        date: "Friday, April 26, 2026",
-        time: "18:00 - 04:00",
-        location: "At Hady's house ",
-        attendees: 120,
-        organizer: "Overflow_SW",
-        image: "images/hattenbar.png" 
+        kategori: "Party",
+        titel: "Software party at Hattenbar",
+        beskrivelse: "First beer is free!",
+        dato: "Friday, april 26, 2026",
+        tid: "18:00 - 04:00",
+        sted: "hos hady",
+        deltagere: 120,
+        arrangoer: "Overflow_SW",
+        billede: "images/hattenbar.png" // her pager vi på hattenbar-billedet
     },
-  
-];
+   
+]
 
-// Empty arrays for future events
+// (tilføje events manual til 'newly added' og past senere)
 const newlyAddedEventsData = [];
 const pastEventsData = [];
 
-// 2. FUNCTION TO BUILD EVENT CARDS
-function createEventCardHTML(event) {
+// 2. FUNKTIONEN DER BYGGER KORTENE (Vores skabelon)
+// Denne funktion tager ét event ad gangen og forvandler det til HTML.
+function skabEventKortHTML(event) {
     return `
         <div class="event-card">
-            <img src="${event.image}" alt="Image of ${event.title}" class="card-image">
+            
+            <img src="${event.billede}" alt="Billede af ${event.titel}" class="card-image">
+            
             <div class="card-content">
-                <span class="category-tag">${event.category}</span>
-                <h3 class="card-title">${event.title}</h3>
-                <p class="card-desc">${event.description}</p>
+                <span class="category-tag">${event.kategori}</span>
+                <h3 class="card-title">${event.titel}</h3>
+                <p class="card-desc">${event.beskrivelse}</p>
                 <div class="card-info">
-                    <p>📅 ${event.date}</p>
-                    <p>🕒 ${event.time}</p>
-                    <p>📍 ${event.location}</p>
+                    <p>📅 ${event.dato}</p>
+                    <p>🕒 ${event.tid}</p>
+                    <p>📍 ${event.sted}</p>
                 </div>
                 <div class="card-footer">
-                    <span>👥 ${event.attendees} attending</span>
-                    <span>by ${event.organizer}</span>
+                    <span>👥 ${event.deltagere} attending</span>
+                    <span>by ${event.arrangoer}</span>
                 </div>
                 <button class="read-more-btn">Read More &gt;</button>
             </div>
@@ -78,21 +81,24 @@ function createEventCardHTML(event) {
     `;
 }
 
-// 3. SHOW EVENTS ON PAGE
-function showEventsOnPage(eventList, containerId) {
-    const container = document.getElementById(containerId);
+// Denne funktion går igennem en liste med events og sætter dem ind i den rigtige kasse.
+function visEventsPåSiden(eventListe, htmlKasseId) {
+    const kasse = document.getElementById(htmlKasseId);
     
-    if (container) {
-        container.innerHTML = ""; // Clear the container first
+    // Hvis kassen findes på siden
+    if (kasse) {
+        // Tøm kassen først (så vi ikke får dubletter)
+        kasse.innerHTML = ""; 
         
-        eventList.forEach(function(singleEvent) {
-            container.innerHTML += createEventCardHTML(singleEvent);
+        // Gå igennem hvert event i listen og tilføj dets HTML til kassen
+        eventListe.forEach(function(enkeltEvent) {
+            kasse.innerHTML += skabEventKortHTML(enkeltEvent);
         });
     }
 }
 
-// Execute the function to display data
-showEventsOnPage(myEventsData, "my-events");
-showEventsOnPage(upcomingEventsData, "upcoming-events");
-showEventsOnPage(newlyAddedEventsData, "newly-added-events");
-showEventsOnPage(pastEventsData, "past-events");
+// vise vores test-data i de rigtige kasser:
+visEventsPåSiden(myEventsData, "my-events");
+visEventsPåSiden(upcomingEventsData, "upcoming-events");
+visEventsPåSiden(newlyAddedEventsData, "newly-added-events");
+visEventsPåSiden(pastEventsData, "past-events");
