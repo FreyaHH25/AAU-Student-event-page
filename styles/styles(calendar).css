@@ -6,24 +6,45 @@
     box-sizing: border-box;
 }
 body {
-    width: 100%;
     overflow-x: hidden; 
     font-family: 'Barlow', sans-serif;
+    background-color: #ffffff;
+    color: #211951;
 }
-/* Buttons and Navigation Menu*/
+
+/*"Calendar"*/
+.calendar-title{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+/*"View all events in monthly or weekly format"*/
+.calendar-description {
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 40px; 
+}
+.calendar-page {
+    padding: 0px 50px;
+}
+/* Buttons for month/week*/
+.calendar-controls {
+    margin-bottom: 30px; /* space above calendar */
+}
+
+/* Buttons for changing month*/
 .nav-buttons {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
+/*Arrows for changing month*/
 .nav-arrow {
     width: 38px;
     height: 38px;
-    border-radius: 50%;         /* Makes it a perfect circle */
-    border: 1px solid #E0E0E0;  /* Subtle light border */
-    background-color: #FFFFFF;  /* Clean white background */
-    color: #211951;             /* Your Navy theme color */
+    border-radius: 50%;
+    border: 1px solid #E0E0E0;
+    background-color: #FFFFFF;
+    color: #211951;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -31,24 +52,20 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Professional smooth timing */
-    outline: none;
 }
-
-/* Hover Animation */
+/*Hover Animation for arrows*/
 .nav-arrow:hover {
-    background-color: #211951;  /* Swaps to Navy background */
-    color: #FFFFFF;            /* Arrow turns white */
+    background-color: #211951;
+    color: #FFFFFF;
     border-color: #211951;
     transform: translateY(-2px); /* Lifts up slightly */
     box-shadow: 0 4px 10px rgba(33, 25, 81, 0.15); /* Soft shadow */
 }
-
 /* Click Animation */
 .nav-arrow:active {
     transform: translateY(0);   /* Pushes back down when clicked */
     background-color: #3b337a;  /* Slightly lighter navy */
 }
-
 /* Refresh the Today button to match the premium look */
 .today-btn {
     background-color: #F2F2F4;
@@ -69,19 +86,19 @@ body {
     background-color: #E0E0E0;
     color: #211951;
 }
-.nav-menu {
+.nav-menu-header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.nav-links-container {
+.nav-links-container-header {
     display: flex;
     flex-direction: row;
     gap: 60px;
 }
 
 /*Button Texst Design*/
-.nav-link {
+.nav-link-header {
     font-family: "Barlow", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -109,33 +126,10 @@ body {
 
 .nav-link:hover {
     background-color: #D1D1D4;
-    color: #211951;
 }
 
-/* Background For the Calendar page. */
-.calendar-page {
-    background-color: #F8F9FA;
-    padding: 40px 41px;
-    min-height: 800px;
-}
-
-/*Calendar Title*/
-.filtre-row {
-    display: flex;
-    flex-direction: column; /* Stacks them vertically */
-    align-items: flex-start; /* Forces everything to stay on the LEFT side */
-    width: 100%;
-    
-    /* Distance from "Calendar" Title and the Calendar Grid */
-    margin-top: 70px;    
-    margin-bottom: 80px; 
-    
-    /* This creates the gap between Search Bar and the Buttons below it */
-    gap: 50px; 
-}
 
 /*Controls and Filtres*/
-
 .left-controls {
     display: flex;
     align-items: center;
@@ -144,15 +138,7 @@ body {
     width: 100%;
 }
 
-.control-btn, 
-.search-container input {
-    height: 52px; /* Set a specific height */
-    border: 1px solid #E0E0E0;
-    border-radius: 12px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
-    background-color: white;
-}
+
 
 .control-btn {
     display: flex;
@@ -201,39 +187,6 @@ body {
     background-color: #F2F2F4;
 }
 
-.search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    max-width: 600px; 
-    margin-right: 40px; 
-}
-
-.search-container input {
-    height: 52px; 
-    width: 100%;
-    padding: 0 15px 0 40px;
-    border: 1px solid #E0E0E0;
-    border-radius: 12px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 14px;
-    outline: none;
-    background-color: white;
-}
-
-.search-icon {
-    position: absolute;
-    left: 12px;         
-    top: 50%;          
-    transform: translateY(-50%); 
-    width: 18px;        
-    height: 18px;
-    opacity: 0.5;       
-    pointer-events: none; 
-}
-
-
 /* Calender Grid */
 
 .calendar-container {
@@ -261,13 +214,7 @@ body {
     color: #666;
 }
 
-.today-btn {
-    background: none;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    color: #211951;
-}
+
 
 /* GRID */
 .calendar-grid {
@@ -297,7 +244,7 @@ body {
 /* The header cells (Sun, Mon, etc.) in Weekly View */
 .calendar-grid.weekly-view .day-name {
     position: sticky;
-    top: 0;
+
     background: #f8f9fa;
     z-index: 10;
     font-weight: 700;

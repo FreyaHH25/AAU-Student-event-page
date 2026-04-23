@@ -82,7 +82,7 @@ main {
     min-width: 350px;
     padding: 40px;
 }
-
+/*Titles for the inpu-boxes*/
 .event-form label {
     display: block;
     padding-top: 15px;
@@ -121,6 +121,7 @@ main {
     border: 1px solid #f2f2f4;
     border-radius: 10px;
     box-sizing: border-box;
+    font-family: "Barlow", sans-serif;
 }
 
 /*Event Description text-box (specific tweak)*/
@@ -185,6 +186,7 @@ input[type="checkbox"] {
 
 /* Buttons general look */
 .button {
+    font-family: "Barlow", sans-serif;
     height: 45px;
     border: none;
     border-radius: 10px;

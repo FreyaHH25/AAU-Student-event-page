@@ -1,0 +1,46 @@
+.search-section {
+    margin: 25px 50px;
+}
+
+/*Searchbar container*/
+.search-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+}
+
+/*The icon before the searchbar*/
+.search-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/*Input for the searchbar*/
+.search-input {
+    font-family: "Barlow", sans-serif;
+    flex-grow: 1;
+    background-color: #f2f2f4;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+
+
+/*The "Filters" button*/
+.filter-btn {
+    font-family: "Barlow", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f2f2f4;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #211951;
+    cursor: pointer;
+}

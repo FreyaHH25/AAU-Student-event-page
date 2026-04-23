@@ -13,6 +13,9 @@
     rel="stylesheet">
     <link rel="stylesheet" href="styles/styles(calendar).css">
     <link rel="stylesheet" href="styles/styles(header_footer).css">
+    <link rel="stylesheet" href="styles/styles(tags).css">
+    <link rel="stylesheet" href="styles/styles(searchbar_filter).css">
+
 </head>
 
 
@@ -43,33 +46,31 @@
                     <p class="user-name">John Doe</p>
                 </div>
             </div>
+            </div>
     </header>
 
 
+    <main>
 
+        <section class="search-section">
+            <img src="images/icons/aau_search.svg" alt="icon" class="search-icon">
+            <input type="text" class="search-input" placeholder="Search for events">
 
+            <button class="filter-btn">
+                Filters <span class="filter-icon">⚏</span>
+            </button>
+        </section>
 
-
-    <main class="calendar-page">
+            <section class="calendar-page">
         <section class="calendar-controls">
-            <h1 class="page-title">Calendar</h1>
+            <h1 class="calendar-title">Calendar</h1>
+            <h2 class="calendar-description">View all events in monthly or weekly format</h2>
 
-            <div class="filtre-row">
-                <div class="left-controls">
-                    <button class="control-btn filter-btn">
-                        <img src="images/icons/filter-icon.svg" alt="" class="btn-icon">
-                        Filters
-                    </button>
-
-                    <div class="search-container">
-                        <img src="images/icons/aau_search.svg" alt="" class="search-icon">
-                        <input type="text" id="event-search" placeholder="Search events...">
-                    </div>
-                </div>
-
-                <div class="view-switch">
-                    <button class="view-btn active" data-view="monthly">
-                        <img src="images/icons/calendar.svg" alt="" class="btn-icon">
+            
+            
+            <div class="view-switch">
+                <button class="view-btn active" data-view="monthly">
+                    <img src="images/icons/calendar.svg" alt="" class="btn-icon">
                         Monthly View
                     </button>
                     <button class="view-btn" data-view="weekly">
@@ -77,52 +78,53 @@
                         Weekly View
                     </button>
                 </div>
-        </section>
-
-
-        <section class="calendar-container">
-            <div class="calendar-header">
-                <h2 id="display-month-year">March 2026</h2>
-                <div class="calendar-nav">
-                    <span class="today-display">Today: <span id="dynamic-date-display">March 18</span></span>
-                    <div class="nav-buttons">
-                        <button class="nav-arrow" id="prev-month">&lt;</button>
-                        <button class="today-btn" id="go-to-today">Today</button>
-                        <button class="nav-arrow" id="next-month">&gt;</button>
+            </section>
+            
+            
+            <section class="calendar-container">
+                <div class="calendar-header">
+                    <h2 id="display-month-year">March 2026</h2>
+                    <div class="calendar-nav">
+                        <span class="today-display">Today: <span id="dynamic-date-display">March 18</span></span>
+                        <div class="nav-buttons">
+                            <button class="nav-arrow" id="prev-month">&lt;</button>
+                            <button class="today-btn" id="go-to-today">Today</button>
+                            <button class="nav-arrow" id="next-month">&gt;</button>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="calendar-grid" id="calendar-grid">
+                    <div class="day-name">Sun</div>
+                    <div class="day-name">Mon</div>
+                    <div class="day-name">Tue</div>
+                    <div class="day-name">Wed</div>
+                    <div class="day-name">Thu</div>
+                    <div class="day-name">Fri</div>
+                    <div class="day-name">Sat</div>
+                </div>
+            </section>
+</section>
+        </main>
+        
+        <!-- Footer with contact info and links -->
+        <footer class="main-footer">
+            <div class="footer-top">
+                <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
             </div>
-
-            <div class="calendar-grid" id="calendar-grid">
-                <div class="day-name">Sun</div>
-                <div class="day-name">Mon</div>
-                <div class="day-name">Tue</div>
-                <div class="day-name">Wed</div>
-                <div class="day-name">Thu</div>
-                <div class="day-name">Fri</div>
-                <div class="day-name">Sat</div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer with contact info and links -->
-    <footer class="main-footer">
-        <div class="footer-top">
-            <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
-        </div>
-
-        <div class="footer-columns">
-            <div class="footer-col col-left">
-                <h3>KONTAKT</h3>
-                <p>Fredrik Bajers Vej 7K</p>
-                <p>9220 Aalborg Ø</p>
-                <p>Tlf.: 9940 9940</p>
-                <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
-                <br />
-                <p>CVR: 29102384</p>
-            </div>
-
-            <div class="footer-col col-center">
+            
+            <div class="footer-columns">
+                <div class="footer-col col-left">
+                    <h3>KONTAKT</h3>
+                    <p>Fredrik Bajers Vej 7K</p>
+                    <p>9220 Aalborg Ø</p>
+                    <p>Tlf.: 9940 9940</p>
+                    <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+                    <br />
+                    <p>CVR: 29102384</p>
+                </div>
+                
+                <div class="footer-col col-center">
                 <h3>OM AAU</h3>
                 <a href="https://www.studerende.aau.dk">For studerende</a>
                 <a href="https://www.ansatte.aau.dk">For ansatte</a>

@@ -1,4 +1,4 @@
-/* UniEvent Font*/
+/* UniEvent Font (Downloads the font from Google Fonts)*/
 @import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
 
 
@@ -9,50 +9,66 @@
     box-sizing: border-box;
 }
 
-/* Header Styles */
 
+
+/*The header section itself*/
 .main-header {
+    font-family: "Barlow", sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     width: 100%;
     height: 200px;
-    padding: 0; 
     background-color: #ffffff;
+    border-bottom: 3px solid #f2f2f4;
+    padding-bottom: 8px;
 }
-
+/*The inside layout of the header*/
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between; 
     padding: 0 41px;  /* Border lenght control */
-
     width: 100%;
 }
 
-/*Left + right sections of*/
-.logo-container, 
+
+
+
+/*AAU Logo container from left to buttons*/
+/*It makes a square which the image fills out, controling it placement*/
+.logo-container {
+    display: flex;
+    flex: 1;
+    justify-content: flex-START;
+    overflow: hidden;
+
+}
+/*AAU students logo size control*/
+.logo-img {
+    max-width: 240px;
+    height: auto;
+}
+
+
+
+/*Profile section from right to buttons*/
+/*It makes a square which the icon and name fills out, controling it placement*/
 .user-container {
     flex: 1;
     display: flex;
-    height: 150px;
-
-}
-
-.user-container {
     justify-content: flex-end;
     overflow: hidden;
-    min-width: 10;
-    background: #ffffff;
-    height: 150prgb(211, 40, 40)
+    min-width: 0;
 }
-
+/*Profile picture and name placement*/
 .user-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 0;
 }
-
+/*Profile picture settings*/
 .user-img {
     width: 102px;
     height: 102px;
@@ -60,28 +76,19 @@
     border-radius: 100%;
     cursor: pointer;
 }
-
+/*User-name settings*/
 .user-name {
+    max-width: 100%;
     margin-top: 6px;
     font-size: 24px;
     color: #211951;
-}
-
-.logo-container {
-    justify-content: flex-START;
-    object-fit:scale-down ;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Logo AAU*/
-
-.logo-img {
-    max-width: 240px;
-    height: auto;
-}
 
 /*Main Logo*/
-
 .site-title{
     font-family: "Jomhuria", serif;
     font-weight: 400;
@@ -94,11 +101,11 @@
 }
 
 /* Buttons and Navigation Menu*/
-
 .nav-menu-header {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 .nav-links-container-header {
     display: flex;
@@ -113,7 +120,6 @@
 .nav-link-header {
     font-family: "Barlow", sans-serif;
     font-weight: 700;
-    font-style: normal;
     color: #211951;
     font-size: 14px;
     letter-spacing: 0.1px;

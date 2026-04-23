@@ -1,92 +1,72 @@
-/* 1. GENERAL SETUP */
+/*Page standard layout*/
 body {
-    margin: 0; 
-    padding: 0;
     font-family: "Barlow", sans-serif;
-    background-color: #fdfdfd; 
+    background-color: #ffffff;
     overflow-x: hidden;
 }
 
 
 
-/* 7. SEARCH SECTION */
-.search-section {
-    display: flex;
-    align-items: center; 
-    padding: 20px 50px; 
-    gap: 20px; 
+/*Padding the page-layout*/
+.events-section{
+    margin: 25px 50px;
 }
 
-.search-icon {
-    font-size: 24px; 
-    color: #1a1654; 
-}
 
-.search-input {
-    flex-grow: 1; 
-    background-color: #f5f5f7; 
-    border: none;
-    padding: 12px 20px; 
-    border-radius: 8px; 
-    font-size: 16px;
-    outline: none;
-}
-
-.filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-    background-color: #f5f5f7; 
-    border: none; 
-    padding: 12px 20px; 
-    border-radius: 8px; 
-    font-weight: bold;
-    font-size: 14px;
-    color: #1a1654; 
-    cursor: pointer; 
-}
-
-/* 8. EVENTS SECTION & CARDS */
-.events-section {
-    padding: 20px 50px;
-}
-
+/*All of the titles for each section (My events, upcoming events etc.)*/
 .section-title {
-    color: #1a1654;
+    color: #211951;
     margin-bottom: 20px;
+    border-bottom: 3px solid #f2f2f4;
+    padding-bottom: 8px;
+}
+
+/*Helps the scroll buttons - !!!might need better explanation!!!*/
+.events-wrapper {
+    position: relative;
 }
 
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 30px; 
+    grid-auto-flow: column;
+    grid-auto-columns: 350px;
+    gap: 30px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
 }
 
 .event-card {
-    background-color: white;
-    border: 1px solid #eaeaea; 
-    border-radius: 12px; 
-    overflow: hidden; 
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    width: 350px;
 }
 
 .card-image {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
+    height: 200px;
+    object-fit: cover;
 }
 
 .card-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; 
+    flex-grow: 1;
+}
+
+.info-icons {
+    width: 20px;
+    height: 20px;
 }
 
 .category-tag {
-    background-color: #e0f8eb; 
-    color: #17c964; 
+    background-color: #e0f8eb;
+    color: #17c964;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 12px;
@@ -102,13 +82,20 @@ body {
 }
 
 .card-desc {
-    margin: 0 0 20px 0;
+    margin: 10px 0 10px 0;
     font-size: 14px;
     color: #777;
+    background-color: #ffffff;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines */
+    line-clamp: 2;  
+    overflow: hidden;
 }
 
+
 .card-info p {
-    margin: 8px;
+    margin-bottom: 10px;
     font-size: 13px;
     color: #555;
     display: flex;
@@ -118,16 +105,17 @@ body {
 .card-footer {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
-    padding-top: 15px;
+    margin-top: 10px;
+
     font-size: 12px;
     color: #777;
     margin-bottom: 20px;
 }
 
 .read-more-btn {
-    margin-top: auto; 
-    width: 100%; 
+    font-family: "Barlow", sans-serif;
+    margin-top: auto;
+    width: 100%;
     background-color: transparent;
     border: 1px solid #eaeaea;
     padding: 12px;
@@ -141,4 +129,35 @@ body {
 
 .read-more-btn:hover {
     background-color: #f5f5f7;
+}
+
+
+
+
+/*Side-scrolling buttons*/
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+
+    width: 40px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.scroll-btn.left {
+    left: 0;
+}
+
+.scroll-btn.right {
+    right: 0;
+}
+
+/* Optional hover effect */
+.scroll-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
