@@ -29,7 +29,7 @@ document.getElementById('event-form').addEventListener('submit', async function(
     try {
         // SEND DATA TO BACKEND:
         // We use fetch() to send the data to our Express server. 
-        const response = await fetch('http://localhost:3001/api/events', {
+        const response = await fetch('http://localhost:3000/api/events', {
             method: 'POST', // POST means we are sending new data to be created
             headers: {
                 'Content-Type': 'application/json' // Tells the server we are sending JSON formatted data

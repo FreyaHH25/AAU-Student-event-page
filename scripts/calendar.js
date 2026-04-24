@@ -1,21 +1,31 @@
-/* 1. The brain GLOBAL STATE */
-/* This keeps track of what the user is looking at, even when we switch functions */
-let displayedDate = new Date(); 
-let currentView = 'monthly'; // Tracks if we are in 'monthly' or 'weekly'
+/* 1. GLOBAL STATE */
+// These variables store the "memory" of your app while it's running
+let displayedDate = new Date();  // The date/month the user is currently looking at
+let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mode
+let allEvents = [];             // A big list that holds all events fetched from the database
 
-/**
- * MAIN FUNCTION: renderCalendar
- * Decides whether to draw the Month or the Week based on currentView.
- **/
+/* 2. FETCH DATA */
+async function fetchEventsFromServer() {
+    try {
+        // Asks the server for the events
+        const response = await fetch('http://localhost:3000/api/events');
+        // Turns the server's raw data into a JavaScript list (array)
+        allEvents = await response.json();
+        // Now that we have data, draw the calendar
+        renderCalendar(); 
+    } catch (error) {
+        // If the server is off or the URL is wrong, show an error in the console
+        console.error("Error loading events:", error);
+    }
+}
+
+/* 3. MAIN RENDER */
 function renderCalendar() {
-    /* Grab the actual HTML boxes where we want to draw stuff */
+    // Finds the HTML elements where the calendar and the title (Month/Year) go
     const grid = document.getElementById('calendar-grid');
     const monthYearLabel = document.getElementById('display-month-year');
     
-    // Clear the grid (except the weekday names)
-    const dayCells = grid.querySelectorAll('.day-cell');
-    dayCells.forEach(cell => cell.remove());
-/* Simple logic: Are we in month mode or week mode? Call the right helper. */
+    // Decides which specific drawing function to use based on the current view
     if (currentView === 'monthly') {
         renderMonthly(grid, monthYearLabel);
     } else {
@@ -23,84 +33,94 @@ function renderCalendar() {
     }
 }
 
+/* 4. MONTHLY VIEW (Max 5, Newest First) */
 function renderMonthly(grid, monthYearLabel) {
-    /* Reset the grid style and clear all HTML inside it to start fresh */
-    grid.classList.remove('weekly-view');
-    grid.innerHTML = ""; // Clear everything (including old headers)
-/* Get the numbers we need: what year is it? what month? */
+    grid.classList.remove('weekly-view'); // Reset CSS to monthly layout
+    grid.innerHTML = "";                   // Clear the grid to start fresh
+
     const year = displayedDate.getFullYear();
     const month = displayedDate.getMonth();
-    const realToday = new Date();// We need "right now" to highlight today's date
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+    const realToday = new Date(); // To check which day is "Today"
+    
+    // Arrays for naming months and days
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    /* Set the big title at the top (e.g., "October 2026") */
+
+    // Update the top label (e.g., "April 2026")
     monthYearLabel.innerText = `${monthNames[month]} ${year}`;
 
-    /* Draw the headers: Sun, Mon, Tue... at the top of the grid */
+    // Step 1: Draw the day headers (Sun, Mon, etc.)
     dayNames.forEach(name => {
         const header = document.createElement('div');
         header.classList.add('day-name');
         header.innerText = name;
         grid.appendChild(header);
     });
-/* CALENDAR MATH: 
-       firstDayIndex: What day of the week does the 1st fall on? (0 for Sunday, 1 for Monday...)
-       daysInMonth: A trick to get the last day of the month by asking for "day 0" of the next month. */
+
+    // Step 2: Calculate empty spaces for the start of the month
     const firstDayIndex = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-/* Padding: If the month starts on a Tuesday, we need 2 empty boxes for Sun/Mon 
-       so the "1st" aligns correctly under Tuesday. */
+    // Fill in blanks for days from the previous month
     for (let i = 0; i < firstDayIndex; i++) {
         const emptyCell = document.createElement('div');
         emptyCell.classList.add('day-cell', 'not-current-month');
         grid.appendChild(emptyCell);
     }
-/* Loop through every day of the month (1 to 31) and create a box for it */
-    // Actual day cells
+
+    // Step 3: Draw each actual day of the month
     for (let day = 1; day <= daysInMonth; day++) {
         const dayCell = document.createElement('div');
         dayCell.classList.add('day-cell');
-        /* If this box is actually 'today', give it a special CSS class to make it glow or change color */
+
+        // Highlight the cell if it's the actual current date
         if (day === realToday.getDate() && month === realToday.getMonth() && year === realToday.getFullYear()) {
             dayCell.classList.add('is-today');
         }
-/* Put the number inside the box */
-        dayCell.innerHTML = `<span class="day-number">${day}</span>`;
-        
-        /* HOVER Logic: When mouse enters a box, update a tiny display somewhere 
-           to show the date. When it leaves, set it back to "Today". */
-        dayCell.addEventListener('mouseenter', () => {
-            document.getElementById('dynamic-date-display').innerText = `${monthNames[month]} ${day}`;
+
+        // Format the date so we can find matching events in our data
+        const dateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+        // Filter: Only keep events for this date, reverse them, and keep only 5
+        const todaysEvents = allEvents
+            .filter(event => event.date === dateString)
+            .reverse() 
+            .slice(0, 5);
+
+        // Put the day number at the top of the cell
+        let cellHTML = `<span class="day-number">${day}</span>`;
+
+        // Create the small colored "pills" for each event
+        todaysEvents.forEach(event => {
+            const categoryClass = `cat-${event.category || 'default'}`;
+            cellHTML += `<div class="event-pill ${categoryClass}">${event.title}</div>`;
         });
-        dayCell.addEventListener('mouseleave', () => {
-            document.getElementById('dynamic-date-display').innerText = `${monthNames[realToday.getMonth()]} ${realToday.getDate()}`;
-        });
-/* Put the finished day box into the grid */
+
+        dayCell.innerHTML = cellHTML;
         grid.appendChild(dayCell);
     }
 }
+
+/* 5. WEEKLY VIEW (Dynamic Height Stacking) */
 function renderWeekly(grid, monthYearLabel) {
-    const realToday = new Date();
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    /* Change the grid to 8 columns (1 for time labels + 7 for days) */
-    // 1. Setup the grid for 8 columns
-    grid.classList.add('weekly-view');
-    grid.innerHTML = ""; 
-/* MATH: Find the Sunday that started this current week */
-    // Calculate start of the week
+    grid.classList.add('weekly-view'); // Use weekly CSS layout
+    grid.innerHTML = "";               // Clear grid
+
+    // Calculate the Sunday that started the current week
     const startOfWeek = new Date(displayedDate);
     startOfWeek.setDate(displayedDate.getDate() - displayedDate.getDay());
+    
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    
     monthYearLabel.innerText = `Week of ${monthNames[startOfWeek.getMonth()]} ${startOfWeek.getDate()}`;
 
-    // 2. Create the Header Row (Empty corner + 7 Day Names)
+    // Create the top-left empty corner
     const corner = document.createElement('div');
     corner.classList.add('time-corner');
     grid.appendChild(corner);
-/* Create the 7 day headers at the top (e.g., "Mon 14") */
+
+    // Draw the 7 day headers for the week
     for (let i = 0; i < 7; i++) {
         const dayHeader = document.createElement('div');
         dayHeader.classList.add('day-name');
@@ -110,75 +130,84 @@ function renderWeekly(grid, monthYearLabel) {
         grid.appendChild(dayHeader);
     }
 
-    // 3. Create the Time Rows (00:00 to 23:00)
+    // Draw the 24 hour rows
     for (let hour = 0; hour < 24; hour++) {
-        // Add Time Label (e.g., 08:00)
+        // Left-side time label (e.g., "09:00")
         const timeLabel = document.createElement('div');
         timeLabel.classList.add('time-cell');
         timeLabel.innerText = `${hour.toString().padStart(2, '0')}:00`;
         grid.appendChild(timeLabel);
 
-        // Add 7 Slots for that hour
+        // Draw the 7 day-slots for this specific hour
         for (let day = 0; day < 7; day++) {
             const slot = document.createElement('div');
             slot.classList.add('slot-cell');
             
-            // Check if this slot is "Today" to highlight the column
-            /* If this column belongs to "Today", give it a super faint background 
-               so the user can see which column is the current day */
-            const checkDay = new Date(startOfWeek);
-            checkDay.setDate(startOfWeek.getDate() + day);
-            if (checkDay.toDateString() === realToday.toDateString()) {
-                slot.style.backgroundColor = "rgba(59, 130, 246, 0.03)";
-            }
+            // Allow the box to get taller if many events happen at once
+            slot.style.height = "auto"; 
+            slot.style.minHeight = "60px"; 
+
+            const cellDate = new Date(startOfWeek);
+            cellDate.setDate(startOfWeek.getDate() + day);
+            const dateString = cellDate.toISOString().split('T')[0];
+
+            // Filter: Find events that happen on this day AND start during this hour
+            const hourlyEvents = allEvents.filter(e => {
+                const startHour = parseInt(e.startTime.split(':')[0]);
+                return e.date === dateString && startHour === hour;
+            });
+
+            // Create the event boxes
+            hourlyEvents.forEach((e) => {
+                const evEl = document.createElement('div');
+                const categoryClass = `cat-${e.category || 'default'}`;
+                evEl.classList.add('weekly-event-block', categoryClass);
+                
+                // Styling so they stack neatly on top of each other
+                evEl.style.position = "relative";
+                evEl.style.width = '94%'; 
+                evEl.style.margin = '2px auto';
+                evEl.style.height = 'auto'; 
+                evEl.style.top = '0';
+
+                evEl.innerHTML = `<strong>${e.title}</strong><br><small>${e.startTime}-${e.endTime}</small>`;
+                slot.appendChild(evEl);
+            });
 
             grid.appendChild(slot);
         }
     }
 }
-/* NAVIGATION & VIEW CONTROLS/ BUTTON CONTROLS */
 
-// Switch between Monthly and Weekly
+/* 6. CONTROLS */
+// Handle clicks on "Monthly" or "Weekly" buttons
 document.querySelectorAll('.view-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        /* visual: remove 'active' color from old button, add to new one */
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        /* Update the view mode and redraw the whole thing */
+        btn.classList.add('active'); // Highlight current button
         currentView = btn.getAttribute('data-view');
         renderCalendar();
     });
 });
 
-// Next Button logic
+// Handle the "Next" button
 document.getElementById('next-month').addEventListener('click', () => {
-    if (currentView === 'monthly') {
-        /* Move 1 month ahead */
-        displayedDate.setMonth(displayedDate.getMonth() + 1);
-    } else {
-        /* Move 7 days ahead */
-        displayedDate.setDate(displayedDate.getDate() + 7);
-    }
+    // If monthly, move by 1 month. If weekly, move by 7 days.
+    currentView === 'monthly' ? displayedDate.setMonth(displayedDate.getMonth() + 1) : displayedDate.setDate(displayedDate.getDate() + 7);
     renderCalendar();
 });
 
-// Previous Button Logic
+// Handle the "Previous" button
 document.getElementById('prev-month').addEventListener('click', () => {
-    if (currentView === 'monthly') {
-        /* Go back 1 month */
-        displayedDate.setMonth(displayedDate.getMonth() - 1);
-    } else {
-        /* Go back 7 days */
-        displayedDate.setDate(displayedDate.getDate() - 7);
-    }
+    currentView === 'monthly' ? displayedDate.setMonth(displayedDate.getMonth() - 1) : displayedDate.setDate(displayedDate.getDate() - 7);
     renderCalendar();
 });
 
-// Today Button( The "Today" button: Just resets everything to the current real-time date )
+// Handle the "Today" button
 document.getElementById('go-to-today').addEventListener('click', () => {
     displayedDate = new Date();
     renderCalendar();
 });
 
-/* Start the app for the first time when the page finishes loading */
-window.onload = renderCalendar;
+// INITIAL BOOTUP: When the page finishes loading, go get the data
+window.onload = fetchEventsFromServer;

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Fetch data from backend (GET REQUEST):
         // We ask our Express server for all the events stored in the database.
         // Fetch defaults to a get request, so we don't need to specify the method.
-        const response = await fetch('http://localhost:3001/api/events');
+        const response = await fetch('http://localhost:3000/api/events');
 
         // Convert the JSON text response back into a readable JavaScript array
         const events = await response.json();
