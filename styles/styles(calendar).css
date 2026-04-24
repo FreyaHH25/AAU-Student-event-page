@@ -380,7 +380,7 @@ body {
     word-wrap: break-word; /* Ensures long titles don't break the layout */
 }
 
-/* Category Colors (Easy to change later) */
+/* Category Colors  */
 .cat-sports { background-color: #FF8C00; }   
 .cat-acedemic { background-color: #9932CC; } 
 .cat-social { background-color: #1E90FF; }   
