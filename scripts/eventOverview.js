@@ -20,27 +20,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Loop through events:
         // We go through each event we got from the database, one by one.
+        // Loop through events from server:
         events.forEach(event => {
-            // Create a new empty <div> element for the event card
-            const eventCard = document.createElement('div');
-            // Add a CSS class so it gets the styling 
-            eventCard.className = 'event-card'; 
+            // Map server field names to the names used in your HTML template function
+            const mappedEvent = {
+                billede: event.imageUrl || "images/basket.webp",
+                        titel: event.title,
+                kategori: event.category || "General",
+                beskrivelse: event.description,
+                dato: event.date,
+                tid: `${event.startTime} - ${event.endTime}`,
+                sted: event.location,
+                deltagere: 0, // Server doesn't track this yet
+                arrangoer: event.organizer || "Student"
+            };
 
-            // Inject HTML content:
-            // fill the <div> with HTML, inserting the data from our database using ${...}
-            eventCard.innerHTML = `
-                <img src="${event.imageUrl}" alt="${event.title}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                <h3>${event.title}</h3>
-                <p><strong>Organizer ID:</strong> ${event.organizerId || 'N/A'}</p> 
-                <p><strong>Location:</strong> ${event.location}</p>
-                <p>${event.description}</p>
-            `;
-            
-            // Add to page:
-            // Attach the finished event card to the container on the webpage
-            container.appendChild(eventCard);
-        });
-
+    // Use your existing "skabEventKortHTML" function to get the nice HTML
+    const cardHTML = skabEventKortHTML(mappedEvent);
+    
+    // Create a temporary div to turn the string into an actual element
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cardHTML;
+    
+    // Append the first child (the .event-card) to your container
+    container.appendChild(tempDiv.firstElementChild);
+});
         // If the database successfully answered, but there were 0 events inside:
         if (events.length === 0) {
             container.innerHTML = '<p>No events found. Create one to get started!</p>';

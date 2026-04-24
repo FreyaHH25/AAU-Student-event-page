@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,13 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "mongodb": "^7.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FreyaHH25/AAU-Student-event-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FreyaHH25/AAU-Student-event-page/issues"
+  },
+  "homepage": "https://github.com/FreyaHH25/AAU-Student-event-page#readme"
 }
