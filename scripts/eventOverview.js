@@ -23,17 +23,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Loop through events from server:
         events.forEach(event => {
             // Map server field names to the names used in your HTML template function
-            const mappedEvent = {
-                billede: event.imageUrl || "images/basket.webp",
-                        titel: event.title,
-                kategori: event.category || "General",
-                beskrivelse: event.description,
-                dato: event.date,
-                tid: `${event.startTime} - ${event.endTime}`,
-                sted: event.location,
-                deltagere: 0, // Server doesn't track this yet
-                arrangoer: event.organizer || "Student"
-            };
+        const mappedEvent = {
+            billede: event.imageUrl || "images/basket.webp",
+            titel: event.title,
+            // Ensure this matches the key 'categories' you sent from createEvent.js
+            categories: event.categories || ["General"], 
+            beskrivelse: event.description,
+            dato: event.date,
+            tid: `${event.startTime} - ${event.endTime}`,
+            sted: event.location,
+            deltagere: 0,
+            arrangoer: event.organizer || "Student"
+        };
 
     // Use your existing "skabEventKortHTML" function to get the nice HTML
     const cardHTML = skabEventKortHTML(mappedEvent);
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 /**************************************************** */
 const myEventsData = [
     {
-        kategori: "Sports",
+        categories: ["Sports"],
         titel: "Basketball Tournament",
         beskrivelse: "Come play basket in Hafniahallen",
         dato: "Thursday, april 19, 2026",
@@ -74,7 +75,7 @@ const myEventsData = [
         billede: "images/basket.webp" // her pager vi på basket-billefet 
     },
     {
-        kategori: "Sports",
+        categories: ["Sports"],
         titel: "Basketball Tournament",
         beskrivelse: "Come play basket in Hafniahallen",
         dato: "Thursday, april 19, 2026",
@@ -85,7 +86,7 @@ const myEventsData = [
         billede: "images/basket.webp" // her pager vi på basket-billefet 
     },
     {
-        kategori: "Party",
+        categories: ["Sports"],
         titel: "fest hos Japot",
         beskrivelse: "First beer is free!",
         dato: "Friday, april 26, 2026",
@@ -100,7 +101,7 @@ const myEventsData = [
 
 const upcomingEventsData = [
     {
-        kategori: "Sports",
+        categories: ["Sports"],
         titel: "Yoga & Wellness",
         beskrivelse: "Weekly yoga session for stress relief",
         dato: "Saturday, april 21, 2026",
@@ -116,7 +117,7 @@ const upcomingEventsData = [
 // (tilføje events manual til 'newly added' og past senere)
 const newlyAddedEventsData = [
     {
-        kategori: "Party",
+        categories: ["Sports"],
         titel: "fest hos Japot",
         beskrivelse: "First beer is free!",
         dato: "Friday, april 26, 2026",
@@ -130,7 +131,7 @@ const newlyAddedEventsData = [
 ];
 const pastEventsData = [
     {
-        kategori: "Party",
+        categories: ["Sports"],
         titel: "Software party at Hattenbar",
         beskrivelse: "First beer is free!",
         dato: "Friday, april 26, 2026",
@@ -152,9 +153,8 @@ function skabEventKortHTML(event) {
             <div class="card-content">
             <h3 class="card-title">${event.titel}</h3>
             
-            <div class="tags-row">
-                <span class="category-tag">${event.kategori}</span>
-                <div class="tag-grid">
+            <div class="tags-row" style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
+                ${event.categories ? event.categories.map(cat => `<span class="tag-${cat.toLowerCase()}">${cat}</span>`).join('') : `<span class="tag-general">General</span>`}
             </div>
             </div>
                 <p class="card-desc">${event.beskrivelse}</p>

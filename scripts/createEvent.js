@@ -1,31 +1,66 @@
 // Listen for the "submit" event on the form with the ID 'event-form'
+let selectedCategories = []; // Array to hold your 3 choices
+
+const categorySelect = document.getElementById('event-category');
+const tagsDisplay = document.getElementById('selected-tags-display');
+
+categorySelect.addEventListener('change', function() {
+    const val = this.value;
+    
+    if (val && !selectedCategories.includes(val)) {
+        if (selectedCategories.length < 3) {
+            selectedCategories.push(val);
+            updateTagDisplay();
+        } else {
+            alert("You can only choose up to 3 categories.");
+        }
+    }
+    this.value = ""; // Resets the dropdown so "Select a category" shows again
+});
+
+function updateTagDisplay() {
+    tagsDisplay.innerHTML = ""; // Clear
+    selectedCategories.forEach(cat => {
+        const tag = document.createElement('span');
+        // This uses your existing tag CSS classes!
+        tag.className = `tag-${cat}`; 
+        tag.style.padding = "5px 10px";
+        tag.style.borderRadius = "12px";
+        tag.style.cursor = "pointer";
+        tag.style.fontSize = "12px";
+        tag.innerText = cat + " ✕";
+        
+        // Click a tag to remove it
+        tag.onclick = () => {
+            selectedCategories = selectedCategories.filter(c => c !== cat);
+            updateTagDisplay();
+        };
+        tagsDisplay.appendChild(tag);
+    });
+}
+
+// --- UPDATE YOUR SUBMIT HANDLER ---
 document.getElementById('event-form').addEventListener('submit', async function(event) {
-    // Preavent default
-    // Forms normally refresh the whole page when submitted. 
-    // This line stops that so we can handle the data in the background using JavaScript.
     event.preventDefault();
 
-    // Get user id:
-    // Retrieve the logged-in user's ID from local storage (saved during login).
-    // This helps us connect the event to a specific user in the database.
-    const loggedInUserId = localStorage.getItem('userId');
+    if (selectedCategories.length === 0) {
+        alert("Please select at least one category.");
+        return;
+    }
 
-    // collect form data:
-    // We create a JavaScript object containing all the values the user typed into the form.
     const newEventData = {
         title: document.getElementById('event-title').value,
         description: document.getElementById('event-description').value,
-        category: document.getElementById('event-category').value,
+        categories: selectedCategories, // Sends the array of 1-3 tags
         organizer: document.getElementById('event-organizer').value,
-        organizerId: loggedInUserId, // Links to the user's ID in the 'users' collection
+        organizerId: localStorage.getItem('userId'),
         date: document.getElementById('event-date').value,
         startTime: document.getElementById('event-starttime').value,
         endTime: document.getElementById('event-endtime').value,
         location: document.getElementById('event-location').value,
         visibility: document.getElementById('event-visibility').value,
-        imageUrl: document.getElementById('event-image').value || "images/basket.jpg.webp" // can change to a balck image basket iamge just for test
+        imageUrl: document.getElementById('event-image').value || "images/basket.jpg.webp"
     };
-
     try {
         // SEND DATA TO BACKEND:
         // We use fetch() to send the data to our Express server. 

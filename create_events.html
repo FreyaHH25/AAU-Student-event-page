@@ -114,27 +114,34 @@
 
 
         <!-- Category selection -->
+
         <div class="row_1">
           <div>
-            <label for="event-category">Category:</label>
-            <select id="event-category" name="event-category" required>
+            <label for="event-category">Categories (Select up to 3):</label>
+            <select id="event-category" name="event-category">
               <option value="">Select a category</option>
-              <option value="sports">Sports</option>
               <option value="academic">Academic</option>
+              <option value="career">Career</option>
+              <option value="creative">Creative</option>
+              <option value="culture">Culture</option>
+              <option value="food">Food</option>
+              <option value="gaming">Gaming</option>
+              <option value="outdoors">Outdoors</option>
+              <option value="party">Party</option>
               <option value="social">Social</option>
+              <option value="sports">Sports</option>
+              <option value="volunteering">Volunteering</option>
+              <option value="wellness">Wellness</option>
             </select>
+            <div id="selected-tags-display" style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
           </div>
-
-          <!-- Organizer name -->
+        
           <div>
             <label for="event-organizer">Organizer:</label>
             <input type="text" id="event-organizer" name="event-organizer" placeholder="E.g Bouldering Crew" required />
           </div>
         </div>
 
-
-
-        <!-- Date and time inputs -->
         <div>
           <label for="event-date">Date:</label>
           <input type="date" id="event-date" name="event-date" required />
