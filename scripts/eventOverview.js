@@ -143,6 +143,8 @@ const pastEventsData = [
     },
 ];
 
+let valgtKategori = "All";
+
 // 2. FUNKTIONEN DER BYGGER KORTENE (Vores skabelon)
 // Denne funktion tager ét event ad gangen og forvandler det til HTML.
 function skabEventKortHTML(event) {
@@ -179,6 +181,16 @@ function skabEventKortHTML(event) {
         </div>
     `;
 }
+/* This function checks which category is chosen and only keeps those events */
+function filtrerEvents(eventListe) {
+    if (valgtKategori === "All") {
+        return eventListe;
+    }
+
+    return eventListe.filter(function(event) {
+        return event.categories.includes(valgtKategori);
+    });
+}
 
 // Denne funktion går igennem en liste med events og sætter dem ind i den rigtige kasse.
 function visEventsPåSiden(eventListe, htmlKasseId) {
@@ -197,11 +209,14 @@ function visEventsPåSiden(eventListe, htmlKasseId) {
 }
 
 // vise vores test-data i de rigtige kasser:
-visEventsPåSiden(myEventsData, "my-events");
-visEventsPåSiden(upcomingEventsData, "upcoming-events");
-visEventsPåSiden(newlyAddedEventsData, "newly-added-events");
-visEventsPåSiden(pastEventsData, "past-events");
+function visAlleEvents() {
+    visEventsPåSiden(filtrerEvents(myEventsData), "my-events");
+    visEventsPåSiden(filtrerEvents(upcomingEventsData), "upcoming-events");
+    visEventsPåSiden(filtrerEvents(newlyAddedEventsData), "newly-added-events");
+    visEventsPåSiden(filtrerEvents(pastEventsData), "past-events");
+}
 
+visAlleEvents();
 
 
 
@@ -221,3 +236,35 @@ document.querySelectorAll(".events-wrapper").forEach(wrapper => {
         grid.scrollBy({ left: -scrollAmount * 2, behavior: "smooth" });
     });
 });
+
+/* Filter button */
+function startFilter() {
+    const filterBtn = document.getElementById('open-filter-btn');
+    const saveBtn = document.getElementById('save-filter-btn');
+    const filterBox = document.getElementById('filter-panel');
+
+    /* open and close filter */
+    filterBtn.addEventListener('click', () => {
+        if (filterBox.style.display === 'block') {
+            filterBox.style.display = 'none';
+        } else {
+            filterBox.style.display = 'block';
+        }
+    });
+
+    /* save and close */
+    saveBtn.addEventListener('click', () => {
+        const checkedBox = document.querySelector('#filter-panel input[type="checkbox"]:checked');
+
+        if (checkedBox) {
+            valgtKategori = checkedBox.value;
+        } else {
+            valgtKategori = "All";
+        }
+
+        visAlleEvents();
+        filterBox.style.display = 'none';
+    });
+}
+
+startFilter();

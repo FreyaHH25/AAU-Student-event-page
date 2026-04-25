@@ -211,3 +211,30 @@ document.getElementById('go-to-today').addEventListener('click', () => {
 
 // INITIAL BOOTUP: When the page finishes loading, go get the data
 window.onload = fetchEventsFromServer;
+
+/* Filter button */
+function startFilter() {
+    const filterBtn = document.getElementById('open-filter-btn');
+    const saveBtn = document.getElementById('save-filter-btn');
+    const filterBox = document.getElementById('filter-panel');
+
+    /* Open and close the filter box */
+    filterBtn.addEventListener('click', () => {
+        if (filterBox.style.display === 'block') {
+            filterBox.style.display = 'none';
+        } else {
+            filterBox.style.display = 'block';
+        }
+    });
+
+    /* Close the box when user clicks save */
+    saveBtn.addEventListener('click', () => {
+        filterBox.style.display = 'none';
+    });
+}
+
+/* Start calendar and filter when page opens */
+window.onload = function () {
+    fetchEventsFromServer();
+    startFilter();
+};

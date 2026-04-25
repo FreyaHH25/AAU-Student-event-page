@@ -56,10 +56,31 @@
             <img src="images/icons/aau_search.svg" alt="icon" class="search-icon">
             <input type="text" class="search-input" placeholder="Search for events">
 
-            <button class="filter-btn">
+            <button class="filter-btn" id="open-filter-btn">
                 Filters <span class="filter-icon">⚏</span>
             </button>
         </section>
+
+        <aside class="filter-panel" id="filter-panel">
+    <h3>Filter & sort</h3>
+
+    <div class="filter-group">
+        <p>Categories</p>
+
+        <label><input type="checkbox" value="All" checked> All</label>
+        <label><input type="checkbox" value="Sports"> Sports</label>
+        <label><input type="checkbox" value="Party"> Party</label>
+        <label><input type="checkbox" value="Free"> Free</label>
+        <label><input type="checkbox" value="Wellness"> Wellness</label>
+        <label><input type="checkbox" value="Food"> Food</label>
+        <label><input type="checkbox" value="Music"> Music</label>
+        <label><input type="checkbox" value="Outdoors"> Outdoors</label>
+        <label><input type="checkbox" value="Academic"> Academic</label>
+        <label><input type="checkbox" value="Social"> Social</label>
+    </div>
+
+    <button id="save-filter-btn">Save</button>
+    </aside>
 
             <section class="calendar-page">
         <section class="calendar-controls">
