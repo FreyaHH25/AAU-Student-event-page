@@ -1,16 +1,20 @@
-.tag-template {
+.tag-visuel {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     padding: 4px 10px;
     height: 24px;
-
-    border-radius: 12px;
+    border-radius: 12px; 
+    border: 1.5px solid;
     font-size: 13px;
     font-weight: 600;
-
     white-space: nowrap;
+   
+}
+
+[class^="tag-"] {
+    text-transform: capitalize;
 }
 
 .tag-grid {

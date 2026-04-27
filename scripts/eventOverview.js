@@ -1,7 +1,7 @@
 // wait for page to load
 // 'DOMContentLoaded' ensures this script only runs AFTER the HTML page is completely loaded.
 document.addEventListener("DOMContentLoaded", async () => {
-    
+
     // Find the container in the HTML where we want to insert the event cards
     const container = document.getElementById('newly-added-events');
 
@@ -16,41 +16,41 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // clear previous content:         MUST BE ACTIVATED BY HADY WHEN IT'S ALL UP AND RUNNING
         // Empty the container to remove any hardcoded HTML or loading messages
-       // container.innerHTML = '';
+        // container.innerHTML = '';
 
         // Loop through events:
         // We go through each event we got from the database, one by one.
         // Loop through events from server:
         events.forEach(event => {
             // Map server field names to the names used in your HTML template function
-        const mappedEvent = {
-            billede: event.imageUrl || "images/basket.webp",
-            titel: event.title,
-            // Ensure this matches the key 'categories' you sent from createEvent.js
-            categories: event.categories || ["General"], 
-            beskrivelse: event.description,
-            dato: event.date,
-            tid: `${event.startTime} - ${event.endTime}`,
-            sted: event.location,
-            deltagere: 0,
-            arrangoer: event.organizer || "Student"
-        };
+            const mappedEvent = {
+                billede: event.imageUrl || "images/basket.webp",
+                titel: event.title,
+                // Ensure this matches the key 'categories' you sent from createEvent.js
+                categories: event.categories || ["General"],
+                beskrivelse: event.description,
+                dato: event.date,
+                tid: `${event.startTime} - ${event.endTime}`,
+                sted: event.location,
+                deltagere: 0,
+                arrangoer: event.organizer || "Student"
+            };
 
-    // Use your existing "skabEventKortHTML" function to get the nice HTML
-    const cardHTML = skabEventKortHTML(mappedEvent);
-    
-    // Create a temporary div to turn the string into an actual element
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = cardHTML;
-    
-    // Append the first child (the .event-card) to your container
-    container.appendChild(tempDiv.firstElementChild);
-});
+            // Use your existing "skabEventKortHTML" function to get the nice HTML
+            const cardHTML = skabEventKortHTML(mappedEvent);
+
+            // Create a temporary div to turn the string into an actual element
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = cardHTML;
+
+            // Append the first child (the .event-card) to your container
+            container.appendChild(tempDiv.firstElementChild);
+        });
         // If the database successfully answered, but there were 0 events inside:
         if (events.length === 0) {
             container.innerHTML = '<p>No events found. Create one to get started!</p>';
         }
-        
+
     } catch (error) {          /// MUST BE ACTIVATED BY HADY WHEN IT'S ALL UP AND RUNNING
         // ERROR HANDLING:
         // If the fetch fails e.g., server is down, show a helpful error message on the page.
@@ -64,15 +64,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 /**************************************************** */
 const myEventsData = [
     {
-        categories: ["Sports"],
-        titel: "Basketball Tournament",
+        categories: ["Social"],
+        titel: "Jumping contest",
         beskrivelse: "Come play basket in Hafniahallen",
         dato: "Thursday, april 19, 2026",
         tid: "15:00 - 19:00",
         sted: "Hafniahallen, Copenhagen",
         deltagere: 30,
         arrangoer: "sportsudvalget",
-        billede: "images/basket.webp" // her pager vi på basket-billefet 
+        billede: "images/betaboulders.jpg"
     },
     {
         categories: ["Sports"],
@@ -86,9 +86,9 @@ const myEventsData = [
         billede: "images/basket.webp" // her pager vi på basket-billefet 
     },
     {
-        categories: ["Sports"],
-        titel: "fest hos Japot",
-        beskrivelse: "First beer is free!",
+        categories: ["Party"],
+        titel: "Fest hos Japot",
+        beskrivelse: "First beer is free! Come join the biggest, baddest party to ever have been hosted on AAU CPH! Jap will personally bring the beers to each guest, while dressed as a minion!",
         dato: "Friday, april 26, 2026",
         tid: "18:00 - 04:00",
         sted: "Hos Jap ",
@@ -96,7 +96,7 @@ const myEventsData = [
         arrangoer: "Japjot",
         billede: "images/jap.jpg"   // her pager vi på jap's-billedet
     }
-    
+
 ];
 
 const upcomingEventsData = [
@@ -111,7 +111,7 @@ const upcomingEventsData = [
         arrangoer: "Wellness Club",
         billede: "images/yoga.jpg" // her peger vi på yoga-billedet
     },
-   
+
 ]
 
 // (tilføje events manual til 'newly added' og past senere)
@@ -124,10 +124,10 @@ const newlyAddedEventsData = [
         tid: "18:00 - 04:00",
         sted: "Hos Jap ",
         deltagere: 120,
-        arrangoer: "Japjot",       
+        arrangoer: "Japjot",
         billede: "images/jap.jpg"   // her pager vi på jap's-billedet
     },
-    
+
 ];
 const pastEventsData = [
     {
@@ -156,9 +156,9 @@ function skabEventKortHTML(event) {
             <h3 class="card-title">${event.titel}</h3>
             
             <div class="tags-row" style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
-                ${event.categories ? event.categories.map(cat => `<span class="tag-${cat.toLowerCase()}">${cat}</span>`).join('') : `<span class="tag-general">General</span>`}
+                ${event.categories ? event.categories.map(cat => `<span class="tag-visuel tag-${cat.toLowerCase()}">${cat}</span>`).join('') : `<span class="tag-visuel tag-general">General</span>`}
             </div>
-            </div>
+
                 <p class="card-desc">${event.beskrivelse}</p>
                 <div class="card-info">
                     <p><img src="images/icons/date.png" alt="icon" class="info-icons"> ${event.dato}</p>
@@ -176,8 +176,8 @@ function skabEventKortHTML(event) {
                     <span> ${event.arrangoer}</span>
                 </div>
                 </div>
+                </div>
                 <button class="read-more-btn">Read More &gt;</button>
-            </div>
         </div>
     `;
 }
@@ -187,7 +187,7 @@ function filtrerEvents(eventListe) {
         return eventListe;
     }
 
-    return eventListe.filter(function(event) {
+    return eventListe.filter(function (event) {
         return event.categories.includes(valgtKategori);
     });
 }
@@ -195,14 +195,14 @@ function filtrerEvents(eventListe) {
 // Denne funktion går igennem en liste med events og sætter dem ind i den rigtige kasse.
 function visEventsPåSiden(eventListe, htmlKasseId) {
     const kasse = document.getElementById(htmlKasseId);
-    
+
     // Hvis kassen findes på siden
     if (kasse) {
         // Tøm kassen først (så vi ikke får dubletter)
-        kasse.innerHTML = ""; 
-        
+        kasse.innerHTML = "";
+
         // Gå igennem hvert event i listen og tilføj dets HTML til kassen
-        eventListe.forEach(function(enkeltEvent) {
+        eventListe.forEach(function (enkeltEvent) {
             kasse.innerHTML += skabEventKortHTML(enkeltEvent);
         });
     }

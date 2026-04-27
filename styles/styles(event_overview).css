@@ -36,6 +36,9 @@ body {
     padding-bottom: 10px;
 }
 
+
+
+/*Event-card section*/
 .event-card {
     background-color: #ffffff;
     border: 1px solid #eaeaea;
@@ -64,17 +67,6 @@ body {
     height: 20px;
 }
 
-.category-tag {
-    background-color: #e0f8eb;
-    color: #17c964;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    align-self: flex-start;
-    margin-bottom: 10px;
-}
-
 .card-title {
     margin: 0 0 5px 0;
     font-size: 18px;
@@ -82,7 +74,7 @@ body {
 }
 
 .card-desc {
-    margin: 10px 0 10px 0;
+    margin: 10px 0 20px 0;
     font-size: 14px;
     color: #777;
     background-color: #ffffff;
@@ -92,6 +84,8 @@ body {
     line-clamp: 2;  
     overflow: hidden;
 }
+
+
 
 
 .card-info p {
@@ -106,10 +100,21 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-
     font-size: 12px;
     color: #777;
     margin-bottom: 20px;
+}
+
+
+/*Fixes line-overflow (NOT FINISHED!) COME BACK LATER*/
+.card-title,
+.card-info p,
+.organizer-row{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* number of lines */
+    line-clamp: 1;  
+    overflow: hidden;
 }
 
 .read-more-btn {
@@ -119,7 +124,7 @@ body {
     background-color: transparent;
     border: 1px solid #eaeaea;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
