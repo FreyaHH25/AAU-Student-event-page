@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
   },
   "keywords": [],
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/FreyaHH25/AAU-Student-event-page/issues"
   },
-  "homepage": "https://github.com/FreyaHH25/AAU-Student-event-page#readme"
+  "homepage": "https://github.com/FreyaHH25/AAU-Student-event-page#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
 }
