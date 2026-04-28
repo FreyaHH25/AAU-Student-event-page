@@ -7,8 +7,8 @@ function validateEvent(event) {
   if (event.title && event.title.length > 100) {
     errors.push("Title is too long (max 100 characters)");
   }
-  if (event.organizer && event.organizer.length > 40) {
-  errors.push("Organizer name is too long (max 40 characters)");
+  if (event.organizer && event.organizer.length > 30) {
+  errors.push("Organizer name is too long (max 30 characters)");
   }
   if (!event.date) {
     errors.push("Date is required");

@@ -92,9 +92,13 @@ function renderMonthly(grid, monthYearLabel) {
 
         // Create the small colored "pills" for each event
         todaysEvents.forEach(event => {
-            const categoryClass = `cat-${event.category || 'default'}`;
+            const category = Array.isArray(event.categories)
+            ? event.categories[0]
+            : event.category;
+            const categoryClass = `cat-${category || 'default'}`;
             cellHTML += `<div class="event-pill ${categoryClass}">${event.title}</div>`;
         });
+        
 
         dayCell.innerHTML = cellHTML;
         grid.appendChild(dayCell);

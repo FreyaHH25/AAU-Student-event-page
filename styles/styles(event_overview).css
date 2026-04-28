@@ -76,17 +76,19 @@ body {
 .card-desc {
     margin: 10px 0 20px 0;
     font-size: 14px;
+    
     color: #777;
     background-color: #ffffff;
+    /*This makes the description text always stay as 2 lines, filling the first line before moving to the second*/
+    line-height: 1.4;
+    min-height: calc(1.4em * 2);
+    /*This clamps the text, cutting off overflowing text and putting in "..." instead*/
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2; /* number of lines */
     line-clamp: 2;  
     overflow: hidden;
 }
-
-
-
 
 .card-info p {
     margin-bottom: 10px;
@@ -96,20 +98,12 @@ body {
     gap: 10px;
 }
 
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 20px;
-}
+
 
 
 /*Fixes line-overflow (NOT FINISHED!) COME BACK LATER*/
 .card-title,
-.card-info p,
-.organizer-row{
+.card-info p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1; /* number of lines */

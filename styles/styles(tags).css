@@ -26,73 +26,85 @@
 /* === EVENT TYPES === */
 
 /* Academic */
-.tag-academic {
+.tag-academic,
+.cat-academic {
     background: #e6e6ff;
     color: #4f46e5;
 }
 
 /* Career */
-.tag-career {
+.tag-career,
+.cat-career {
     background: #e0f2ff;
     color: #0284c7;
 }
 
 /* Creative */
-.tag-creative {
+.tag-creative,
+.cat-creative {
     background: #fef3c7;
     color: #b45309;
 }
 
 /* Culture */
-.tag-culture {
+.tag-culture,
+.cat-culture {
     background: #ffe4e6;
     color: #e11d48;
 }
 
 /* Food */
-.tag-food {
+.tag-food,
+.cat-food {
     background: #fff1e6;
     color: #ea580c;
 }
 
 /* Gaming */
-.tag-gaming {
+.tag-gaming,
+.cat-gaming {
     background: #e9d5ff;
     color: #b93bf3;
 }
 
 /* Outdoors */
-.tag-outdoors {
+.tag-outdoors,
+.cat-outdoors {
     background: #dcfce7;
     color: #15803d;
 }
 
 /* Party */
-.tag-party {
+.tag-party,
+.cat-party {
     background: #ffe8f3;
     color: #f54c92;
 }
 
 /* Social */
-.tag-social {
+.tag-social,
+.cat-social {
     background: #fff3cd;
     color: #d39e00;
 }
 
 /* Sports */
-.tag-sports {
+.tag-sports,
+.cat-sports {
     background: #e0f8eb;
     color: #17c964;
 }
 
 /* Volunteering */
-.tag-volunteering {
+.tag-volunteering,
+.cat-volunteering {
     background: #c9fafc;
     color: #25ccff;
 }
 
 /* Wellness */
-.tag-wellness {
+.tag-wellness,
+.cat-wellness {
     background: #f3e8ff;
     color: #7c3aed;
 }
@@ -100,7 +112,8 @@
 
 /* === SEMESTERS === */
 /* Shared style override*/
-[class*="tag-semester"] {
+[class*="tag-semester"],
+.cat-default {
     background: #f2f2f4;
     color: #211951;
 }
