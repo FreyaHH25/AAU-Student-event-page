@@ -237,6 +237,7 @@ document.querySelectorAll(".events-wrapper").forEach(wrapper => {
     });
 });
 
+
 /* Filter button */
 function startFilter() {
     const filterBtn = document.getElementById('open-filter-btn');
