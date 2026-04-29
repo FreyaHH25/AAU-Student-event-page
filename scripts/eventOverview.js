@@ -1,6 +1,7 @@
 // wait for page to load
 // 'DOMContentLoaded' ensures this script only runs AFTER the HTML page is completely loaded.
 document.addEventListener("DOMContentLoaded", async () => {
+    const userSemester = localStorage.getItem('userSemester');
 
     // Find the container in the HTML where we want to insert the event cards
     const container = document.getElementById('newly-added-events');
@@ -22,7 +23,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         // We go through each event we got from the database, one by one.
         // Loop through events from server:
         events.forEach(event => {
-            // Map server field names to the names used in your HTML template function
+            const userSemester = localStorage.getItem('userSemester');
+             /*1. Normalize visibility to always be an array
+             If it's a string like "ALL", it becomes ["ALL"] */
+            const visibilityArray = Array.isArray(event.visibility)
+            ? event.visibility
+            : [event.visibility];
+
+            const canSee = visibilityArray.some(visGroup => {
+                // Safety check: skip if visGroup is null/undefined
+                if (!visGroup) return false;
+                // Convert to string in case of weird data types
+                const value = visGroup.toString();
+                // Check for ALL
+                if (value.toUpperCase() === "ALL") {
+                    return true;
+                }
+                // Check for semester match (handling comma-separated lists)
+                if (userSemester) {
+                    const allowedSemesters = value.split(',').map(s => s.trim());
+                    return allowedSemesters.includes(userSemester);
+                }
+                return false;    
+    });
+            if (canSee) {
+             // Map server field names to the names used in your HTML template function
+
             const mappedEvent = {
                 imageUrl: event.imageUrl || "images/basket.webp",
                 title: event.title,
@@ -45,6 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Append the first child (the .event-card) to your container
             container.appendChild(tempDiv.firstElementChild);
+            }
         });
         // If the database successfully answered, but there were 0 events inside:
         if (events.length === 0) {

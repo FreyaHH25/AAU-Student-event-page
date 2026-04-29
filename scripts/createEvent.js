@@ -4,6 +4,7 @@ let selectedCategories = []; // An array to store the categories the user picks 
 // Grab the <select> dropdown and the <div> where the colored tags will appear
 const categorySelect = document.getElementById("event-category");
 const tagsDisplay = document.getElementById("selected-tags-display");
+const userSemester = localStorage.getItem('userSemester');
 
 // Runs every time the user picks an option from the dropdown
 categorySelect.addEventListener("change", function () {
@@ -108,7 +109,7 @@ document.getElementById("event-form").addEventListener("submit", async function 
       location: document.getElementById("event-location").value,
       
       // Update: Now sends the visibility array
-      visibility: selectedVisibility, 
+      visibility: selectedVisibility.map(v => v.val),
       
       imageUrl: document.getElementById("event-image").value || "images/aau-entrance.png",
     };
