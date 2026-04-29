@@ -1,7 +1,10 @@
 /* 1. KONFIGURATION OG INITIALISERING */
 
-/* Variabel til at holde styr på hvilken kategori der er valgt i filteret. Standard er "All" */
-let valgtKategori = "All";
+/* Variabel til at holde styr på hvilke kategorier der er valgt i filteret. Standard er alle */
+let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All', 'Sports', 'Party', 'Free', 'Wellness', 'Food', 'Music', 'Outdoors', 'Academic', 'Social'];
+
+/* Global variabel til at holde events */
+let allEvents = [];
 
 /* Lytter efter hvornår HTML-dokumentet er helt indlæst, før koden kører */
 document.addEventListener("DOMContentLoaded", async () => {
@@ -17,6 +20,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         /* Omdanner serverens svar fra JSON til et læsbart JavaScript objekt (array) */
         const dbEvents = await response.json();
+
+        /* Gemmer events globalt */
+        allEvents = dbEvents;
 
         /* Sender de hentede events videre til sorterings-funktionen */
         distributeEvents(dbEvents, userSemester, currentUserId);
@@ -137,10 +143,13 @@ function visEventsPåSiden(eventListe, htmlKasseId) {
 /* 5. FILTRERING (Kategori-logik) */
 
 function filtrerEvents(eventListe) {
-    /* Hvis "All" er valgt, skal vi ikke filtrere noget fra */
-    if (valgtKategori === "All") return eventListe;
-    /* Ellers returnerer vi kun de events, hvor den valgte kategori findes i eventets liste */
-    return eventListe.filter(event => (event.categories || []).includes(valgtKategori));
+    /* Hvis "All" er valgt eller ingen specifikke, vis alle */
+    if (selectedCategories.includes('All') || selectedCategories.length === 0) return eventListe;
+    /* Ellers returnerer vi kun de events, hvor mindst én valgt kategori findes i eventets liste */
+    return eventListe.filter(event => {
+        const eventCats = event.categories || [];
+        return selectedCategories.some(cat => eventCats.includes(cat));
+    });
 }
 
 /* 6. NAVIGATION OG FILTRE (Interaktion) */
@@ -162,21 +171,64 @@ function startFilter() {
     const filterBtn = document.getElementById('open-filter-btn');
     const saveBtn = document.getElementById('save-filter-btn');
     const filterBox = document.getElementById('filter-panel');
+    const checkboxes = filterBox.querySelectorAll('input[type="checkbox"]');
 
     /* Viser eller skjuler filter-menuen når man klikker på tragt-ikonet */
     filterBtn.addEventListener('click', () => {
         filterBox.style.display = (filterBox.style.display === 'block') ? 'none' : 'block';
     });
 
-    /* Gemmer det valgte filter og genindlæser siden for at opdatere visningen */
+    /* Tilføj event listeners til hver checkbox for at håndtere logik */
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            if (cb.value === 'All') {
+                if (cb.checked) {
+                    // Hvis "All" checked, check alle andre
+                    checkboxes.forEach(other => other.checked = true);
+                } else {
+                    // Hvis "All" unchecked, uncheck alle andre
+                    checkboxes.forEach(other => {
+                        if (other.value !== 'All') other.checked = false;
+                    });
+                }
+            } else {
+                // Hvis en specifik unchecked, uncheck "All"
+                if (!cb.checked) {
+                    const allCb = filterBox.querySelector('input[value="All"]');
+                    if (allCb) allCb.checked = false;
+                }
+                // Hvis alle specifikke er checked, check "All"
+                const specificCbs = Array.from(checkboxes).filter(c => c.value !== 'All');
+                const allChecked = specificCbs.every(c => c.checked);
+                if (allChecked) {
+                    const allCb = filterBox.querySelector('input[value="All"]');
+                    if (allCb) allCb.checked = true;
+                }
+            }
+        });
+    });
+
+    /* Gemmer det valgte filter og opdaterer visningen */
     saveBtn.addEventListener('click', () => {
-        const checkedBox = document.querySelector('#filter-panel input[type="checkbox"]:checked');
-        /* Sætter den globale kategori-variabel til den valgte værdi, eller "All" hvis ingen er valgt */
-        valgtKategori = checkedBox ? checkedBox.value : "All";
-        /* Genindlæser siden (da vi henter frisk data fra serveren i starten) */
-        location.reload(); 
+        const checkedBoxes = filterBox.querySelectorAll('input[type="checkbox"]:checked');
+        selectedCategories = Array.from(checkedBoxes).map(cb => cb.value);
+        localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+        /* Gen-distribuerer events med ny filter */
+        const currentUserId = localStorage.getItem('userId');
+        const userSemester = localStorage.getItem('userSemester');
+        distributeEvents(allEvents, userSemester, currentUserId);
+        /* Lukker filter-panelet */
+        filterBox.style.display = 'none';
     });
 }
 
 /* Aktiverer filter-logikken så knapperne virker */
 startFilter();
+
+/* Sætter de rigtige checkboxes som checked baseret på gemte kategorier */
+const checkboxes = document.querySelectorAll('#filter-panel input[type="checkbox"]');
+checkboxes.forEach(cb => {
+    if (selectedCategories.includes(cb.value)) {
+        cb.checked = true;
+    }
+});
