@@ -3,6 +3,7 @@
 let displayedDate = new Date();  // The date/month the user is currently looking at
 let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mode
 let allEvents = [];             // A big list that holds all events fetched from the database
+let selectedCategories = ['All']; // Selected categories for filtering
 
 /* 2. FETCH DATA */
 async function fetchEventsFromServer() {
@@ -17,6 +18,17 @@ async function fetchEventsFromServer() {
         // If the server is off or the URL is wrong, show an error in the console
         console.error("Error loading events:", error);
     }
+}
+
+/* 2.5 FILTERING */
+function getFilteredEvents() {
+    if (selectedCategories.includes('All') || selectedCategories.length === 0) {
+        return allEvents;
+    }
+    return allEvents.filter(event => {
+        const category = Array.isArray(event.categories) ? event.categories[0] : event.category;
+        return selectedCategories.includes(category);
+    });
 }
 
 /* 3. MAIN RENDER */
@@ -82,7 +94,7 @@ function renderMonthly(grid, monthYearLabel) {
         const dateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
         // Filter: Only keep events for this date, reverse them, and keep only 5
-        const todaysEvents = allEvents
+        const todaysEvents = getFilteredEvents()
             .filter(event => event.date === dateString)
             .reverse() 
             .slice(0, 5);
@@ -156,7 +168,7 @@ function renderWeekly(grid, monthYearLabel) {
             const dateString = cellDate.toISOString().split('T')[0];
 
             // Filter: Find events that happen on this day AND start during this hour
-            const hourlyEvents = allEvents.filter(e => {
+            const hourlyEvents = getFilteredEvents().filter(e => {
                 const startHour = parseInt(e.startTime.split(':')[0]);
                 return e.date === dateString && startHour === hour;
             });
@@ -214,7 +226,7 @@ document.getElementById('go-to-today').addEventListener('click', () => {
 });
 
 // INITIAL BOOTUP: When the page finishes loading, go get the data
-window.onload = fetchEventsFromServer;
+// window.onload = fetchEventsFromServer; // Removed duplicate
 
 /* Filter button */
 function startFilter() {
@@ -231,8 +243,16 @@ function startFilter() {
         }
     });
 
-    /* Close the box when user clicks save */
+    /* Close the box when user clicks save and apply filter */
     saveBtn.addEventListener('click', () => {
+        // Collect selected categories
+        const checkboxes = filterBox.querySelectorAll('input[type="checkbox"]:checked');
+        selectedCategories = Array.from(checkboxes).map(cb => cb.value);
+        
+        // Re-render the calendar with new filters
+        renderCalendar();
+        
+        // Close the filter panel
         filterBox.style.display = 'none';
     });
 }
