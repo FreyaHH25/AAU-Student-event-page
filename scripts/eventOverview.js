@@ -24,16 +24,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         events.forEach(event => {
             // Map server field names to the names used in your HTML template function
             const mappedEvent = {
-                billede: event.imageUrl || "images/basket.webp",
-                titel: event.title,
+                imageUrl: event.imageUrl || "images/basket.webp",
+                title: event.title,
                 // Ensure this matches the key 'categories' you sent from createEvent.js
                 categories: event.categories || ["General"],
-                beskrivelse: event.description,
-                dato: event.date,
-                tid: `${event.startTime} - ${event.endTime}`,
-                sted: event.location,
-                deltagere: 0,
-                arrangoer: event.organizer || "Student"
+                description: event.description,
+                date: event.date,
+                time: `${event.startTime} - ${event.endTime}`,
+                location: event.location,
+                attending: 0,
+                organizer: event.organizer || "Student"
             };
 
             // Use your existing "skabEventKortHTML" function to get the nice HTML
@@ -65,36 +65,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 const myEventsData = [
     {
         categories: ["Social"],
-        titel: "Jumping contest",
-        beskrivelse: "Come play basket in Hafniahallen",
-        dato: "Thursday, april 19, 2026",
-        tid: "15:00 - 19:00",
-        sted: "Hafniahallen, Copenhagen",
-        deltagere: 30,
-        arrangoer: "sportsudvalget",
-        billede: "images/betaboulders.jpg"
+        title: "Jumping contest",
+        description: "Come play basket in Hafniahallen",
+        date: "Thursday, april 19, 2026",
+        time: "15:00 - 19:00",
+        location: "Hafniahallen, Copenhagen",
+        attending: 30,
+        organizer: "sportsudvalget",
+        imageUrl: "images/betaboulders.jpg"
     },
     {
         categories: ["Sports"],
-        titel: "Basketball Tournament",
-        beskrivelse: "Come play basket in Hafniahallen",
-        dato: "Thursday, april 19, 2026",
-        tid: "15:00 - 19:00",
-        sted: "Hafniahallen, Copenhagen",
-        deltagere: 30,
-        arrangoer: "sportsudvalget",
-        billede: "images/basket.webp" // her pager vi på basket-billefet 
+        title: "Basketball Tournament",
+        description: "Come play basket in Hafniahallen",
+        date: "Thursday, april 19, 2026",
+        time: "15:00 - 19:00",
+        location: "Hafniahallen, Copenhagen",
+        attending: 30,
+        organizer: "sportsudvalget",
+        imageUrl: "images/basket.webp" // her pager vi på basket-billefet 
     },
     {
         categories: ["Party"],
-        titel: "Fest hos Japot",
-        beskrivelse: "First beer is free! Come join the biggest, baddest party to ever have been hosted on AAU CPH! Jap will personally bring the beers to each guest, while dressed as a minion!",
-        dato: "Friday, april 26, 2026",
-        tid: "18:00 - 04:00",
-        sted: "Hos Jap ",
-        deltagere: 120,
-        arrangoer: "Japjot",
-        billede: "images/jap.jpg"   // her pager vi på jap's-billedet
+        title: "Fest hos Japot",
+        description: "First beer is free! Come join the biggest, baddest party to ever have been hosted on AAU CPH! Jap will personally bring the beers to each guest, while dressed as a minion!",
+        date: "Friday, april 26, 2026",
+        time: "18:00 - 04:00",
+        location: "Hos Jap ",
+        attending: 120,
+        organizer: "Japjot",
+        imageUrl: "images/jap.jpg"
     }
 
 ];
@@ -102,14 +102,14 @@ const myEventsData = [
 const upcomingEventsData = [
     {
         categories: ["Sports"],
-        titel: "Yoga & Wellness",
-        beskrivelse: "Weekly yoga session for stress relief",
-        dato: "Saturday, april 21, 2026",
-        tid: "07:00 - 08:00",
-        sted: "Recreation Center",
-        deltagere: 25,
-        arrangoer: "Wellness Club",
-        billede: "images/yoga.jpg" // her peger vi på yoga-billedet
+        title: "Yoga & Wellness",
+        description: "Weekly yoga session for stress relief",
+        date: "Saturday, april 21, 2026",
+        time: "07:00 - 08:00",
+        location: "Recreation Center",
+        attending: 25,
+        organizer: "Wellness Club",
+        imageUrl: "images/yoga.jpg"
     },
 
 ]
@@ -118,28 +118,28 @@ const upcomingEventsData = [
 const newlyAddedEventsData = [
     {
         categories: ["Sports"],
-        titel: "fest hos Japot",
-        beskrivelse: "First beer is free!",
-        dato: "Friday, april 26, 2026",
-        tid: "18:00 - 04:00",
-        sted: "Hos Jap ",
-        deltagere: 120,
-        arrangoer: "Japjot",
-        billede: "images/jap.jpg"   // her pager vi på jap's-billedet
+        title: "fest hos Japot",
+        description: "First beer is free!",
+        date: "Friday, april 26, 2026",
+        time: "18:00 - 04:00",
+        location: "Hos Jap ",
+        attending: 120,
+        organizer: "Japjot",
+        imageUrl: "images/jap.jpg"
     },
 
 ];
 const pastEventsData = [
     {
         categories: ["Sports"],
-        titel: "Software party at Hattenbar",
-        beskrivelse: "First beer is free!",
-        dato: "Friday, april 26, 2026",
-        tid: "18:00 - 04:00",
-        sted: "hos hady",
-        deltagere: 120,
-        arrangoer: "Overflow_SW",
-        billede: "images/hattenbar.png" // her pager vi på hattenbar-billedet
+        title: "Software party at Hattenbar",
+        description: "First beer is free!",
+        date: "Friday, april 26, 2026",
+        time: "18:00 - 04:00",
+        location: "hos hady",
+        attending: 120,
+        organizer: "Overflow_SW",
+        imageUrl: "images/hattenbar.png"
     },
 ];
 
@@ -150,31 +150,22 @@ let valgtKategori = "All";
 function skabEventKortHTML(event) {
     return `
         <div class="event-card">
-            <img src="${event.billede}" alt="Billede af ${event.titel}" class="card-image">
+            <img src="${event.imageUrl}" alt="Billede af ${event.title}" class="card-image">
             
             <div class="card-content">
-            <h3 class="card-title">${event.titel}</h3>
+            <h3 class="card-title">${event.title}</h3>
             
             <div class="tags-row" style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
                 ${event.categories ? event.categories.map(cat => `<span class="tag-visuel tag-${cat.toLowerCase()}">${cat}</span>`).join('') : `<span class="tag-visuel tag-general">General</span>`}
             </div>
 
-                <p class="card-desc">${event.beskrivelse}</p>
+                <p class="card-desc">${event.description}</p>
                 <div class="card-info">
-                    <p><img src="images/icons/date.png" alt="icon" class="info-icons"> ${event.dato}</p>
-                    <p><img src="images/icons/time.png" alt="icon" class="info-icons"> ${event.tid}</p>
-                    <p><img src="images/icons/location.png" alt="icon" class="info-icons"> ${event.sted}</p>
-                </div>
-                <div class="card-footer">
-                <div class="attending-row">
-                <img src="images/icons/attending.png" alt="icon" class="info-icons">
-                    <span> ${event.deltagere} attending</span>
-                    </div>
-                <div class="organizer-row">
-                <img src="images/icons/organizer.png" alt="icon" class="info-icons">
-
-                    <span> ${event.arrangoer}</span>
-                </div>
+                    <p><img src="images/icons/date.png" alt="icon" class="info-icons"> ${event.date}</p>
+                    <p><img src="images/icons/time.png" alt="icon" class="info-icons"> ${event.time}</p>
+                    <p><img src="images/icons/location.png" alt="icon" class="info-icons"> ${event.location}</p>
+                    <p><img src="images/icons/organizer.png" alt="icon" class="info-icons"> ${event.organizer}</p>
+                    <p><img src="images/icons/attending.png" alt="icon" class="info-icons"> ${event.attending} attending</p>
                 </div>
                 </div>
                 <button class="read-more-btn">Read More &gt;</button>

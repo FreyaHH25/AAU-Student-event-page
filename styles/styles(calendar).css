@@ -25,6 +25,7 @@ body {
 }
 .calendar-page {
     padding: 0px 50px;
+    min-width: 620px;
 }
 /* Buttons for month/week*/
 .calendar-controls {
@@ -342,15 +343,23 @@ body {
 
 /* --- Monthly View Styles --- */
 .event-pill {
-    color: white;
     font-size: 10px;
     padding: 2px 4px;
     margin: 2px 2px 0 2px;
     border-radius: 4px;
+    cursor: pointer;
+
+    border: 1.5px solid currentColor;;
+    
+    display: -webkit-box;
+    -webkit-line-clamp: 1;      
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
+
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
+
+
     cursor: pointer;
 }
 
@@ -380,84 +389,6 @@ body {
     word-wrap: break-word; /* Ensures long titles don't break the layout */
 }
 
-/* Category Colors  */
-/* Academic */
-.cat-academic {
-    background-color: #e6e6ff;
-    color: #4f46e5;
-}
-
-/* Career */
-.cat-career {
-    background-color: #e0f2ff;
-    color: #0284c7;
-}
-
-/* Creative */
-.cat-creative {
-    background-color: #fef3c7;
-    color: #b45309;
-}
-
-/* Culture */
-.cat-culture {
-    background-color: #ffe4e6;
-    color: #e11d48;
-}
-
-/* Food */
-.cat-food {
-    background-color: #fff1e6;
-    color: #ea580c;
-}
-
-/* Gaming */
-.cat-gaming {
-    background-color: #e9d5ff;
-    color: #b93bf3;
-}
-
-/* Outdoors */
-.cat-outdoors {
-    background-color: #dcfce7;
-    color: #15803d;
-}
-
-/* Party */
-.cat-party {
-    background-color: #ffe8f3;
-    color: #f54c92;
-}
-
-/* Social */
-.cat-social {
-    background-color: #fff3cd;
-    color: #d39e00;
-}
-
-/* Sports */
-.cat-sports {
-    background-color: #e0f8eb;
-    color: #17c964;
-}
-
-/* Volunteering */
-.cat-volunteering {
-    background-color: #c9fafc;
-    color: #25ccff;
-}
-
-/* Wellness */
-.cat-wellness {
-    background-color: #f3e8ff;
-    color: #7c3aed;
-}
-
-/* Default / Semesters */
-.cat-default {
-    background-color: #f2f2f4;
-    color: #211951;
-}
 
 .filter-panel {
     display: none;
