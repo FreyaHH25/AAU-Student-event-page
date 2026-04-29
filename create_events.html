@@ -210,8 +210,8 @@
 
           <!-- Visibility settings -->
           <div>
-            <label for="event-visibility">Visibility:</label>
-            <select id="event-visibility" name="event-visibility" required>
+            <label for="event-visibility">Visibility (Select multiple):</label>
+            <select id="event-visibility" name="event-visibility">
               <option value="">Select who can see this event</option>
               <option value="ALL">ALL</option>
               <option value="1 semester">1-2 semester</option>
@@ -219,7 +219,8 @@
               <option value="3 semester">5-6 semester</option>
               <option value="4 semester">7-8 semester</option>
               <option value="5 semester">9-10 semester</option>
-              </select>
+            </select>
+            <div id="visibility-tags-display" style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
           </div>
 
           <!-- Optional image URL -->
