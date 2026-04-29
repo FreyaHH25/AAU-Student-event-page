@@ -3,9 +3,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const userSemester = localStorage.getItem('userSemester');
 
-    // Find the container in the HTML where we want to insert the event cards
-    const container = document.getElementById('newly-added-events');
-
     try {
         // Fetch data from backend (GET REQUEST):
         // We ask our Express server for all the events stored in the database.
@@ -62,21 +59,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 organizer: event.organizer || "Student"
             };
 
-            // Use your existing "skabEventKortHTML" function to get the nice HTML
-            const cardHTML = skabEventKortHTML(mappedEvent);
-
-            // Create a temporary div to turn the string into an actual element
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = cardHTML;
-
-            // Append the first child (the .event-card) to your container
-            container.appendChild(tempDiv.firstElementChild);
-            }
+            dbEventsData.push(mappedEvent);
+                    }
         });
-        // If the database successfully answered, but there were 0 events inside:
-        if (events.length === 0) {
-            container.innerHTML = '<p>No events found. Create one to get started!</p>';
-        }
 
     } catch (error) {          /// MUST BE ACTIVATED BY HADY WHEN IT'S ALL UP AND RUNNING
         // ERROR HANDLING:
@@ -84,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         //console.error("Error fetching events:", error);
         //container.innerHTML = '<p>Could not load events. Is your Express server running in the terminal?</p>';
     }
+      visAlleEvents();
 });
 
 //*************************************************** */
@@ -170,7 +156,8 @@ const pastEventsData = [
     },
 ];
 
-let valgtKategori = "All";
+let valgteKategorier = ["Sports", "Party", "Free", "Wellness", "Food", "Music", "Outdoors", "Academic", "Social"];
+let dbEventsData = [];
 
 // 2. FUNKTIONEN DER BYGGER KORTENE (Vores skabelon)
 // Denne funktion tager ét event ad gangen og forvandler det til HTML.
@@ -199,14 +186,12 @@ function skabEventKortHTML(event) {
         </div>
     `;
 }
-/* This function checks which category is chosen and only keeps those events */
+/* This function checks which categories are chosen and only keeps those events */
 function filtrerEvents(eventListe) {
-    if (valgtKategori === "All") {
-        return eventListe;
-    }
-
     return eventListe.filter(function (event) {
-        return event.categories.includes(valgtKategori);
+        return event.categories.some(function (kategori) {
+            return valgteKategorier.includes(kategori);
+        });
     });
 }
 
@@ -230,11 +215,9 @@ function visEventsPåSiden(eventListe, htmlKasseId) {
 function visAlleEvents() {
     visEventsPåSiden(filtrerEvents(myEventsData), "my-events");
     visEventsPåSiden(filtrerEvents(upcomingEventsData), "upcoming-events");
-    visEventsPåSiden(filtrerEvents(newlyAddedEventsData), "newly-added-events");
+    visEventsPåSiden(filtrerEvents([...newlyAddedEventsData, ...dbEventsData]), "newly-added-events");
     visEventsPåSiden(filtrerEvents(pastEventsData), "past-events");
 }
-
-visAlleEvents();
 
 
 
@@ -261,6 +244,50 @@ function startFilter() {
     const filterBtn = document.getElementById('open-filter-btn');
     const saveBtn = document.getElementById('save-filter-btn');
     const filterBox = document.getElementById('filter-panel');
+    const allBox = document.querySelector('#filter-panel input[value="All"]');
+    const boxes = document.querySelectorAll('#filter-panel input[type="checkbox"]');
+
+    /* all boxes checked from start */
+    boxes.forEach(box => {
+        box.checked = true;
+    });
+
+    /* check what happens when user clicks */
+    boxes.forEach(box => {
+        box.addEventListener('change', () => {
+
+            /* if user clicks All */
+            if (box.value === "All") {
+                if (allBox.checked) {
+                    boxes.forEach(oneBox => {
+                        oneBox.checked = true;
+                    });
+                } else {
+                    boxes.forEach(oneBox => {
+                        oneBox.checked = false;
+                    });
+                }
+            } else {
+                /* if one category is removed, All should also be removed */
+                if (!box.checked) {
+                    allBox.checked = false;
+                }
+
+                /* if all normal categories are checked, All should be checked too */
+                let allChosen = true;
+
+                boxes.forEach(oneBox => {
+                    if (oneBox.value !== "All" && !oneBox.checked) {
+                        allChosen = false;
+                    }
+                });
+
+                if (allChosen) {
+                    allBox.checked = true;
+                }
+            }
+        });
+    });
 
     /* open and close filter */
     filterBtn.addEventListener('click', () => {
@@ -273,13 +300,8 @@ function startFilter() {
 
     /* save and close */
     saveBtn.addEventListener('click', () => {
-        const checkedBox = document.querySelector('#filter-panel input[type="checkbox"]:checked');
-
-        if (checkedBox) {
-            valgtKategori = checkedBox.value;
-        } else {
-            valgtKategori = "All";
-        }
+        const chosenBoxes = Array.from(boxes).filter(box => box.checked && box.value !== "All");
+        valgteKategorier = chosenBoxes.map(box => box.value);
 
         visAlleEvents();
         filterBox.style.display = 'none';
