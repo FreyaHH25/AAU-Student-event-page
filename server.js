@@ -95,7 +95,8 @@ app.post('/api/login', async (req, res) => {
             return res.status(200).json({ 
                 success: true, 
                 userId: user._id,
-                userName: user.name 
+                userName: user.name,
+                userSemester: user.semester
             });
         } else {
             /**
@@ -117,3 +118,4 @@ app.post('/api/login', async (req, res) => {
         return res.status(500).send("Server Error");
     }
 });
+

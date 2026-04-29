@@ -48,42 +48,48 @@ const visibilitySelect = document.getElementById("event-visibility");
 const visibilityTagsDisplay = document.getElementById("visibility-tags-display");
 
 visibilitySelect.addEventListener("change", function () {
-  const val = this.value;
-  if (val && !selectedVisibility.includes(val)) {
-    // Logic: If "ALL" is selected, clear everything else. 
-    // If a semester is selected, remove "ALL".
-    if (val === "ALL") {
-      selectedVisibility = ["ALL"]; // Clear all semesters and just set to ALL
+  // Grab the actual text (e.g., "1-2 semester")
+  const selectedText = this.options[this.selectedIndex].text; 
+  // Keep the data value for the database (e.g., "1 semester")
+  const selectedValue = this.value; 
+
+  if (selectedValue && !selectedVisibility.some(v => v.val === selectedValue)) {
+       // Logic: If "ALL" is selected, clear everything else. 
+      // If a semester is selected, remove "ALL".
+    if (selectedValue === "ALL") {
+      selectedVisibility = [{ val: "ALL", text: "ALL" }];// Clear all semesters and just set to ALL
     } else {
-      // If a specific semester is picked, remove "ALL" from the list (can't have both)
-      selectedVisibility = selectedVisibility.filter(v => v !== "ALL");
-      selectedVisibility.push(val);
+            // If a specific semester is picked, remove "ALL" from the list (can't have both)
+
+      selectedVisibility = selectedVisibility.filter(v => v.val !== "ALL");
+      selectedVisibility.push({ val: selectedValue, text: selectedText });
     }
-    updateVisibilityTagDisplay(); // Refresh the visual semester tags
+    updateVisibilityTagDisplay();// Refresh the visual semester tags
   }
-  this.value = ""; // Reset dropdown
+  this.value = "";
 });
 // Recreates the visual list of visibility tags
 function updateVisibilityTagDisplay() {
   visibilityTagsDisplay.innerHTML = ""; 
   selectedVisibility.forEach((vis) => {
     const tag = document.createElement("span");
-    // Styling the visibility tags to look distinct (Dark Blue)
     tag.style.backgroundColor = "#211951";
     tag.style.color = "white";
     tag.style.padding = "5px 10px";
     tag.style.borderRadius = "12px";
     tag.style.cursor = "pointer";
     tag.style.fontSize = "12px";
-    tag.innerText = vis + " ✕";
+    
+    // DISPLAY the pretty text (1-2 semester)
+    tag.innerText = vis.text + " ✕"; 
+    
     tag.onclick = () => { // Click to remove a semester choice
-      selectedVisibility = selectedVisibility.filter((v) => v !== vis);
+      selectedVisibility = selectedVisibility.filter((v) => v.val !== vis.val);
       updateVisibilityTagDisplay();
     };
     visibilityTagsDisplay.appendChild(tag);
   });
 }
-
 // --- SUBMIT HANDLER ---
 // Runs when the "Create and post event" button is clicked
 document.getElementById("event-form").addEventListener("submit", async function (event) {
@@ -95,6 +101,7 @@ document.getElementById("event-form").addEventListener("submit", async function 
       categories: selectedCategories, 
       organizer: document.getElementById("event-organizer").value,
       organizerId: localStorage.getItem("userId"),
+      creatorSemester: localStorage.getItem('userSemester'), // This attaches the logged-in user's semester to the event data
       date: document.getElementById("event-date").value,
       startTime: document.getElementById("event-starttime").value,
       endTime: document.getElementById("event-endtime").value,

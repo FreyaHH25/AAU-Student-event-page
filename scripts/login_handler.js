@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('userEmail', emailInput);
                 // 2. SAVE THE REAL NAME (Crucial for the header!)
                 localStorage.setItem('realName', data.userName);
+                // This saves the semester from the database into the browser's memory
+                localStorage.setItem('userSemester', data.userSemester);
 
                 // Redirect to the event overview page
                 window.location.href = "event_overview.html";
