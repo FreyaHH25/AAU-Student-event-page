@@ -56,9 +56,7 @@ document
       endTime: document.getElementById("event-endtime").value,
       location: document.getElementById("event-location").value,
       visibility: document.getElementById("event-visibility").value,
-      imageUrl:
-        document.getElementById("event-image").value ||
-        "images/basket.jpg.webp",
+      imageUrl: document.getElementById("event-image").value || "images/aau-entrance.png",
     };
 
     // Validate before sending to server
