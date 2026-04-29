@@ -43,6 +43,11 @@ function distributeEvents(events, userSemester, currentUserId) {
 
     /* En indre funktion (helper), der tjekker om en bruger har lov til at se et specifikt event */
     const hasAccess = (event) => {
+        /* Hvis brugeren ikke er logget ind, vises alle events for at sikre at gruppen kan se dem */
+        if (!userSemester) {
+            return true;
+        }
+
         /* Sørger for at visibility altid er en liste (array), selvom det kun er én værdi */
         const vis = Array.isArray(event.visibility) ? event.visibility : [event.visibility];
         return vis.some(v => {
@@ -150,10 +155,13 @@ function filtrerEvents(eventListe) {
         const eventDescription = (event.description || "").toLowerCase();
         const eventLocation = (event.location || "").toLowerCase();
 
+        const selectedLower = selectedCategories.map(cat => cat.toString().toLowerCase());
+        const eventCatsLower = eventCats.map(cat => cat.toString().toLowerCase());
+
         const matchesCategory =
-            selectedCategories.includes('All') ||
-            selectedCategories.length === 0 ||
-            selectedCategories.some(cat => eventCats.includes(cat));
+            selectedLower.includes('all') ||
+            selectedLower.length === 0 ||
+            selectedLower.some(cat => eventCatsLower.includes(cat));
 
         const matchesSearch =
             searchText === "" ||

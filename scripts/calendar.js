@@ -22,12 +22,18 @@ async function fetchEventsFromServer() {
 
 /* 2.5 FILTERING */
 function getFilteredEvents() {
-    if (selectedCategories.includes('All') || selectedCategories.length === 0) {
+    const selectedLower = selectedCategories.map(cat => cat.toString().toLowerCase());
+    if (selectedLower.includes('all') || selectedLower.length === 0) {
         return allEvents;
     }
     return allEvents.filter(event => {
-        const category = Array.isArray(event.categories) ? event.categories[0] : event.category;
-        return selectedCategories.includes(category);
+        const categories = Array.isArray(event.categories)
+            ? event.categories
+            : event.category
+                ? [event.category]
+                : [];
+        const eventCatsLower = categories.map(cat => cat.toString().toLowerCase());
+        return selectedLower.some(cat => eventCatsLower.includes(cat));
     });
 }
 
@@ -258,7 +264,7 @@ function startFilter() {
 }
 
 /* Start calendar and filter when page opens */
-window.onload = function () {
+window.addEventListener('DOMContentLoaded', () => {
     fetchEventsFromServer();
     startFilter();
-};
+});
