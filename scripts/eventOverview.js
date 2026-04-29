@@ -5,6 +5,7 @@ let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) 
 
 /* Global variabel til at holde events */
 let allEvents = [];
+let searchText = "";
 
 /* Lytter efter hvornår HTML-dokumentet er helt indlæst, før koden kører */
 document.addEventListener("DOMContentLoaded", async () => {
@@ -143,12 +144,24 @@ function visEventsPåSiden(eventListe, htmlKasseId) {
 /* 5. FILTRERING (Kategori-logik) */
 
 function filtrerEvents(eventListe) {
-    /* Hvis "All" er valgt eller ingen specifikke, vis alle */
-    if (selectedCategories.includes('All') || selectedCategories.length === 0) return eventListe;
-    /* Ellers returnerer vi kun de events, hvor mindst én valgt kategori findes i eventets liste */
     return eventListe.filter(event => {
         const eventCats = event.categories || [];
-        return selectedCategories.some(cat => eventCats.includes(cat));
+        const eventTitle = (event.title || "").toLowerCase();
+        const eventDescription = (event.description || "").toLowerCase();
+        const eventLocation = (event.location || "").toLowerCase();
+
+        const matchesCategory =
+            selectedCategories.includes('All') ||
+            selectedCategories.length === 0 ||
+            selectedCategories.some(cat => eventCats.includes(cat));
+
+        const matchesSearch =
+            searchText === "" ||
+            eventTitle.includes(searchText) ||
+            eventDescription.includes(searchText) ||
+            eventLocation.includes(searchText);
+
+        return matchesCategory && matchesSearch;
     });
 }
 
@@ -165,6 +178,23 @@ document.querySelectorAll(".events-wrapper").forEach(wrapper => {
     /* Ruller rækken til venstre ved klik */
     wrapper.querySelector(".left").addEventListener("click", () => grid.scrollBy({ left: -scrollAmount * 2, behavior: "smooth" }));
 });
+
+function startSearch() {
+    const searchInput = document.querySelector('.search-input');
+
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.addEventListener('input', () => {
+        searchText = searchInput.value.toLowerCase();
+
+        const currentUserId = localStorage.getItem('userId');
+        const userSemester = localStorage.getItem('userSemester');
+
+        distributeEvents(allEvents, userSemester, currentUserId);
+    });
+}
 
 /* Funktion der styrer selve filter-panelet (popup menuen) */
 function startFilter() {
@@ -224,6 +254,7 @@ function startFilter() {
 
 /* Aktiverer filter-logikken så knapperne virker */
 startFilter();
+startSearch();
 
 /* Sætter de rigtige checkboxes som checked baseret på gemte kategorier */
 const checkboxes = document.querySelectorAll('#filter-panel input[type="checkbox"]');
