@@ -3,8 +3,7 @@
 let displayedDate = new Date();  // The date/month the user is currently looking at
 let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mode
 let allEvents = [];             // A big list that holds all events fetched from the database
-let selectedCategories = ['All']; // Selected categories for filtering
-
+let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All'];
 /* 1.5 USER PROFILE */
 function loadUserProfile() {
     // Looks for 'userName' in the browser's memory
@@ -253,6 +252,5 @@ document.getElementById('go-to-today').addEventListener('click', () => {
 /* Start calendar and filter when page opens */
 window.addEventListener('DOMContentLoaded', () => {
     fetchEventsFromServer();
-    startFilter();
     loadUserProfile(); 
 });
