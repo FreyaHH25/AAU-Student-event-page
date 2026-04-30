@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         /* Omdanner serverens svar fra JSON til et læsbart JavaScript objekt (array) */
         const dbEvents = await response.json();
 
-        /* Gemmer events globalt */
+        /* Gemmer evenats globalt */
         allEvents = dbEvents;
 
         /* Sender de hentede events videre til sorterings-funktionen */

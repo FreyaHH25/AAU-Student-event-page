@@ -5,6 +5,20 @@ let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mod
 let allEvents = [];             // A big list that holds all events fetched from the database
 let selectedCategories = ['All']; // Selected categories for filtering
 
+/* 1.5 USER PROFILE */
+function loadUserProfile() {
+    // Looks for 'userName' in the browser's memory
+    const storedName = localStorage.getItem('userName');
+    
+    // Finds the <p class="user-name"> element in your HTML
+    const userNameElement = document.querySelector('.user-name');
+    
+    // If a name was found in memory, replace "John Doe" with that name
+    if (userNameElement && storedName) {
+        userNameElement.innerText = storedName;
+    }
+}
+
 /* 2. FETCH DATA */
 async function fetchEventsFromServer() {
     try {
@@ -267,4 +281,5 @@ function startFilter() {
 window.addEventListener('DOMContentLoaded', () => {
     fetchEventsFromServer();
     startFilter();
+    loadUserProfile(); 
 });
