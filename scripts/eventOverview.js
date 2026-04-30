@@ -1,10 +1,9 @@
 /* 1. KONFIGURATION OG INITIALISERING */
 
 /* Variabel til at holde styr på hvilke kategorier der er valgt i filteret. Standard er alle */
-let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All', 'Sports', 'Party', 'Free', 'Wellness', 'Food', 'Music', 'Outdoors', 'Academic', 'Social'];
-
+window.selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All', 'Sports', 'Party', 'Free', 'Wellness', 'Food', 'Music', 'Outdoors', 'Academic', 'Social'];
 /* Global variabel til at holde events */
-let allEvents = [];
+window.allEvents = [];
 let searchText = "";
 
 /* Lytter efter hvornår HTML-dokumentet er helt indlæst, før koden kører */
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const dbEvents = await response.json();
 
         /* Gemmer evenats globalt */
-        allEvents = dbEvents;
+        window.allEvents = dbEvents;
 
         /* Sender de hentede events videre til sorterings-funktionen */
         distributeEvents(dbEvents, userSemester, currentUserId);
@@ -37,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 /* 2. DISTRIBUTION LOGIK (Sortering af events i rækker) */
 
 function distributeEvents(events, userSemester, currentUserId) {
+    window.allEvents = events;
     /* Opretter et dato-objekt for i dag og nulstiller tiden for nem sammenligning */
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -155,7 +155,7 @@ function filtrerEvents(eventListe) {
         const eventDescription = (event.description || "").toLowerCase();
         const eventLocation = (event.location || "").toLowerCase();
 
-        const selectedLower = selectedCategories.map(cat => cat.toString().toLowerCase());
+        const selectedLower = window.selectedCategories.map(cat => cat.toString().toLowerCase());
         const eventCatsLower = eventCats.map(cat => cat.toString().toLowerCase());
 
         const matchesCategory =
@@ -200,7 +200,7 @@ function startSearch() {
         const currentUserId = localStorage.getItem('userId');
         const userSemester = localStorage.getItem('userSemester');
 
-        distributeEvents(allEvents, userSemester, currentUserId);
+        distributeEvents(window.allEvents, userSemester, currentUserId);
     });
 }
 
