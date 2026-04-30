@@ -39,7 +39,7 @@ function startFilter() {
         }
     
         if (typeof distributeEvents === 'function') {
-            distributeEvents(window.allEvents || [], localStorage.getItem('userSemester'), localStorage.getItem('userId'));
+            distributeEvents(allEvents, localStorage.getItem('userSemester'), localStorage.getItem('userId'));
         } else if (typeof renderCalendar === 'function') {
             renderCalendar();
         }
