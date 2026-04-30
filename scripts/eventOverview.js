@@ -204,3 +204,28 @@ function startSearch() {
     });
 }
 
+/* modal */
+const modal = document.getElementById("event_info");
+const closeButton = document.getElementById("modal-close-button");
+
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("read-more-btn")) {
+        modal.classList.remove("hidden"); 
+    }
+});
+
+closeButton.addEventListener("click", function () {
+    modal.classList.add("hidden");
+});
+/* attendknappen*/
+const attendButton = document.getElementById("attend-button");
+
+attendButton.addEventListener("click", function () {
+    attendButton.classList.toggle("attending");
+
+    if (attendButton.classList.contains("attending")) {
+        attendButton.textContent = "Attending";
+    } else {
+        attendButton.textContent = "Attend event";
+    }
+});
