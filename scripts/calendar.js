@@ -4,6 +4,7 @@ let displayedDate = new Date();  // The date/month the user is currently looking
 let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mode
 let allEvents = [];             // A big list that holds all events fetched from the database
 let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All'];
+let searchText = "";
 /* 1.5 USER PROFILE */
 function loadUserProfile() {
     // Looks for 'userName' in the browser's memory
@@ -33,20 +34,28 @@ async function fetchEventsFromServer() {
     }
 }
 
-/* 2.5 FILTERING */
+/* 2.5 FILTERING AND SEARCHING */
 function getFilteredEvents() {
     const selectedLower = selectedCategories.map(cat => cat.toString().toLowerCase());
-    if (selectedLower.includes('all') || selectedLower.length === 0) {
-        return allEvents;
-    }
+    
     return allEvents.filter(event => {
         const categories = Array.isArray(event.categories)
             ? event.categories
-            : event.category
-                ? [event.category]
-                : [];
+            : event.category ? [event.category] : [];
         const eventCatsLower = categories.map(cat => cat.toString().toLowerCase());
-        return selectedLower.some(cat => eventCatsLower.includes(cat));
+
+        const matchesCategory =
+            selectedLower.includes('all') ||
+            selectedLower.length === 0 ||
+            selectedLower.some(cat => eventCatsLower.includes(cat));
+
+        const matchesSearch =
+            searchText === "" ||
+            (event.title || "").toLowerCase().includes(searchText) ||
+            (event.description || "").toLowerCase().includes(searchText) ||
+            (event.location || "").toLowerCase().includes(searchText);
+
+        return matchesCategory && matchesSearch;
     });
 }
 
@@ -248,9 +257,17 @@ document.getElementById('go-to-today').addEventListener('click', () => {
 // window.onload = fetchEventsFromServer; // Removed duplicate
 
 
-
+function startSearch() {
+    const searchInput = document.querySelector('.search-input');
+    
+    searchInput.addEventListener('input', function() {
+        searchText = searchInput.value.toLowerCase();
+        renderCalendar();
+    });
+}
 /* Start calendar and filter when page opens */
 window.addEventListener('DOMContentLoaded', () => {
     fetchEventsFromServer();
-    loadUserProfile(); 
+    loadUserProfile();
+    startSearch(); 
 });
