@@ -6,6 +6,56 @@ const categorySelect = document.getElementById("event-category");
 const tagsDisplay = document.getElementById("selected-tags-display");
 const userSemester = localStorage.getItem('userSemester');
 
+// --- INITIALIZATION: Check for Edit Mode ---
+const urlParams = new URLSearchParams(window.location.search);
+const editEventId = urlParams.get('edit');
+
+if (editEventId) {
+    // Change the page title/button text so the user knows they are editing
+    document.querySelector('h1').innerText = "Edit Event";
+    document.querySelector('button[type="submit"]').innerText = "Save Changes";
+    
+    loadEventDataForEditing(editEventId);
+}
+
+async function loadEventDataForEditing(id) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/events/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch event data");
+        
+        const eventData = await response.json();
+
+        // Fill in basic text inputs
+        document.getElementById("event-title").value = eventData.title;
+        document.getElementById("event-description").value = eventData.description;
+        document.getElementById("event-organizer").value = eventData.organizer;
+        document.getElementById("event-date").value = eventData.date;
+        document.getElementById("event-starttime").value = eventData.startTime;
+        document.getElementById("event-endtime").value = eventData.endTime;
+        document.getElementById("event-location").value = eventData.location;
+        document.getElementById("event-image").value = eventData.imageUrl || "";
+
+        // Reconstruct Categories (Tags)
+        selectedCategories = eventData.categories || [];
+        updateTagDisplay();
+
+        // Reconstruct Visibility
+        // Note: We need to map the values (e.g. "1 semester") back to their pretty text
+        if (eventData.visibility) {
+            selectedVisibility = eventData.visibility.map(val => {
+                // Find the option in the dropdown to get the text label
+                const option = Array.from(visibilitySelect.options).find(opt => opt.value === val);
+                return { val: val, text: option ? option.text : val };
+            });
+            updateVisibilityTagDisplay();
+        }
+
+    } catch (error) {
+        console.error("Error loading event:", error);
+        alert("Could not load event data.");
+    }
+}
+
 // Runs every time the user picks an option from the dropdown
 categorySelect.addEventListener("change", function () {
   const val = this.value; // Get the chosen category (e.g., "creative")
@@ -94,54 +144,47 @@ function updateVisibilityTagDisplay() {
 // --- SUBMIT HANDLER ---
 // Runs when the "Create and post event" button is clicked
 document.getElementById("event-form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Stop the page from refreshing automatically
-// Bundle all form inputs into a single object to send to the server
+    event.preventDefault();
+
     const newEventData = {
-      title: document.getElementById("event-title").value,
-      description: document.getElementById("event-description").value,
-      categories: selectedCategories, 
-      organizer: document.getElementById("event-organizer").value,
-      organizerId: localStorage.getItem("userId"),
-      creatorSemester: localStorage.getItem('userSemester'), // This attaches the logged-in user's semester to the event data
-      date: document.getElementById("event-date").value,
-      startTime: document.getElementById("event-starttime").value,
-      endTime: document.getElementById("event-endtime").value,
-      location: document.getElementById("event-location").value,
-      
-      // Update: Now sends the visibility array
-      visibility: selectedVisibility.map(v => v.val),
-      
-      imageUrl: document.getElementById("event-image").value || "images/aau-entrance.png",
+        title: document.getElementById("event-title").value,
+        description: document.getElementById("event-description").value,
+        categories: selectedCategories,
+        organizer: document.getElementById("event-organizer").value,
+        organizerId: localStorage.getItem("userId"),
+        creatorSemester: localStorage.getItem('userSemester'),
+        date: document.getElementById("event-date").value,
+        startTime: document.getElementById("event-starttime").value,
+        endTime: document.getElementById("event-endtime").value,
+        location: document.getElementById("event-location").value,
+        visibility: selectedVisibility.map(v => v.val),
+        imageUrl: document.getElementById("event-image").value || "images/aau-entrance.png",
     };
 
-    // Quick check to make sure they picked at least one visibility
-    if (selectedVisibility.length === 0) {
-      alert("Please select at least one visibility option.");
-      return;
-    }
-
-    const validation = validateEvent(newEventData);
-    if (!validation.valid) {
-      alert("Please fix the following:\n" + validation.errors.join("\n"));
-      return;
-    }
+    // ... (Your validation code here) ...
 
     try {
-      const response = await fetch("http://localhost:3000/api/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEventData),
-      });
+        // --- LOGIC SWITCH: POST for new, PUT/PATCH for edit ---
+        const url = editEventId 
+            ? `http://localhost:3000/api/events/${editEventId}` 
+            : "http://localhost:3000/api/events";
+        
+        const method = editEventId ? "PATCH" : "POST";
 
-      if (response.ok) {
-        alert("Success! Your event has been saved.");
-        document.getElementById("event-form").reset();
-        window.location.href = "event_overview.html";
-      } else {
-        alert("Something went wrong on the server.");
-      }
+        const response = await fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEventData),
+        });
+
+        if (response.ok) {
+            alert(editEventId ? "Event updated!" : "Event created!");
+            window.location.href = "event_overview.html";
+        } else {
+            alert("Something went wrong on the server.");
+        }
     } catch (error) {
-      console.error("Connection error:", error);
-      alert("Could not connect to the server.");
+        console.error("Connection error:", error);
+        alert("Could not connect to the server.");
     }
 });

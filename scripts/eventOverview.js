@@ -159,17 +159,16 @@ function filtrerEvents(eventListe) {
 
 /* 5. MODAL OG ATTEND LOGIK (The Popup and "Sign Up" button) */
 
-// Listens for clicks anywhere on the page to catch "Read More" button clicks.
+//* 5. MODAL OG ATTEND LOGIK (The Popup and "Sign Up" button) */
+
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("read-more-btn")) {
-        const eventId = e.target.getAttribute("data-id"); // Gets the ID from the button.
-        const eventData = window.allEvents.find(ev => (ev._id || ev.id) === eventId); // Finds that event in our list.
+        const eventId = e.target.getAttribute("data-id");
+        const eventData = window.allEvents.find(ev => (ev._id || ev.id) === eventId);
 
         if (eventData) {
-            // Stores the ID on the modal so we know which event the user is looking at.
+            // 1. Set Modal Data
             modal.setAttribute("data-current-event-id", eventId);
-            
-            // Fills the popup (modal) with the correct text, image, and data.
             document.getElementById("modal-title").innerText = eventData.title;
             document.getElementById("modal-description").innerText = eventData.description;
             document.getElementById("modal-date").innerText = eventData.date;
@@ -178,46 +177,74 @@ document.addEventListener("click", function (e) {
             document.getElementById("modal-image").src = eventData.imageUrl || "images/basket.webp";
             document.getElementById("modal-time").innerText = eventData.time || `${eventData.startTime} - ${eventData.endTime}`;
 
-            // Logic to create and color-code the tags inside the popup.
+            // 2. Handle Tags
             const tagContainer = document.getElementById("modal-tags-container");
             if (tagContainer) {
-                tagContainer.innerHTML = ""; // Clears the tags from the previous event looked at.
+                tagContainer.innerHTML = ""; 
                 const categories = eventData.categories || ["General"];
-                
                 categories.forEach(cat => {
                     const span = document.createElement("span");
-                    span.className = `tag-visuel tag-${cat.toLowerCase()}`; // Uses CSS classes for colors.
+                    span.className = `tag-visuel tag-${cat.toLowerCase()}`;
                     span.style.marginRight = "5px"; 
                     span.innerText = cat;
                     tagContainer.appendChild(span);
                 });
             }
 
+            // 3. User & Attendee Logic
             const currentUserId = localStorage.getItem('userId');
-            
-            // Pulls the attendee lists (names and IDs) from the event data.
             const namesArray = Array.isArray(eventData.attendeeNames) ? eventData.attendeeNames : [];
             const attendeesIDs = Array.isArray(eventData.attending) ? eventData.attending : [];
 
-            // Updates the counter on the popup with the number of people attending.
             document.getElementById("modal-attendees").innerText = attendeesIDs.length;
 
-            // Checks if the logged-in user is already in the list to change the button text.
             const isAlreadyAttending = attendeesIDs.includes(currentUserId);
             attendBtn.classList.toggle("attending", isAlreadyAttending);
             attendBtn.textContent = isAlreadyAttending ? "Attending ✔️" : "Attend event";
 
-            // Shows the list of names. If no names are available yet, shows placeholders.
-            if (namesArray.length > 0) {
-                updateModalAttendeeList(namesArray);
-            } else if (attendeesIDs.length > 0) {
-                const placeholders = attendeesIDs.map(() => "Student");
-                updateModalAttendeeList(placeholders);
+            updateModalAttendeeList(namesArray.length > 0 ? namesArray : attendeesIDs.map(() => "Student"));
+
+            // --- MOVED: LOGIC FOR EDIT/DELETE BUTTONS ---
+            // This must be inside so it knows WHICH event is open
+            const editBtn = document.getElementById("edit-button");
+            const deleteBtn = document.getElementById("delete-button");
+
+            // Check if the user is the creator
+            const isCreator = (eventData.organizerId || eventData.organizer) === currentUserId;
+
+            if (isCreator) {
+                editBtn.classList.remove("hidden-btn");
+                deleteBtn.classList.remove("hidden-btn");
             } else {
-                updateModalAttendeeList([]);
+                editBtn.classList.add("hidden-btn");
+                deleteBtn.classList.add("hidden-btn");
             }
 
-            // Finally reveals the hidden popup to the user.
+            // Define the delete action for THIS specific event
+            deleteBtn.onclick = async () => {
+                if (confirm("Are you sure you want to delete this event?")) {
+                    try {
+                        const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+                            method: 'DELETE'
+                        });
+                        if (response.ok) {
+                            alert("Event deleted!");
+                            location.reload(); 
+                        } else {
+                            alert("Failed to delete event.");
+                        }
+                    } catch (error) {
+                        console.error("Delete Error:", error);
+                    }
+                }
+            };
+
+            // Define the edit action for THIS specific event
+            editBtn.onclick = () => {
+                window.location.href = `create_events.html?edit=${eventId}`;
+            };
+
+            // Show the modal
             modal.classList.remove("hidden");
         }
     }
@@ -314,3 +341,44 @@ if (tagContainerFooter) {
         tagContainerFooter.appendChild(span);
     });
 }
+
+// --- LOGIC FOR EDIT/DELETE BUTTONS ---
+const editBtn = document.getElementById("edit-button");
+const deleteBtn = document.getElementById("delete-button");
+
+// Check if the user is the creator
+const isCreator = (eventData.organizerId || eventData.organizer) === currentUserId;
+
+if (isCreator) {
+    editBtn.classList.remove("hidden-btn");
+    deleteBtn.classList.remove("hidden-btn");
+} else {
+    editBtn.classList.add("hidden-btn");
+    deleteBtn.classList.add("hidden-btn");
+}
+
+// --- ADDING THE DELETE FUNCTIONALITY ---
+deleteBtn.onclick = async () => {
+    if (confirm("Are you sure you want to delete this event? This cannot be undone.")) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                alert("Event deleted successfully!");
+                location.reload(); // Refresh the page to update the grids
+            } else {
+                alert("Failed to delete event.");
+            }
+        } catch (error) {
+            console.error("Delete Error:", error);
+        }
+    }
+};
+
+// --- ADDING THE EDIT REDIRECT ---
+editBtn.onclick = () => {
+    // Redirect to create_events page with the event ID in the URL
+    window.location.href = `create_events.html?edit=${eventId}`;
+};

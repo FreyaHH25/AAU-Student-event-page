@@ -161,6 +161,79 @@ app.patch('/api/events/:id/attend', async (req, res) => {
     }
 });
 
+app.get('/api/events/:id', async (req, res) => {
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const eventId = req.params.id;
+
+        // Find the event using the ObjectId format
+        const event = await db.collection(collectionName).findOne({ _id: new ObjectId(eventId) });
+
+        if (event) {
+            res.json(event);
+        } else {
+            res.status(404).send("Event not found");
+        }
+    } catch (error) {
+        console.error("Fetch Single Event Error:", error);
+        res.status(500).send("Error fetching event details.");
+    }
+});
+
+/** ---  UPDATE EVENT --- **/
+// This handles the actual saving of the edited event
+app.patch('/api/events/:id', async (req, res) => {
+    try {
+        await client.connect();// Establishes a connection to your MongoDB database cluster
+        const db = client.db(dbName);// Selects the specific database (UniEventDB) to work with
+        const eventId = req.params.id;// Extracts the event ID from the URL parameters
+        const updatedData = req.body;// Grabs the new event data (title, desc, etc.) sent from the frontend form
+
+        delete updatedData._id;// Removes the '_id' field from the incoming data because MongoDB doesn't allow you to overwrite the unique ID
+
+        // Finds the specific document by its ID and applies the new data using the $set command
+        const result = await db.collection(collectionName).updateOne(
+            { _id: new ObjectId(eventId) },// The "filter": find the event with this ID
+            { $set: updatedData }// The "update": change only the fields provided in updatedData
+        );
+        // Checks if the database actually found a document with that ID
+        if (result.matchedCount === 0) {
+            // If no event was found, stop here and send a 404 "Not Found" error to the frontend
+            return res.status(404).send("Event not found");
+        }
+        // If successful, send a JSON response back to the frontend to confirm the update worked
+        res.json({ message: "Update successful!" });
+    } catch (error) {
+        // If the database connection fails or there's a code error, log it in the terminal
+        console.error("Update Error:", error);
+        // Send a 500 "Server Error" status so the frontend knows the request failed
+        res.status(500).send("Error updating event.");
+    }
+});
+
+app.delete('/api/events/:id', async (req, res) => {
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const eventId = req.params.id;
+
+        const result = await db.collection(collectionName).deleteOne({ 
+            _id: new ObjectId(eventId) 
+        });
+
+        if (result.deletedCount === 1) {
+            res.json({ message: "Event deleted successfully!" });
+        } else {
+            res.status(404).send("Event not found in database.");
+        }
+    } catch (error) {
+        console.error("DELETE ERROR:", error);
+        res.status(500).send("Server error during deletion.");
+    }
+});
+
+
 /** --- SERVER ACTIVATION --- **/
 // This starts the server and makes it ready to handle incoming requests
 app.listen(port, () => {
@@ -207,3 +280,4 @@ app.post('/api/login', async (req, res) => {
         return res.status(500).send("Server Error");
     }
 });
+

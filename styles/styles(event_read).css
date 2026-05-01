@@ -166,3 +166,41 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
+
+/* Helper class to hide buttons by default */
+.hidden-btn {
+    display: none !important;
+}
+
+/* Edit Button Style */
+.modal-button-edit {
+    background-color: #211951;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Delete Button Style */
+.modal-button-delete {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-button-delete:hover {
+    background-color: #cc0000;
+}
+
+/* Ensure the Attend button still takes up most space but allows room for others */
+.modal-buttoon-attending {
+    flex: 2;
+}
