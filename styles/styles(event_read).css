@@ -26,7 +26,7 @@ body {
     background-color: white;
     border-radius: 16px;
     width: 90%;
-    max-width: 720px;
+    max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
     font-family: 'Barlow', sans-serif;
@@ -58,10 +58,13 @@ body {
     padding: 20px;
 }
 
+/*A box that stretches from tags all the way to the bottom of description?*/
 .modal-left {
     flex: 2;
+    font-size: 18px;
 }
 
+/*Attending list of students*/
 .modal-right {
     flex: 1;
     background-color: #211951;
@@ -69,6 +72,8 @@ body {
     padding: 16px;
     color: white;
     min-height: 320px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
 }
 
 
@@ -88,11 +93,18 @@ body {
     font-weight: 600;
 }
 
-/* Event Info */
+.modal-info-icons {
+    width: 30px;
+    height: 30px;
+}
+
+/* Event Info - Date, Time, Location, Organizer. */
 .modal-information {
     margin: 4px 0;
     font-size: 15px;
     color: #333;
+    font-size: 20px;
+
 }
 
 /* Beskrivelse boks */
@@ -101,9 +113,12 @@ body {
     border-radius: 10px;
     padding: 14px;
     margin-top: 10px;
+    min-height: 200px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
 }
 
-/* Attending listn */
+/* x "Attending students" header*/
 .modal-attending-header {
     font-weight: 700;
     margin: 0 0 12px 0;
@@ -137,7 +152,7 @@ body {
 
 .modal-buttoon-attending {
     flex: 2;
-    background-color: #17c964;
+    background-color: #211951; /* navy */
     color: white;
     border: none;
     border-radius: 12px;
@@ -146,15 +161,19 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
-}
-.modal-buttoon-attending:hover {
-    background-color: green
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
 }
 
-.modal-buttoon-attending:active {
-    background-color: #14b85a;
-    transform: translateY(3px);
+/* hover when NOT attending */
+.modal-buttoon-attending:hover, 
+.modal-buttoon-attending.attending{
+    background-color: #17c964; 
 }
+.modal-buttoon-attending.attending:hover {
+    background-color: #ff4d4d;
+}
+
 .modal-button-close {
     width: 120px;
     height: 56px;
@@ -165,6 +184,12 @@ body {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
+    transition: 0.2s ease; /*Makes the hover effect fade in and out*/
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+}
+.modal-button-close:hover {
+    filter: brightness(0.8);
 }
 
 /* Helper class to hide buttons by default */
@@ -204,3 +229,4 @@ body {
 .modal-buttoon-attending {
     flex: 2;
 }
+

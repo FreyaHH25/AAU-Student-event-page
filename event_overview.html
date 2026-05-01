@@ -60,31 +60,31 @@
             <img src="images/icons/aau_search.svg" alt="icon" class="search-icon">
             <input type="text" class="search-input" placeholder="Search for events">
 
-           <button class="filter-btn" id="open-filter-btn">
-             Filters <span class="filter-icon">⚏</span>
-           </button>
+            <button class="filter-btn" id="open-filter-btn">
+                Filters <span class="filter-icon">⚏</span>
+            </button>
         </section>
 
         <aside class="filter-panel" id="filter-panel">
-    <h3>Filter & sort</h3>
+            <h3>Filter & sort</h3>
 
-    <div class="filter-group">
-        <p>Categories</p>
+            <div class="filter-group">
+                <p>Categories</p>
 
-        <label><input type="checkbox" value="All" checked> All</label>
-        <label><input type="checkbox" value="Sports"> Sports</label>
-        <label><input type="checkbox" value="Party"> Party</label>
-        <label><input type="checkbox" value="Free"> Free</label>
-        <label><input type="checkbox" value="Wellness"> Wellness</label>
-        <label><input type="checkbox" value="Food"> Food</label>
-        <label><input type="checkbox" value="Music"> Music</label>
-        <label><input type="checkbox" value="Outdoors"> Outdoors</label>
-        <label><input type="checkbox" value="Academic"> Academic</label>
-        <label><input type="checkbox" value="Social"> Social</label>
-    </div>
+                <label><input type="checkbox" value="All" checked> All</label>
+                <label><input type="checkbox" value="Sports"> Sports</label>
+                <label><input type="checkbox" value="Party"> Party</label>
+                <label><input type="checkbox" value="Free"> Free</label>
+                <label><input type="checkbox" value="Wellness"> Wellness</label>
+                <label><input type="checkbox" value="Food"> Food</label>
+                <label><input type="checkbox" value="Music"> Music</label>
+                <label><input type="checkbox" value="Outdoors"> Outdoors</label>
+                <label><input type="checkbox" value="Academic"> Academic</label>
+                <label><input type="checkbox" value="Social"> Social</label>
+            </div>
 
-    <button id="save-filter-btn">Save</button>
-    </aside>
+            <button id="save-filter-btn">Save</button>
+        </aside>
 
         <section class="events-section">
             <h2 class="section-title">My events</h2>
@@ -129,22 +129,20 @@
                 </div>
                 <button class="scroll-btn right">❯</button>
             </div>
-        </section>    
+        </section>
 
         <section class="events-section">
-             <h2 class="section-title">Attending events</h2>
-             <div class="events-wrapper">
-                  <button class="scroll-btn left">❮</button>
-                  <div class="events-grid" id="attending-events">
-                  </div>
-                  <button class="scroll-btn right">❯</button>
+            <h2 class="section-title">Attending events</h2>
+            <div class="events-wrapper">
+                <button class="scroll-btn left">❮</button>
+                <div class="events-grid" id="attending-events">
+                </div>
+                <button class="scroll-btn right">❯</button>
             </div>
         </section>
 
 
-   
-            <script src="scripts/login_handler.js"></script>
-            <script src="scripts/filter.js"></script>
+
     </main>
 
 
@@ -210,75 +208,64 @@
     </footer>
 
     <!-- Event read more-->
- <div id="event_info" class="modal hidden">
-     <div class="modal-box">
+    <div id="event_info" class="modal hidden">
+        <div class="modal-box">
+            <img id="modal-image" src="" alt="Event Image" class="modal-image">
 
-        <img id="modal-image" src="images/orangestage.jpg" alt="Event billede" class="modal-image"
-        >
-
-        <div class="modal-title-bar">
-            <h2 id="modal-title" class="modal-title">Example event</h2>
-        </div>
-
-        <div class="modal-content">
-
-           
-            <div class="modal-left">
-
-                <div class="modal-tags" id="modal-tags-container"">
-             <span class="modal-tags-list">Tags:</span>
-                </div>
-
-
-                <p class="modal-information">📅 <span id="modal-date">Sunday, March 22, 2026</span></p>
-                <p class="modal-information">🕒<span id="modal-time">18:00 - 22:00</span></p>
-                <p class="modal-information">📍<span id="modal-location">Main Auditorium</span></p>
-                <p class="modal-information"> Organizer: <span id="modal-organizer">Don Jon</span></p>
-
-
-        <div class="modal-description-box">
-                    <p id="modal-description">Here the event-organizers will write about the event and what it is all about!
-                    Details will include descriptions of the program, key highlights, and the purpose
-                    behind the gathering. Attendees can expect information about featured speakers,
-                    scheduled activities, and any special experiences planned throughout the event.</p>
-                </div>
-
+            <div class="modal-title-bar">
+                <h2 id="modal-title" class="modal-title">Event Title</h2>
             </div>
 
-            <!--attending listen-->
-            <div class="modal-right">
+            <div class="modal-content">
+                <div class="modal-left">
+                    <div class="modal-tags" id="modal-tags-container">
+                        <span class="modal-tags-list">Tags:</span>
+                    </div>
+                    <p class="modal-information">
+                        <img src="images/icons/date.png" class="info-icons">
+                        <span id="modal-date"></span>
+                    </p>
 
-                <p class="modal-attending-header"><span id="modal-attendees">30</span> Attending students</p>
+                    <p class="modal-information">
+                        <img src="images/icons/time.png" class="info-icons">
+                        <span id="modal-time"></span>
+                    </p>
 
-                <ul class="modal-list" id="modal-list">
-                    <li>Abdulhady Ghabour</li>
-                    <li>Aisha Amakaak</li>
-                    <li>Filip Sukhanov</li>
-                    <li>Freya Hansen</li>
-                    <li>Japjot Singh</li>
-                    <li>Marius Hansen</li>
-                    <li>Marzia Yousofi</li>
-                    <li>Student 8</li>
-                    <li>Student 9</li>
-                    <li>Student 10</li>
-                    <li>Student 11</li>
-                    <li>Student 12</li>
-                    <li>Student 13</li>
-                    <li class="modal-attending" >17 others...</li>
-                </ul>
-         </div>
-    
+                    <p class="modal-information">
+                        <img src="images/icons/location.png" class="info-icons">
+                        <span id="modal-location"></span>
+                    </p>
 
+                    <p class="modal-information">
+                        <img src="images/icons/organizer.png" class="info-icons">
+                        <span id="modal-organizer"></span>
+                    </p>
+
+                    <div class="modal-description-box">
+                        <p id="modal-description"></p>
+                    </div>
+                </div>
+
+                <div class="modal-right">
+                    <p class="modal-attending-header"><span id="modal-attendees">0</span> Attending students</p>
+                    <ul class="modal-list" id="modal-list">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
+                <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
+                <button class="modal-buttoon-attending" id="attend-button">Attend event</button>
+                <button class="modal-button-close" id="modal-close-button">Close</button>
+            </div>
+        </div>
     </div>
-         <div class="modal-buttons">
-             <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
-             <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
-             
-             <button class="modal-buttoon-attending" id="attend-button">Attend event</button>
-             <button class="modal-button-close" id="modal-close-button">Close</button>
-         </div>
 
-     <script src="scripts/eventOverview.js"></script>
+        <script src="scripts/eventOverview.js"></script>
+        <script src="scripts/login_handler.js"></script>
+        <script src="scripts/filter.js"></script>
+        <script src="scripts/modal.js"></script>
 </body>
 
 </html>

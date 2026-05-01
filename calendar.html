@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles/styles(calendar).css">
     <link rel="stylesheet" href="styles/styles(header_footer).css">
     <link rel="stylesheet" href="styles/styles(tags).css">
@@ -47,7 +47,7 @@
                     <p class="user-name">Null</p>
                 </div>
             </div>
-            </div>
+        </div>
     </header>
 
 
@@ -63,36 +63,36 @@
         </section>
 
         <aside class="filter-panel" id="filter-panel">
-    <h3>Filter & sort</h3>
+            <h3>Filter & sort</h3>
 
-    <div class="filter-group">
-        <p>Categories</p>
+            <div class="filter-group">
+                <p>Categories</p>
 
-        <label><input type="checkbox" value="All" checked> All</label>
-        <label><input type="checkbox" value="Sports"> Sports</label>
-        <label><input type="checkbox" value="Party"> Party</label>
-        <label><input type="checkbox" value="Free"> Free</label>
-        <label><input type="checkbox" value="Wellness"> Wellness</label>
-        <label><input type="checkbox" value="Food"> Food</label>
-        <label><input type="checkbox" value="Music"> Music</label>
-        <label><input type="checkbox" value="Outdoors"> Outdoors</label>
-        <label><input type="checkbox" value="Academic"> Academic</label>
-        <label><input type="checkbox" value="Social"> Social</label>
-    </div>
+                <label><input type="checkbox" value="All" checked> All</label>
+                <label><input type="checkbox" value="Sports"> Sports</label>
+                <label><input type="checkbox" value="Party"> Party</label>
+                <label><input type="checkbox" value="Free"> Free</label>
+                <label><input type="checkbox" value="Wellness"> Wellness</label>
+                <label><input type="checkbox" value="Food"> Food</label>
+                <label><input type="checkbox" value="Music"> Music</label>
+                <label><input type="checkbox" value="Outdoors"> Outdoors</label>
+                <label><input type="checkbox" value="Academic"> Academic</label>
+                <label><input type="checkbox" value="Social"> Social</label>
+            </div>
 
-    <button id="save-filter-btn">Save</button>
-    </aside>
+            <button id="save-filter-btn">Save</button>
+        </aside>
 
-            <section class="calendar-page">
-        <section class="calendar-controls">
-            <h1 class="calendar-title">Calendar</h1>
-            <h2 class="calendar-description">View all events in monthly or weekly format</h2>
+        <section class="calendar-page">
+            <section class="calendar-controls">
+                <h1 class="calendar-title">Calendar</h1>
+                <h2 class="calendar-description">View all events in monthly or weekly format</h2>
 
-            
-            
-            <div class="view-switch">
-                <button class="view-btn active" data-view="monthly">
-                    <img src="images/icons/calendar.svg" alt="" class="btn-icon">
+
+
+                <div class="view-switch">
+                    <button class="view-btn active" data-view="monthly">
+                        <img src="images/icons/calendar.svg" alt="" class="btn-icon">
                         Monthly View
                     </button>
                     <button class="view-btn" data-view="weekly">
@@ -101,8 +101,8 @@
                     </button>
                 </div>
             </section>
-            
-            
+
+
             <section class="calendar-container">
                 <div class="calendar-header">
                     <h2 id="display-month-year">March 2026</h2>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="calendar-grid" id="calendar-grid">
                     <div class="day-name">Sun</div>
                     <div class="day-name">Mon</div>
@@ -126,27 +126,27 @@
                     <div class="day-name">Sat</div>
                 </div>
             </section>
-</section>
-        </main>
-        
-        <!-- Footer with contact info and links -->
-        <footer class="main-footer">
-            <div class="footer-top">
-                <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
+        </section>
+    </main>
+
+    <!-- Footer with contact info and links -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <img src="images/aau_logo_footer.png" alt="AAU Logo" class="footer-logo" />
+        </div>
+
+        <div class="footer-columns">
+            <div class="footer-col col-left">
+                <h3>KONTAKT</h3>
+                <p>Fredrik Bajers Vej 7K</p>
+                <p>9220 Aalborg Ø</p>
+                <p>Tlf.: 9940 9940</p>
+                <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
+                <br />
+                <p>CVR: 29102384</p>
             </div>
-            
-            <div class="footer-columns">
-                <div class="footer-col col-left">
-                    <h3>KONTAKT</h3>
-                    <p>Fredrik Bajers Vej 7K</p>
-                    <p>9220 Aalborg Ø</p>
-                    <p>Tlf.: 9940 9940</p>
-                    <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
-                    <br />
-                    <p>CVR: 29102384</p>
-                </div>
-                
-                <div class="footer-col col-center">
+
+            <div class="footer-col col-center">
                 <h3>OM AAU</h3>
                 <a href="https://www.studerende.aau.dk">For studerende</a>
                 <a href="https://www.ansatte.aau.dk">For ansatte</a>
@@ -187,51 +187,72 @@
         </div>
     </footer>
 
-</main>
+    </main>
 
-<div id="event_info" class="modal hidden">
-    <div class="modal-box">
-        <img id="modal-image" src="" alt="Event Image" class="modal-image">
 
-        <div class="modal-title-bar">
-            <h2 id="modal-title" class="modal-title">Event Title</h2>
-        </div>
 
-        <div class="modal-content">
-            <div class="modal-left">
-                <div class="modal-tags" id="modal-tags-container">
-                    <span class="modal-tags-list">Tags:</span>
-                </div>
 
-                <p class="modal-information">📅 <span id="modal-date"></span></p>
-                <p class="modal-information">🕒 <span id="modal-time"></span></p>
-                <p class="modal-information">📍 <span id="modal-location"></span></p>
-                <p class="modal-information">Organizer: <span id="modal-organizer"></span></p>
 
-                <div class="modal-description-box">
-                    <p id="modal-description"></p>
-                </div>
+    <div id="event_info" class="modal hidden">
+        <div class="modal-box">
+            <img id="modal-image" src="" alt="Event Image" class="modal-image">
+
+            <div class="modal-title-bar">
+                <h2 id="modal-title" class="modal-title">Event Title</h2>
             </div>
 
-            <div class="modal-right">
-                <p class="modal-attending-header"><span id="modal-attendees">0</span> Attending students</p>
-                <ul class="modal-list" id="modal-list">
+            <div class="modal-content">
+                <div class="modal-left">
+                    <div class="modal-tags" id="modal-tags-container">
+                        <span class="modal-tags-list">Tags:</span>
+                    </div>
+                    <p class="modal-information">
+                        <img src="images/icons/date.png" class="modal-info-icons">
+                        <span id="modal-date"></span>
+                    </p>
+
+                    <p class="modal-information">
+                        <img src="images/icons/time.png" class="modal-info-icons">
+                        <span id="modal-time"></span>
+                    </p>
+
+                    <p class="modal-information">
+                        <img src="images/icons/location.png" class="modal-info-icons">
+                        <span id="modal-location"></span>
+                    </p>
+
+                    <p class="modal-information">
+                        <img src="images/icons/organizer.png" class="modal-info-icons">
+                        <span id="modal-organizer"></span>
+                    </p>
+
+                    <div class="modal-description-box">
+                        <p id="modal-description"></p>
+                    </div>
+                </div>
+
+                <div class="modal-right">
+                    <p class="modal-attending-header"><span id="modal-attendees">0</span> Attending students</p>
+                    <ul class="modal-list" id="modal-list">
                     </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="modal-buttons">
-            <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
-            <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
-            <button class="modal-buttoon-attending" id="attend-button">Attend event</button>
-            <button class="modal-button-close" id="modal-close-button">Close</button>
+            <div class="modal-buttons">
+                <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
+                <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
+                <button class="modal-buttoon-attending" id="attend-button">Attend event</button>
+                <button class="modal-button-close" id="modal-close-button">Close</button>
+            </div>
         </div>
     </div>
-</div>
-    
+
+
     <script src="scripts/calendar.js"></script>
     <script src="scripts/login_handler.js"></script>
     <script src="scripts/filter.js"></script>
+    <script src="scripts/modal.js"></script>
 
 </body>
+
 </html>

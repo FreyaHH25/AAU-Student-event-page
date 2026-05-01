@@ -261,8 +261,7 @@ body {
     display: flex;
     flex-direction: column; 
     gap: 5px;
-    transition: 0.2s;
-    cursor: pointer;
+    cursor: default;
 }
 
 /* The 00:00, 01:00 time labels */
@@ -321,12 +320,6 @@ body {
     color: #CCC;
 }
 
-/*Hover Effect*/
-.day-cell:hover {
-    background-color: #F0F7FF; 
-    border: 1px solid #211951; 
-    z-index: 1;
-}
 .day-cell.today {
     background-color: #FFFFFF;
 }
@@ -348,19 +341,24 @@ body {
     margin: 2px 2px 0 2px;
     border-radius: 4px;
     cursor: pointer;
-
+    transition: 0.2s ease; /*Makes the hover effect fade in and out*/
+    
     border: 1.5px solid currentColor;;
     
     display: -webkit-box;
     -webkit-line-clamp: 1;      
     -webkit-box-orient: vertical;
     line-clamp: 1;
-
+    
     overflow: hidden;
     text-overflow: ellipsis;
-
-
+    
+    
     cursor: pointer;
+}
+/*Simple hover Effect to set the brightness to 90%, darkening it*/
+.event-pill:hover {
+    filter: brightness(0.9);
 }
 
 /* --- Weekly View Styles --- */

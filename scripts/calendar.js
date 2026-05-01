@@ -2,7 +2,7 @@
 // These variables store the "memory" of your app while it's running
 let displayedDate = new Date();  // The date/month the user is currently looking at
 let currentView = 'monthly';    // Tracks if we are in 'monthly' or 'weekly' mode
-let allEvents = [];             // A big list that holds all events fetched from the database
+window.allEvents = [];         // A big list that holds all events fetched from the database
 let selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All'];
 let searchText = "";
 /* 1.5 USER PROFILE */
@@ -19,13 +19,49 @@ function loadUserProfile() {
     }
 }
 
+
+
+
+// Grabs references to specific HTML elements for the event info popup (modal).
+const modal = document.getElementById("event_info");
+const closeButton = document.getElementById("modal-close-button");
+const attendBtn = document.getElementById("attend-button");
+
+// This runs as soon as the website finishes loading its basic structure.
+document.addEventListener("DOMContentLoaded", async () => {
+    // Retrieves the unique ID and semester of the logged-in user from storage.
+    const currentUserId = localStorage.getItem('userId');
+    const userSemester = localStorage.getItem('userSemester');
+
+    try {
+        // --- COMMUNICATION WITH SERVER ---
+        // Sends a request to the backend server to get the list of events.
+        const response = await fetch('http://localhost:3000/api/events');
+        // Converts the server's response into a usable JavaScript list (JSON).
+        const dbEvents = await response.json();
+
+        // Saves the fetched events into our global variable.
+        window.allEvents = dbEvents;
+        
+        // Calls the logic to sort these events into 'Upcoming', 'Past', etc., based on user info.
+        distributeEvents(dbEvents, userSemester, currentUserId);
+        
+        // Starts the "listening" process for the search bar.
+        startSearch();
+
+    } catch (error) {
+        // If the server is down or there is a bug in the fetch, it logs the error here.
+        console.error("Error fetching events:", error);
+    }
+});
+
 /* 2. FETCH DATA */
 async function fetchEventsFromServer() {
     try {
         // Asks the server for the events
         const response = await fetch('http://localhost:3000/api/events');
         // Turns the server's raw data into a JavaScript list (array)
-        allEvents = await response.json();
+        window.allEvents = await response.json();
         // Now that we have data, draw the calendar
         renderCalendar(); 
     } catch (error) {
@@ -126,15 +162,14 @@ function renderMonthly(grid, monthYearLabel) {
             const category = Array.isArray(event.categories) ? event.categories[0] : event.category;
             const categoryClass = `cat-${category || 'default'}`;
             
-            const pill = document.createElement('div');
-            pill.classList.add('event-pill', categoryClass);
+            const pill = document.createElement('button');
+            pill.type = 'button';
+            pill.classList.add('event-pill', categoryClass, 'read-more-btn');
+
             pill.innerText = event.title;
             pill.style.cursor = "pointer";
-        
-            pill.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openEventModal(event);
-            });
+            pill.setAttribute("data-id", event._id || event.id);
+
         
             dayCell.appendChild(pill); // This adds it safely without overwriting the number
         });
@@ -200,10 +235,6 @@ function renderWeekly(grid, monthYearLabel) {
                 evEl.style.margin = '2px auto';
 
                 evEl.innerHTML = `<strong>${e.title}</strong><br><small>${e.startTime}-${e.endTime}</small>`;
-                
-                evEl.addEventListener('click', () => {
-                    openEventModal(e);
-                });
 
                 slot.appendChild(evEl);
             });
@@ -262,147 +293,3 @@ window.addEventListener('DOMContentLoaded', () => {
     startSearch(); 
 });
 
-function openEventModal(event) {
-    const modal = document.getElementById("event_info");
-    const modalAttendBtn = document.getElementById("attend-button");
-    
-    // 1. Tag the modal with the event ID
-    modal.setAttribute("data-current-event-id", event._id || event.id);
-
-    // 2. Prepare attendee data
-    const attendeesIDs = Array.isArray(event.attending) ? event.attending : [];
-    const namesArray = Array.isArray(event.attendeeNames) ? event.attendeeNames : [];
-
-    document.getElementById("modal-attendees").innerText = attendeesIDs.length;
-
-    // 3. Set Attend button state
-    const currentUserId = localStorage.getItem('userId');
-    const isAlreadyAttending = attendeesIDs.includes(currentUserId);
-    
-    if (modalAttendBtn) {
-        modalAttendBtn.classList.toggle("attending", isAlreadyAttending);
-        modalAttendBtn.textContent = isAlreadyAttending ? "Attending ✔️" : "Attend event";
-    }
-    
-    // 4. Update the name list
-    updateModalAttendeeList(namesArray.length > 0 ? namesArray : attendeesIDs.map(() => "Student"));
-    
-    // 5. Fill text fields
-    document.getElementById("modal-title").innerText = event.title;
-    document.getElementById("modal-description").innerText = event.description || "No description provided.";
-    document.getElementById("modal-location").innerText = event.location || "TBA";
-    document.getElementById("modal-date").innerText = event.date;
-    document.getElementById("modal-time").innerText = `${event.startTime} - ${event.endTime}`;
-    document.getElementById("modal-organizer").innerText = event.organizer || "Anonymous";
-
-    const modalImg = document.getElementById("modal-image");
-    modalImg.src = event.image || 'images/orangestage.jpg';
-
-    // 6. Delete button setup
-    const deleteBtn = document.getElementById("delete-button");
-    if (deleteBtn) {
-        deleteBtn.setAttribute("data-id", event._id || event.id);
-    }
-
-    modal.classList.remove("hidden");
-}
-// Close modal logic
-document.getElementById("modal-close-button").addEventListener("click", () => {
-    document.getElementById("event_info").classList.add("hidden");
-});
-
-// Close if clicking outside the box
-window.addEventListener("click", (event) => {
-    const modal = document.getElementById("event_info");
-    if (event.target === modal) {
-        modal.classList.add("hidden");
-    }
-});
-
-document.getElementById("delete-button").addEventListener("click", async () => {
-    const deleteBtn = document.getElementById("delete-button");
-    const eventId = deleteBtn.getAttribute("data-id");
-
-    if (!eventId) return;
-
-    if (confirm("Are you sure you want to delete this event?")) {
-        try {
-            const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                alert("Event deleted successfully!");
-                // Refresh data without reloading the whole page
-                fetchEventsFromServer(); 
-                document.getElementById("event_info").classList.add("hidden");
-            } else {
-                alert("Failed to delete event.");
-            }
-        } catch (error) {
-            console.error("Error deleting:", error);
-        }
-    }
-});
-
-/* ATTEND BUTTON LOGIC FOR CALENDAR */
-const attendBtn = document.getElementById("attend-button");
-
-if (attendBtn) {
-    attendBtn.addEventListener("click", async function () {
-        const currentUserId = localStorage.getItem('userId');
-        const modal = document.getElementById("event_info");
-        const eventId = modal.getAttribute("data-current-event-id");
-
-        if (!currentUserId) return alert("Please log in to attend events!");
-
-        try {
-            const response = await fetch(`http://localhost:3000/api/events/${eventId}/attend`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId: currentUserId })
-            });
-
-            if (response.ok) {
-                const updatedData = await response.json();
-                const names = updatedData.attendeeNames || [];
-                
-                // Update the count and the button style immediately
-                document.getElementById("modal-attendees").innerText = names.length;
-                this.classList.toggle("attending", updatedData.attending.includes(currentUserId));
-                this.textContent = updatedData.attending.includes(currentUserId) ? "Attending ✔️" : "Attend event";
-                
-                // Refresh the list of names shown in the modal
-                updateModalAttendeeList(names);
-
-                // IMPORTANT: Update our local 'allEvents' array so the calendar 
-                // stays updated without a page reload
-                const eventIndex = allEvents.findIndex(ev => (ev._id || ev.id) === eventId);
-                if (eventIndex !== -1) {
-                    allEvents[eventIndex].attending = updatedData.attending;
-                    allEvents[eventIndex].attendeeNames = names;
-                }
-            }
-        } catch (error) {
-            console.error("Attend Error:", error);
-        }
-    });
-}
-function updateModalAttendeeList(names) {
-    const list = document.getElementById("modal-list");
-    if (!list) return;
-    
-    list.innerHTML = ""; // Clear the old list
-    
-    if (!names || names.length === 0) {
-        list.innerHTML = "<li>No one attending yet.</li>";
-        return;
-    }
-
-    names.forEach(name => {
-        const li = document.createElement("li");
-        li.style.padding = "5px 0";
-        li.innerHTML = `👤 ${name}`;
-        list.appendChild(li);
-    });
-}
