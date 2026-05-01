@@ -67,6 +67,8 @@ function distributeEvents(events, userSemester, currentUserId) {
         return isNaN(d.getTime()) ? new Date(0) : d; // Returns a "zero date" if the date is broken.
     };
 
+    // Filter: Events where the current user ID exists in the attending array
+    const attendingEvents = events.filter(e => Array.isArray(e.attending) && e.attending.includes(currentUserId));
     // Filter: Finds events where the logged-in user is listed as the creator/organizer.
     const myEvents = events.filter(e => (e.organizerId || e.organizer) === currentUserId);
     
@@ -84,6 +86,7 @@ function distributeEvents(events, userSemester, currentUserId) {
     }).sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
     // Displays the filtered and sorted lists into the correct sections on the webpage.
+    visEventsPåSiden(filtrerEvents(attendingEvents), "attending-events");
     visEventsPåSiden(filtrerEvents(myEvents), "my-events");
     visEventsPåSiden(filtrerEvents(upcoming), "upcoming-events");
     visEventsPåSiden(filtrerEvents(newlyAdded), "newly-added-events");
