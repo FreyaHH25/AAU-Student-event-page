@@ -164,3 +164,19 @@ async function loadModal() {
 }
 
 window.addEventListener("DOMContentLoaded", loadModal);
+
+document.querySelectorAll(".events-wrapper").forEach(wrapper => {
+    const grid = wrapper.querySelector(".events-grid");
+    const leftBtn = wrapper.querySelector(".scroll-btn.left");
+    const rightBtn = wrapper.querySelector(".scroll-btn.right");
+
+    const scrollAmount = 800;
+
+    leftBtn.addEventListener("click", () => {
+        grid.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    rightBtn.addEventListener("click", () => {
+        grid.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+});

@@ -37,7 +37,7 @@ document.addEventListener("click", function (e) {
 
             const isAlreadyAttending = attendeesIDs.includes(currentUserId);
             attendBtn.classList.toggle("attending", isAlreadyAttending);
-            attendBtn.textContent = isAlreadyAttending ? "Attending ✔️" : "Attend event";
+            attendBtn.textContent = isAlreadyAttending ? "Attending ✓" : "Attend event";
 
             updateModalAttendeeList(namesArray.length > 0 ? namesArray : attendeesIDs.map(() => "Student"));
 
@@ -114,7 +114,7 @@ if (attendBtn) {
                 
                 document.getElementById("modal-attendees").innerText = names.length;
                 this.classList.toggle("attending", updatedData.attending.includes(currentUserId));
-                this.textContent = updatedData.attending.includes(currentUserId) ? "Attending ✔️" : "Attend event";
+                this.textContent = updatedData.attending.includes(currentUserId) ? "Attending ✓" : "Attend event";
                 
                 updateModalAttendeeList(names); // Refresh the visible name list.
 

@@ -24,26 +24,47 @@ body {
 
 .modal-box {
     background-color: white;
-    border-radius: 16px;
+    border-radius: 20px;
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
-    font-family: 'Barlow', sans-serif;
+
+    position: relative; /* needed for layering */
+    overflow-x: hidden;   /* keeps edges clean */
+}
+.modal-box button {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /*Billede */
 .modal-image {
     width: 100%;
-    height: 220px;
+    height: 260px;
     object-fit: cover;
-    border-radius: 16px 16px 0 0;
+    border-radius: 20px;
+
+    border: 8px solid white; /* creates that “contained” look */
+
+    position: relative;
+    z-index: 1;
 }
 
 /* overskrift */
 .modal-title-bar {
     background-color: #211951;
     padding: 12px 20px;
+
+    position: relative;
+    margin-top: -63px;   /* pulls it up over the image */
+    z-index: 2;
+    margin-left: 8px;
+    margin-right: 8px;
+
+    border-radius: 0 0 12px 12px;
 }
 
 .modal-title {
@@ -61,6 +82,7 @@ body {
 /*A box that stretches from tags all the way to the bottom of description?*/
 .modal-left {
     flex: 2;
+    color: #000000;
     font-size: 18px;
 }
 
@@ -72,7 +94,7 @@ body {
     padding: 16px;
     color: white;
     min-height: 320px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 }
 
@@ -94,20 +116,17 @@ body {
 }
 
 .modal-info-icons {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 
 /* Event Info - Date, Time, Location, Organizer. */
 .modal-information {
     margin: 4px 0;
-    font-size: 15px;
-    color: #333;
     font-size: 20px;
-
 }
 
-/* Beskrivelse boks */
+/* Description box */
 .modal-description-box {
     background-color: #f5f5f7;
     border-radius: 10px;
@@ -118,18 +137,19 @@ body {
 
 }
 
-/* x "Attending students" header*/
+/* "x Attending students" header */
 .modal-attending-header {
     font-weight: 700;
     margin: 0 0 12px 0;
 }
 
+/* The list of students */
 .modal-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
+/* Names on the list of students */
 .modal-list li {
     font-size: 13px;
     color: #d0d0e8;
@@ -143,53 +163,72 @@ body {
     cursor: pointer;
 }
 
-.modal-buttons {
+/* The top box for the buttons */
+.modal-buttons-top {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 20px 20px;
+    align-items: center;
+    position: absolute;
+    top: 16px;
+    right: 0px;
+
+    z-index: 5;
+}
+.modal-buttons-top button {
+    font-size: 14px;
+    height: 40px;
+}
+/* The bottom box for the buttons */
+.modal-buttons-bottom {
     display: flex;
     gap: 16px;
     padding: 0 20px 20px 20px;
     align-items: center;
 }
+.modal-buttons-bottom button {
+    font-size: 18px;
+    height: 50px;
+}
 
-.modal-buttoon-attending {
+.modal-button-attending {
     flex: 2;
     background-color: #211951; /* navy */
     color: white;
     border: none;
     border-radius: 12px;
     padding: 14px;
-    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-
 }
-
 /* hover when NOT attending */
-.modal-buttoon-attending:hover, 
-.modal-buttoon-attending.attending{
+.modal-button-attending:hover, 
+.modal-button-attending.attending{
     background-color: #17c964; 
 }
-.modal-buttoon-attending.attending:hover {
+.modal-button-attending.attending:hover {
     background-color: #ff4d4d;
 }
 
 .modal-button-close {
     width: 120px;
-    height: 56px;
-    background-color: rgb(205, 200, 200);
+    background-color:#F2F2F4;
     color: #211951;
     border: 1px solid #dddddd;
     border-radius: 14px;
-    font-size: 18px;
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s ease; /*Makes the hover effect fade in and out*/
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-
 }
-.modal-button-close:hover {
-    filter: brightness(0.8);
+.modal-button-close:hover{
+    background-color:#cbcbcb;
+}
+
+.modal-button-edit:hover{
+    background-color:#0d062d;
 }
 
 /* Helper class to hide buttons by default */
@@ -220,13 +259,12 @@ body {
     cursor: pointer;
     transition: 0.2s;
 }
-
 .modal-button-delete:hover {
-    background-color: #cc0000;
+    background-color:#d52222;
 }
 
 /* Ensure the Attend button still takes up most space but allows room for others */
-.modal-buttoon-attending {
+.modal-button-attending {
     flex: 2;
 }
 

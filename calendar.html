@@ -67,17 +67,18 @@
 
             <div class="filter-group">
                 <p>Categories</p>
-
                 <label><input type="checkbox" value="All" checked> All</label>
-                <label><input type="checkbox" value="Sports"> Sports</label>
-                <label><input type="checkbox" value="Party"> Party</label>
-                <label><input type="checkbox" value="Free"> Free</label>
-                <label><input type="checkbox" value="Wellness"> Wellness</label>
-                <label><input type="checkbox" value="Food"> Food</label>
-                <label><input type="checkbox" value="Music"> Music</label>
-                <label><input type="checkbox" value="Outdoors"> Outdoors</label>
                 <label><input type="checkbox" value="Academic"> Academic</label>
+                <label><input type="checkbox" value="Career"> Career</label>
+                <label><input type="checkbox" value="Creative"> Creative</label>
+                <label><input type="checkbox" value="Culture"> Culture</label>
+                <label><input type="checkbox" value="Food"> Food</label>
+                <label><input type="checkbox" value="Gaming"> Gaming</label>
+                <label><input type="checkbox" value="Party"> Party</label>
                 <label><input type="checkbox" value="Social"> Social</label>
+                <label><input type="checkbox" value="Sports"> Sports</label>
+                <label><input type="checkbox" value="Volunteering"> Volunteering</label>
+                <label><input type="checkbox" value="Wellness"> Wellness</label>
             </div>
 
             <button id="save-filter-btn">Save</button>
@@ -193,8 +194,13 @@
 
 
 
+    <!-- Event read more-->
     <div id="event_info" class="modal hidden">
         <div class="modal-box">
+                <div class="modal-buttons-top">
+        <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
+        <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
+    </div>
             <img id="modal-image" src="" alt="Event Image" class="modal-image">
 
             <div class="modal-title-bar">
@@ -238,14 +244,13 @@
                 </div>
             </div>
 
-            <div class="modal-buttons">
-                <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
-                <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
-                <button class="modal-buttoon-attending" id="attend-button">Attend event</button>
+            <div class="modal-buttons-bottom">
+                <button class="modal-button-attending" id="attend-button">Attend event</button>
                 <button class="modal-button-close" id="modal-close-button">Close</button>
             </div>
         </div>
     </div>
+
 
 
     <script src="scripts/calendar.js"></script>
