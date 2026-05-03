@@ -34,7 +34,7 @@ body {
     overflow-x: hidden;   /* keeps edges clean */
 }
 .modal-box button {
-    border: 1px solid black;
+    border: 1px solid #211951;
     display: flex;
     align-items: center;
     justify-content: center;
