@@ -12,7 +12,14 @@ const editEventId = urlParams.get('edit');
 
 if (editEventId) {
     // Change the page title/button text so the user knows they are editing
-    document.querySelector('h1').innerText = "Edit Event";
+    document.querySelector('.title_with_icon').innerHTML = `
+    <img src="images/icons/create_icon.png" alt="icon" class="title-icon" />
+        Edit Event`;
+
+    // Change the description text
+    document.querySelector('.create_description').innerText = "Fill in the details to update the event.";
+    
+    //Change the post button to "save changes"
     document.querySelector('button[type="submit"]').innerText = "Save Changes";
     
     loadEventDataForEditing(editEventId);

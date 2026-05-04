@@ -1,3 +1,11 @@
+:root {
+  --aau-blue: #211951;
+  --aau-light-blue: #0f6f82;
+  --aau-grey: #f2f2f4;
+  --aau-dark-grey: #D1D1D4;
+
+}
+
 body {
     margin: 0; 
     padding: 0;
@@ -158,7 +166,7 @@ body {
 }
 
 .modal-attending {
-    color: #a0a0c8;
+    color: #f2f2f4;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -206,7 +214,7 @@ body {
 /* hover when NOT attending */
 .modal-button-attending:hover, 
 .modal-button-attending.attending{
-    background-color: #17c964; 
+    background-color: #0f6f82; 
 }
 .modal-button-attending.attending:hover {
     background-color: #ff4d4d;
