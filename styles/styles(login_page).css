@@ -36,35 +36,6 @@ header p {
     line-height: 1.4;
 }
 
-.toggle-container {
-    display: flex;
-    background-color: #f3f4f6;
-    padding: 4px;
-    border-radius: 30px;
-    margin-bottom: 30px;
-}
-
-.toggle-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    background: transparent;
-    color: #4b5563;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-.toggle-btn.active {
-    background: white;
-    color: #1e1b4b;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
 
 .input-group {
     margin-bottom: 20px;
