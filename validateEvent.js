@@ -1,4 +1,3 @@
-// validateEvent.test.js
 // Unit tests for the validateEvent function.
 // These tests verify that the function correctly accepts valid events
 // and rejects invalid ones, returning appropriate error messages.
@@ -17,7 +16,7 @@ describe("validateEvent", () => {
     categories: ["social"],
   };
 
-  // --- Happy path ---
+  // --- Successful path ---
   // First we verify that a fully valid event passes validation.
   // If this test fails, something is fundamentally wrong with the function.
   test("accepts a valid event", () => {
