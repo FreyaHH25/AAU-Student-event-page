@@ -149,10 +149,16 @@ function renderMonthly(grid, monthYearLabel) {
 
         const dateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
-        const todaysEvents = getFilteredEvents()
-            .filter(event => event.date === dateString)
-            .reverse() 
-            .slice(0, 5);
+                // Fixed Logic: Filter by date FIRST, then sort by time
+                const todaysEvents = getFilteredEvents()
+                    .filter(event => event.date === dateString) // This line was missing!
+                    .sort((a, b) => {
+                        // Compare start times (Earliest first)
+                        if (a.startTime < b.startTime) return -1;
+                        if (a.startTime > b.startTime) return 1;
+                        return 0;
+                    })
+                    .slice(0, 5); // Take only the 5 earliest events for THIS day
 
         // 1. Set the day number first
         dayCell.innerHTML = `<span class="day-number">${day}</span>`;
@@ -220,21 +226,37 @@ function renderWeekly(grid, monthYearLabel) {
             cellDate.setDate(startOfWeek.getDate() + day);
             const dateString = cellDate.toISOString().split('T')[0];
 
-            const hourlyEvents = getFilteredEvents().filter(e => {
-                const startHour = parseInt(e.startTime.split(':')[0]);
-                return e.date === dateString && startHour === hour;
-            });
+// 1. Get events for this hour
+            const hourlyEvents = getFilteredEvents()
+                .filter(e => {
+                    const startHour = parseInt(e.startTime.split(':')[0]);
+                    return e.date === dateString && startHour === hour;
+                })
+                // 2. SORT so 12:00 appears before 12:45
+                .sort((a, b) => {
+                    if (a.startTime < b.startTime) return -1;
+                    if (a.startTime > b.startTime) return 1;
+                    return 0;
+                });
 
-            hourlyEvents.forEach((e) => {
+            // 3. Draw the events in the sorted order
+hourlyEvents.forEach((e) => {
                 const evEl = document.createElement('div');
-                const categoryClass = `cat-${e.category || 'default'}`;
+                
+                // --- FIX: Logic to get the correct category class ---
+                const category = Array.isArray(e.categories) ? e.categories[0] : e.category;
+                const categoryClass = `cat-${(category || 'default').toLowerCase()}`;
+                
                 evEl.classList.add('weekly-event-block', categoryClass);
                 evEl.style.cursor = "pointer";
-                evEl.style.position = "relative";
-                evEl.style.width = '94%'; 
-                evEl.style.margin = '2px auto';
-
+                
                 evEl.innerHTML = `<strong>${e.title}</strong><br><small>${e.startTime}-${e.endTime}</small>`;
+
+                evEl.addEventListener('click', () => {
+                    if (typeof openEventModal === "function") {
+                        openEventModal(e);
+                    }
+                });
 
                 slot.appendChild(evEl);
             });
