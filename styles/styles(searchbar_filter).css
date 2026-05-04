@@ -9,6 +9,9 @@
     gap: 10px;
     width: 50%;
 }
+.search-input:hover{
+background-color: #ccc;
+}
 
 /*The icon before the searchbar*/
 .search-icon {
@@ -25,6 +28,7 @@
     padding: 12px 20px;
     border-radius: 8px;
     font-size: 16px;
+    transition: 0.2s;
 }
 
 
@@ -43,6 +47,10 @@
     font-size: 14px;
     color: #211951;
     cursor: pointer;
+    transition: 0.2s;
+}
+.filter-btn:hover{
+    background-color: #ccc;
 }
 
 .filter-panel {
