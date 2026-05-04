@@ -240,23 +240,24 @@ function renderWeekly(grid, monthYearLabel) {
                 });
 
             // 3. Draw the events in the sorted order
-hourlyEvents.forEach((e) => {
+            hourlyEvents.forEach((e) => {
                 const evEl = document.createElement('div');
                 
-                // --- FIX: Logic to get the correct category class ---
                 const category = Array.isArray(e.categories) ? e.categories[0] : e.category;
-                const categoryClass = `cat-${(category || 'default').toLowerCase()}`;
-                
-                evEl.classList.add('weekly-event-block', categoryClass);
+                const catClass = `cat-${(category || 'default').toLowerCase()}`;
+    
+              
+                evEl.className = `weekly-event-block event-pill ${catClass} read-more-btn`;
+                evEl.setAttribute("data-id", e._id || e.id);
+    
+             
+                evEl.style.height = "auto";           
+                evEl.style.minHeight = "40px";        
+                evEl.style.padding = "5px";           
                 evEl.style.cursor = "pointer";
-                
+                evEl.style.border = "none";
+    
                 evEl.innerHTML = `<strong>${e.title}</strong><br><small>${e.startTime}-${e.endTime}</small>`;
-
-                evEl.addEventListener('click', () => {
-                    if (typeof openEventModal === "function") {
-                        openEventModal(e);
-                    }
-                });
 
                 slot.appendChild(evEl);
             });
