@@ -230,7 +230,6 @@ body {
     grid-template-columns: 80px repeat(7, 1fr); 
     border: 1px solid #EEE;
     background-color: white;
-    max-height: 700px; /* Makes the calendar scrollable */
     overflow-y: auto;
         /* change grid-auto-rows to auto so it can grow */
     grid-auto-rows: minmax(60px, auto); 
@@ -263,8 +262,7 @@ body {
     display: flex;
     flex-direction: column; 
     gap: 5px;
-    cursor: default;
-}
+    cursor: default;}
 
 /* The 00:00, 01:00 time labels */
 .time-cell {

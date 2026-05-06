@@ -210,7 +210,7 @@ function renderWeekly(grid, monthYearLabel) {
         grid.appendChild(dayHeader);
     }
 
-    for (let hour = 0; hour < 24; hour++) {
+    for (let hour = 6; hour < 24; hour++) {
         const timeLabel = document.createElement('div');
         timeLabel.classList.add('time-cell');
         timeLabel.innerText = `${hour.toString().padStart(2, '0')}:00`;
