@@ -148,6 +148,10 @@
     color: #211951;
 }
 
+.nav-link-header.active:hover {
+    background-color: #0f6f82;
+    color: #F2F2F4;
+}
 
 
 

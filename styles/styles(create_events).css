@@ -34,13 +34,14 @@ main {
     width: 50vw;
     min-width: 450px;
     padding: 20px;
-    margin: -125px auto 0 auto; /* pulls it upward */
+    margin: -125px auto 0 auto;
+    /* pulls it upward */
     position: relative;
 }
 
 /*Makes "Create Event" and the event-form line up*/
 .page-wrapper,
-.event-form{
+.event-form {
     width: 40vw;
     min-width: 350px;
     margin: 0 auto;
@@ -53,7 +54,7 @@ main {
     gap: 10px;
     font-weight: 600;
     color: #211951;
-    margin-top: 35px;    
+    margin-top: 35px;
     margin-bottom: 10px;
 }
 
@@ -72,7 +73,7 @@ main {
     margin-bottom: 5px;
 }
 
-.required-note{
+.required-note {
     margin-bottom: 40px;
     color: #211951;
     font-size: 14px;
@@ -87,6 +88,7 @@ main {
     min-width: 350px;
     padding: 40px;
 }
+
 /*Titles for the inpu-boxes*/
 .event-form label {
     display: block;
@@ -132,7 +134,8 @@ main {
 /*Event Description text-box (specific tweak)*/
 #event-description {
     min-height: 150px;
-    resize: vertical; /* users can drag to expand but only down */
+    resize: vertical;
+    /* users can drag to expand but only down */
 }
 
 /*row_1 Puts "Category" and "Organizer" on the same row*/
@@ -142,7 +145,9 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    align-items:last baseline;
 }
+
 
 /*Financial Support and Room Booking*/
 fieldset {
@@ -155,13 +160,13 @@ fieldset {
 
 /* "*" stars */
 .required {
-  color: red;
-  font-weight: bold;
-  margin-left: 4px;
+    color: red;
+    font-weight: bold;
+    margin-left: 4px;
 }
 
 
-.financial1, 
+.financial1,
 .room1 {
     display: flex;
     align-items: center;
@@ -185,7 +190,7 @@ input[type="checkbox"] {
 }
 
 /*Size of both icons in Financial Support and Room Booking*/
-.legend-icon{
+.legend-icon {
     width: 40px;
     height: 40px;
 }
@@ -193,7 +198,6 @@ input[type="checkbox"] {
 /* Button row :) */
 .button-row {
     display: flex;
-    gap: 20px;
 }
 
 /* Buttons general look */
@@ -202,7 +206,7 @@ input[type="checkbox"] {
     height: 45px;
     border: none;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     padding: 10px;
     white-space: nowrap;
@@ -211,20 +215,25 @@ input[type="checkbox"] {
 
 /* Create Event button */
 .btn-create {
-    background-color: #0f6f82;
+    background-color: #211951;
     color: #ffffff;
     flex: 3;
+    margin-right: 10px;
 }
 
 /* Cancel button */
 .btn-cancel {
     background-color: #ffffff;
-    color: #333;
+    color: #211951;
     flex: 1;
 }
 
 /* Hover effect */
-.button:hover {
-    transform: translateY(-2px); /*Makes it jump*/
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /*Gives extra shadow*/
+.btn-create:hover {
+    background-color: #0f6f82;
+    transition: 0.2s;
+}
+.btn-cancel:hover {
+    background-color: #D1D1D4;
+    transition: 0.2s;
 }

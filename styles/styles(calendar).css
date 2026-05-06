@@ -301,10 +301,6 @@ body {
     gap: 2px;
 }
 
-.slot-cell:hover {
-    background-color: #F0F7FF;
-}
-
 /* Corner piece top-left */
 .time-corner {
     position: sticky;
