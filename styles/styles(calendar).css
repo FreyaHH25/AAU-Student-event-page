@@ -25,11 +25,13 @@ body {
 }
 .calendar-page {
     padding: 0px 50px;
-    min-width: 620px;
+    min-width: 420px;
+    margin-bottom: 40px;
 }
 /* Buttons for month/week*/
 .calendar-controls {
     margin-bottom: 30px; /* space above calendar */
+
 }
 
 /* Buttons for changing month*/
@@ -163,7 +165,7 @@ body {
     align-items: center;
     gap: 10px;
     height: 60px;
-    padding: 0 60px;
+    padding: 0 20px;
     font-size: 18px;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
@@ -171,7 +173,8 @@ body {
     cursor: pointer;
     font-family: 'Barlow', sans-serif;
     font-weight: 500;
-    
+    width: 260px;
+    min-width: 120px;
 }
 
 .view-btn.active {
@@ -195,6 +198,7 @@ body {
     border: 1px solid #E0E0E0;
     border-radius: 15px;
     padding: 25px;
+    overflow-x: auto;
 }
 
 .calendar-header {
@@ -223,6 +227,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     border-top: 1px solid #EEE;
     border-left: 1px solid #EEE;
+    min-width: 600px;
 }
 /* When in weekly view, we use 8 columns (1 for time, 7 for days) */
 .calendar-grid.weekly-view {
