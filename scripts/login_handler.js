@@ -2,14 +2,14 @@
   DOMContentLoaded: Ensures the script waits for the HTML to load 
  before trying to find the 'loginForm'.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log("JS loaded and HTML is ready!");
 
     const loginForm = document.getElementById('loginForm');
 
     if (loginForm) {
-        
-        loginForm.addEventListener('submit', function(event) {
+
+        loginForm.addEventListener('submit', function (event) {
             // Stops the page from refreshing automatically
             event.preventDefault();
 
@@ -37,58 +37,55 @@ document.addEventListener('DOMContentLoaded', function() {
                     password: passwordInput
                 })
             })
-            .then(response => {
-                // If the server finds the user, response.ok is true
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    // If login is wrong (401), we jump to the .catch() block
-                    throw new Error('Invalid login credentials');
-                }
-            })
-            .then(data => {
-                console.log("Success! Server found the user.");
+                .then(response => {
+                    // If the server finds the user, response.ok is true
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        // If login is wrong (401), we jump to the .catch() block
+                        throw new Error('Invalid login credentials');
+                    }
+                })
+                .then(data => {
+                    console.log("Success! Server found the user.");
 
-                /*
-                  LocalStorage: We save the User ID and Email in the browser.
-                  This is CRITICAL so other pages (like the calendar) know 
-                  which student is currently logged in.
-                 */
-                localStorage.setItem('userId', data.userId);
-                localStorage.setItem('userEmail', emailInput);
-                // 2. SAVE THE REAL NAME (Crucial for the header!)
-                localStorage.setItem('realName', data.userName);
-                // This saves the semester from the database into the browser's memory
-                localStorage.setItem('userSemester', data.userSemester);
+                    /*
+                      LocalStorage: We save the User ID and Email in the browser.
+                      This is CRITICAL so other pages (like the calendar) know 
+                      which student is currently logged in.
+                     */
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userEmail', emailInput);
+                    // 2. SAVE THE REAL NAME (Crucial for the header!)
+                    localStorage.setItem('realName', data.userName);
+                    // This saves the semester from the database into the browser's memory
+                    localStorage.setItem('userSemester', data.userSemester);
 
-                // Redirect to the event overview page
-                window.location.href = "event_overview.html";
-            })
-            .catch(error => {
-                console.error("Login Error:", error.message);
-                
-                // Show error message to the user
-                if (errorDisplay) {
-                    errorDisplay.innerText = "Invalid student email or password.";
-                    errorDisplay.style.color = "#ff6b6b"; 
-                } else {
-                    alert("Invalid credentials.");
-                }
-            });
+                    // Redirect to the event overview page
+                    window.location.href = "event_overview.html";
+                })
+                .catch(error => {
+                    console.error("Login Error:", error.message);
+
+                    // Show error message to the user
+                    if (errorDisplay) {
+                        errorDisplay.innerText = "Invalid student email or password.";
+                        errorDisplay.style.color = "#ff6b6b";
+                    } else {
+                        alert("Invalid credentials.");
+                    }
+                });
         });
-
-    } else {
-        console.error("Critical Error: Could not find 'loginForm' in your HTML. Check your ID!");
     }
 });
 
 /* HEADER NAME CHANCE: */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Accesses the 'realName' we saved during the login process earlier
     const savedName = localStorage.getItem('realName');
     const userNameElement = document.querySelector('.user-name');
-// Locates the paragraph tag in the header where the name should be displayed
+    // Locates the paragraph tag in the header where the name should be displayed
     if (savedName && userNameElement && savedName !== "undefined") {
         // 1. Split the name into an array of words
         /*
@@ -107,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // If they only have one name, just show that
             userNameElement.innerText = savedName;
         }
-        
+
         console.log("Header show name.");
     }
 });

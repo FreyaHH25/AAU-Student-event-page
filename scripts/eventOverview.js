@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Calls the logic to sort these events into 'Upcoming', 'Past', etc., based on user info.
         distributeEvents(dbEvents, userSemester, currentUserId);
         
-        // Starts the "listening" process for the search bar.
-        startSearch();
 
     } catch (error) {
         // If the server is down or there is a bug in the fetch, it logs the error here.
@@ -156,14 +154,6 @@ function filtrerEvents(eventListe) {
         return matchesCategory && matchesSearch;
     });
 }
-
-async function loadModal() {
-    const res = await fetch("components/modal.html");
-    const html = await res.text();
-    document.body.insertAdjacentHTML("beforeend", html);
-}
-
-window.addEventListener("DOMContentLoaded", loadModal);
 
 document.querySelectorAll(".events-wrapper").forEach(wrapper => {
     const grid = wrapper.querySelector(".events-grid");

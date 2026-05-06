@@ -27,33 +27,6 @@ const modal = document.getElementById("event_info");
 const closeButton = document.getElementById("modal-close-button");
 const attendBtn = document.getElementById("attend-button");
 
-// This runs as soon as the website finishes loading its basic structure.
-document.addEventListener("DOMContentLoaded", async () => {
-    // Retrieves the unique ID and semester of the logged-in user from storage.
-    const currentUserId = localStorage.getItem('userId');
-    const userSemester = localStorage.getItem('userSemester');
-
-    try {
-        // --- COMMUNICATION WITH SERVER ---
-        // Sends a request to the backend server to get the list of events.
-        const response = await fetch('http://localhost:3000/api/events');
-        // Converts the server's response into a usable JavaScript list (JSON).
-        const dbEvents = await response.json();
-
-        // Saves the fetched events into our global variable.
-        window.allEvents = dbEvents;
-        
-        // Calls the logic to sort these events into 'Upcoming', 'Past', etc., based on user info.
-        distributeEvents(dbEvents, userSemester, currentUserId);
-        
-        // Starts the "listening" process for the search bar.
-        startSearch();
-
-    } catch (error) {
-        // If the server is down or there is a bug in the fetch, it logs the error here.
-        console.error("Error fetching events:", error);
-    }
-});
 
 /* 2. FETCH DATA */
 async function fetchEventsFromServer() {
@@ -303,9 +276,11 @@ document.getElementById('go-to-today').addEventListener('click', () => {
 
 function startSearch() {
     const searchInput = document.querySelector('.search-input');
-    
+    if (!searchInput) return;
+
     searchInput.addEventListener('input', function() {
         searchText = searchInput.value.toLowerCase();
+        console.log('search triggered:', searchText, 'allEvents:', allEvents.length);
         renderCalendar();
     });
 }

@@ -1,6 +1,7 @@
 document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("read-more-btn")) {
-        const eventId = e.target.getAttribute("data-id");
+const btn = e.target.closest(".read-more-btn");
+    if (btn) {
+        const eventId = btn.getAttribute("data-id");
         const eventData = window.allEvents.find(ev => (ev._id || ev.id) === eventId);
 
         if (eventData) {
@@ -153,71 +154,14 @@ function updateModalAttendeeList(names) {
 // Sets up the search bar to filter events every time the user types a key.
 function startSearch() {
     const searchInput = document.querySelector('.search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            searchText = searchInput.value.toLowerCase(); // Updates our global search variable.
-            // Triggers a full refresh of all event sections with the new filter.
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', () => {
+        searchText = searchInput.value.toLowerCase();
+        if (typeof distributeEvents === 'function') {
             distributeEvents(window.allEvents, localStorage.getItem('userSemester'), localStorage.getItem('userId'));
-        });
-    }
-}
-
-// Visual category tags setup for the modal footer.
-const tagContainerFooter = document.getElementById("modal-tags-container");
-
-if (tagContainerFooter) {
-    tagContainerFooter.innerHTML = ""; // Clear existing UI.
-    
-    // Safety check for categories to prevent code crashes.
-    const categories = (typeof eventData !== 'undefined' && eventData.categories) ? eventData.categories : ["General"];
-    
-    categories.forEach(cat => {
-        const span = document.createElement("span");
-        span.className = `tag-visuel tag-${cat.toLowerCase()}`;
-        span.innerText = cat;
-        tagContainerFooter.appendChild(span);
+        } else if (typeof renderCalendar === 'function') {
+            renderCalendar();
+        }
     });
 }
-
-// --- LOGIC FOR EDIT/DELETE BUTTONS ---
-const editBtn = document.getElementById("edit-button");
-const deleteBtn = document.getElementById("delete-button");
-
-// Check if the user is the creator
-const isCreator = (eventData.organizerId || eventData.organizer) === currentUserId;
-
-if (isCreator) {
-    editBtn.classList.remove("hidden-btn");
-    deleteBtn.classList.remove("hidden-btn");
-} else {
-    editBtn.classList.add("hidden-btn");
-    deleteBtn.classList.add("hidden-btn");
-}
-
-// --- ADDING THE DELETE FUNCTIONALITY ---
-deleteBtn.onclick = async () => {
-    if (confirm("Are you sure you want to delete this event? This cannot be undone.")) {
-        try {
-            const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                alert("Event deleted successfully!");
-                location.reload(); // Refresh the page to update the grids
-            } else {
-                alert("Failed to delete event.");
-            }
-        } catch (error) {
-            console.error("Delete Error:", error);
-        }
-    }
-};
-
-// --- ADDING THE EDIT REDIRECT ---
-editBtn.onclick = () => {
-    // Redirect to create_events page with the event ID in the URL
-    window.location.href = `create_events.html?edit=${eventId}`;
-};
-
-
