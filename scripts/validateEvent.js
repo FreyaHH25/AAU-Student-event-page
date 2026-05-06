@@ -40,7 +40,6 @@ function validateEvent(event) {
   if (event.categories && event.categories.length > 3) {
     errors.push("You can select a maximum of 3 categories");
   }
-
   return {
     valid: errors.length === 0,
     errors: errors,

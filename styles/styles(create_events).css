@@ -145,7 +145,23 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    align-items:last baseline;
+    align-items: last baseline;
+}
+.row_1 {
+    margin-bottom: 40px;
+}
+#selected-tags-display {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    z-index: 10;
+}
+.row_1 > div:first-child {
+    position: relative;
 }
 
 

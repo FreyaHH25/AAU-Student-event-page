@@ -168,7 +168,7 @@ document.getElementById("event-form").addEventListener("submit", async function 
         imageUrl: document.getElementById("event-image").value || "images/aau-entrance.png",
     };
 
-    // ... (Your validation code here) ...
+  
 
     try {
         // --- LOGIC SWITCH: POST for new, PUT/PATCH for edit ---
