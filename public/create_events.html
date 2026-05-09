@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Create event</title>
-    <link rel="icon" type="image/x-icon" href="images/icons/x-icon-aau.png">
+    <link rel="icon" type="image/x-icon" href="images/icons/x-icon-aau.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,10 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/styles(create_events).css" />
-    <link rel="stylesheet" href="styles/styles(header_footer).css" />
-    <link rel="stylesheet" href="styles/styles(tags).css" />
-    <link rel="stylesheet" href="styles/styles(searchbar_filter).css" />
+    <link rel="stylesheet" href="css/create_events.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/tags.css" />
+    <link rel="stylesheet" href="css/searchbar_filter.css" />
   </head>
 
   <body>
@@ -139,10 +139,7 @@
 
           <div class="row_1">
             <div>
-              <label for="event-category">
-              Categories (Select up to 3):
-
-              </label>
+              <label for="event-category"> Categories (Select up to 3): </label>
               <select id="event-category" name="event-category">
                 <option value="">Select a category</option>
                 <option value="academic">Academic</option>
@@ -238,13 +235,16 @@
             <select id="event-visibility" name="event-visibility">
               <option value="">Select who can see this event</option>
               <option value="ALL">ALL</option>
-              <option value="1 semester, 2 semester">1-2 semester</option> 
+              <option value="1 semester, 2 semester">1-2 semester</option>
               <option value="3 semester, 4 semester">3-4 semester</option>
               <option value="5 semester, 6 semester">5-6 semester</option>
               <option value="7 semester, 8 semester">7-8 semester</option>
               <option value="9 semester, 10 semester">9-10 semester</option>
             </select>
-            <div id="visibility-tags-display" style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
+            <div
+              id="visibility-tags-display"
+              style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap"
+            ></div>
           </div>
 
           <!-- Optional image URL -->
@@ -386,8 +386,8 @@
     </footer>
 
     <!-- link to JavaScript file -->
-    <script src="scripts/validateEvent.js"></script>
-    <script src="scripts/createEvent.js"></script>
-    <script src="scripts/login_handler.js"></script>
+    <script src="js/validateEvent.js"></script>
+    <script src="js/createEvent.js"></script>
+    <script src="js/login_handler.js"></script>
   </body>
 </html>

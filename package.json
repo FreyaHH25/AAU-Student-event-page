@@ -26,5 +26,8 @@
   "homepage": "https://github.com/FreyaHH25/AAU-Student-event-page#readme",
   "devDependencies": {
     "jest": "^30.3.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
