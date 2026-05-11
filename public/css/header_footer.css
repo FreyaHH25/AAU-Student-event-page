@@ -144,7 +144,7 @@
 }
 
 .nav-link-header:hover {
-    background-color: var(--aau-grey);
+    background-color: var(--aau-dark-grey);
     color: var(--aau-blue);
 }
 
