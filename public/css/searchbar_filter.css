@@ -29,6 +29,8 @@ background-color: var(--aau-dark-grey);
     border-radius: 8px;
     font-size: 16px;
     transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
 }
 
 
@@ -48,6 +50,8 @@ background-color: var(--aau-dark-grey);
     color: var(--aau-blue);
     cursor: pointer;
     transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
 }
 .filter-btn:hover{
     background-color: var(--aau-dark-grey);

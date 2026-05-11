@@ -110,7 +110,7 @@ body {
     letter-spacing: 0.1px;
     text-decoration: none;
  /* Button Design */
-   width: 150px;
+    width: 150px;
     height: 50px;
     border-radius: 25px;
     background-color: var(--aau-grey); 
@@ -120,6 +120,7 @@ body {
     align-items: center;     
     border: none;
     transition: 0.3s;
+    
 }
 
 .nav-link.active {
