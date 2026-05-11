@@ -113,10 +113,12 @@ if (attendBtn) {
                 const updatedData = await response.json();
                 const names = updatedData.attendeeNames || [];
                 
-                document.getElementById("modal-attendees").innerText = names.length;
-                this.classList.toggle("attending", updatedData.attending.includes(currentUserId));
-                this.textContent = updatedData.attending.includes(currentUserId) ? "Attending ✓" : "Attend event";
-                
+                document.getElementById("modal-attendees").innerText = names.length;                
+                const isNowAttending = updatedData.attending.includes(currentUserId);
+                this.classList.toggle("attending", isNowAttending);
+                this.textContent = isNowAttending ? "Attending ✓" : "Attend event";
+
+
                 updateModalAttendeeList(names); // Refresh the visible name list.
 
                 // Updates the main data list (global variable) so the card on the main page is also current.
