@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Saves the fetched events into our global variable.
         window.allEvents = dbEvents;
-        
+
         // Calls the logic to sort these events into 'Upcoming', 'Past', etc., based on user info.
         distributeEvents(dbEvents, userSemester, currentUserId);
-        
+
 
     } catch (error) {
         // If the server is down or there is a bug in the fetch, it logs the error here.
@@ -66,22 +66,41 @@ function distributeEvents(events, userSemester, currentUserId) {
     };
 
     // Filter: Events where the current user ID exists in the attending array
-    const attendingEvents = events.filter(e => Array.isArray(e.attending) && e.attending.includes(currentUserId));
+    const attendingEvents = events.filter(e =>
+        Array.isArray(e.attending) &&
+        e.attending.includes(currentUserId) &&
+        parseDate(e.date) >= today
+    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     // Filter: Finds events where the logged-in user is listed as the creator/organizer.
-    const myEvents = events.filter(e => (e.organizerId || e.organizer) === currentUserId);
-    
+    const myEvents = events.filter(e =>
+        (e.organizerId || e.organizer) === currentUserId &&
+        parseDate(e.date) >= today
+    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     // Filter: Finds future events that the user has permission to see, sorted by date (closest first).
-    const upcoming = events.filter(e => parseDate(e.date) >= today && hasAccess(e))
-                           .sort((a, b) => parseDate(a.date) - parseDate(b.date));
-    
+    const upcoming = events.filter(e =>
+        parseDate(e.date) >= today && 
+        hasAccess(e) 
+    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     // Filter: Takes events the user can see and reverses the order to show the most recently added first.
-    const newlyAdded = events.filter(e => hasAccess(e)).slice().reverse();
-    
+    const newlyAdded = events.filter(e => 
+        hasAccess(e)&&
+        parseDate(e.date) >= today
+    ).slice().reverse();
+
     // Filter: Finds events that have already happened, sorted newest to oldest.
     const past = events.filter(e => {
         const eventDate = parseDate(e.date);
         return eventDate < today && eventDate.getTime() !== new Date(0).getTime();
     }).sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+        // Filter: Finds events where the logged-in user is listed as the creator/organizer, with the date in the past.
+    const myPastEvents = events.filter(e =>
+        (e.organizerId || e.organizer) === currentUserId &&
+        parseDate(e.date) < today
+    ).sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
     // Displays the filtered and sorted lists into the correct sections on the webpage.
     visEventsPåSiden(filtrerEvents(attendingEvents), "attending-events");
@@ -89,6 +108,7 @@ function distributeEvents(events, userSemester, currentUserId) {
     visEventsPåSiden(filtrerEvents(upcoming), "upcoming-events");
     visEventsPåSiden(filtrerEvents(newlyAdded), "newly-added-events");
     visEventsPåSiden(filtrerEvents(past), "past-events");
+    visEventsPåSiden(filtrerEvents(myPastEvents), "my-past-events");
 }
 
 /* 3. UI FUNKTIONER (Building the visuals) */
@@ -141,13 +161,13 @@ function filtrerEvents(eventListe) {
         // Converts all categories to lowercase so the search isn't picky about capital letters.
         const eventCatsLower = (event.categories || []).map(cat => cat.toString().toLowerCase());
         const selectedLower = window.selectedCategories.map(cat => cat.toString().toLowerCase());
-        
+
         // Logic: matches if 'All' is picked OR if the event's category matches one of the user's picks.
         const matchesCategory = selectedLower.includes('all') || selectedLower.some(cat => eventCatsLower.includes(cat));
-        
+
         // Logic: matches if search is empty OR if the title/description contains the search text.
-        const matchesSearch = searchText === "" || 
-            (event.title || "").toLowerCase().includes(searchText) || 
+        const matchesSearch = searchText === "" ||
+            (event.title || "").toLowerCase().includes(searchText) ||
             (event.description || "").toLowerCase().includes(searchText);
 
         // Returns true only if the event passes both the category AND search tests.

@@ -10,7 +10,7 @@
     width: 50%;
 }
 .search-input:hover{
-background-color: #ccc;
+background-color: var(--aau-dark-grey);
 }
 
 /*The icon before the searchbar*/
@@ -23,7 +23,7 @@ background-color: #ccc;
 .search-input {
     font-family: "Barlow", sans-serif;
     flex-grow: 1;
-    background-color: #f2f2f4;
+    background-color: var(--aau-grey);
     border: none;
     padding: 12px 20px;
     border-radius: 8px;
@@ -39,24 +39,24 @@ background-color: #ccc;
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: #f2f2f4;
+    background-color: var(--aau-grey);
     border: none;
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
     font-size: 14px;
-    color: #211951;
+    color: var(--aau-blue);
     cursor: pointer;
     transition: 0.2s;
 }
 .filter-btn:hover{
-    background-color: #ccc;
+    background-color: var(--aau-dark-grey);
 }
 
 .filter-panel {
     display: none;
     background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid var(--aau-dark-grey);
     padding: 15px;
     width: 250px;
     position: absolute;
@@ -79,13 +79,11 @@ background-color: #ccc;
 input[type="checkbox"] {
     width: 15px;
     height: 15px;
-    accent-color: #211951;
+    accent-color: var(--aau-blue);
     cursor: pointer;
 }
 
-/* I FIX LATER!!!*/
 .search-input{
-    accent-color: #211951;
-    color: #211951;
-    
+    accent-color: var(--aau-blue);
+    color: var(--aau-blue);
 }

@@ -114,6 +114,6 @@
 /* Shared style override*/
 [class*="tag-semester"],
 .cat-default {
-    background: #f2f2f4;
-    color: #211951;
+    background: var(--aau-grey);
+    color: var(--aau-blue);
 }

@@ -15,9 +15,9 @@ body {
 
 /*All of the titles for each section (My events, upcoming events etc.)*/
 .section-title {
-    color: #211951;
+    color: var(--aau-blue);
     margin-bottom: 20px;
-    border-bottom: 3px solid #f2f2f4;
+    border-bottom: 3px solid var(--aau-grey);
     padding-bottom: 8px;
 }
 
@@ -40,8 +40,8 @@ body {
 
 /*Event-card section*/
 .event-card {
-    background-color: #ffffff;
-    border: 1px solid #eaeaea;
+    background-color: white;
+    border: 1px solid var(--aau-dark-grey);
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -70,16 +70,15 @@ body {
 .card-title {
     margin: 0 0 5px 0;
     font-size: 18px;
-    color: #1a1654;
+    color: var(--aau-blue);
 }
 
 .card-desc {
     margin: 10px 0 20px 0;
     font-size: 14px;
     
-    color: #777;
-    background-color: #ffffff;
-    /*This makes the description text always stay as 2 lines, filling the first line before moving to the second*/
+    color: #555;
+    background-color: white;
     line-height: 1.4;
     min-height: calc(1.4em * 2);
     /*This clamps the text, cutting off overflowing text and putting in "..." instead*/
@@ -115,19 +114,19 @@ body {
     font-family: "Barlow", sans-serif;
     margin-top: auto;
     width: 100%;
-    border: 1px solid #eaeaea;
+    border: 1px solid var(--aau-blue);
     padding: 12px;
     border-radius: 0 0 12px 12px;
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
-    color: #f2f2f4;
-    background-color: #1a1654;
+    color: var(--aau-grey);
+    background-color: var(--aau-blue);
     transition: 0.2s;
 }
 
 .read-more-btn:hover {
-    background-color: #0f6f82;;
+    background-color: var(--aau-light-blue);
 }
 
 

@@ -5,7 +5,7 @@ body {
     font-family: "Barlow", sans-serif;
     font-weight: 700;
     font-style: normal;
-    background-color: #f0f2f5;
+    background-color: var(--aau-grey);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@ body {
 }
 
 header h1 {
-    color: #211951;
+    color: var(--aau-blue);
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 8px;
@@ -52,7 +52,7 @@ header p {
 .input-group input {
     width: 95%;
     padding: 12px;
-    background-color: #f3f4f6;
+    background-color: var(--aau-grey);
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -62,7 +62,7 @@ header p {
 .forgot-password {
     display: block;
     font-size: 13px;
-    color: #0891b2; /* Teal color */
+    color: var(--aau-light-blue);
     text-decoration: none;
     margin-bottom: 24px;
 }
@@ -70,7 +70,7 @@ header p {
 .submit-btn {
     width: 100%;
     padding: 14px;
-    background-color: #1e1b4b;
+    background-color: var(--aau-blue);
     color: white;
     border: none;
     border-radius: 8px;
@@ -81,10 +81,11 @@ header p {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    transition: 0.2s;
 }
 
 .submit-btn:hover {
-    background-color: #2e2a6e;
+    background-color: var(--aau-light-blue);
 }
 
 /* This is the code for the inverted SVG image */

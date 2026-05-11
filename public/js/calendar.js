@@ -7,24 +7,17 @@ let selectedCategories = JSON.parse(
   localStorage.getItem("selectedCategories"),
 ) || ["All"];
 let searchText = "";
-/* 1.5 USER PROFILE */
-function loadUserProfile() {
-  // Looks for 'realName' in the browser's memory
-  const storedName = localStorage.getItem("realName");
 
-  // Finds the <p class="user-name"> element in your HTML
-  const userNameElement = document.querySelector(".user-name");
-
-  // If a name was found in memory, replace "John Doe" with that name
-  if (userNameElement && storedName) {
-    userNameElement.innerText = storedName;
-  }
-}
+  const monthNames = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];
+    
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // Grabs references to specific HTML elements for the event info popup (modal).
 const modal = document.getElementById("event_info");
 const closeButton = document.getElementById("modal-close-button");
 const attendBtn = document.getElementById("attend-button");
+
 
 /* 2. FETCH DATA */
 async function fetchEventsFromServer() {
@@ -40,6 +33,11 @@ async function fetchEventsFromServer() {
     console.error("Error loading events:", error);
   }
 }
+
+/* Start calendar and filter when page opens */
+window.addEventListener("DOMContentLoaded", () => {
+  fetchEventsFromServer();
+});
 
 /* 2.5 FILTERING AND SEARCHING */
 function getFilteredEvents() {
@@ -95,21 +93,8 @@ function renderMonthly(grid, monthYearLabel) {
   const month = displayedDate.getMonth();
   const realToday = new Date();
 
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  document.getElementById("dynamic-date-display").innerText =
+  `${monthNames[realToday.getMonth()]} ${realToday.getDate()}`;
 
   monthYearLabel.innerText = `${monthNames[month]} ${year}`;
 
@@ -186,22 +171,6 @@ function renderWeekly(grid, monthYearLabel) {
 
   const startOfWeek = new Date(displayedDate);
   startOfWeek.setDate(displayedDate.getDate() - displayedDate.getDay());
-
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   monthYearLabel.innerText = `Week of ${monthNames[startOfWeek.getMonth()]} ${startOfWeek.getDate()}`;
 
@@ -329,9 +298,4 @@ function startSearch() {
     renderCalendar();
   });
 }
-/* Start calendar and filter when page opens */
-window.addEventListener("DOMContentLoaded", () => {
-  fetchEventsFromServer();
-  loadUserProfile();
-  startSearch();
-});
+

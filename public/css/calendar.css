@@ -8,8 +8,8 @@
 body {
     overflow-x: hidden; 
     font-family: 'Barlow', sans-serif;
-    background-color: #ffffff;
-    color: #211951;
+    background-color: white;
+    color: var(--aau-blue);
 }
 
 /*"Calendar"*/
@@ -45,9 +45,9 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    border: 1px solid #E0E0E0;
-    background-color: #FFFFFF;
-    color: #211951;
+    border: 1px solid var(--aau-dark-grey);
+    background-color: White;
+    color: var(--aau-blue);
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -58,21 +58,21 @@ body {
 }
 /*Hover Animation for arrows*/
 .nav-arrow:hover {
-    background-color: #211951;
-    color: #FFFFFF;
-    border-color: #211951;
+    background-color: var(--aau-blue);
+    color: White;
+    border-color: var(--aau-blue);
     transform: translateY(-2px); /* Lifts up slightly */
     box-shadow: 0 4px 10px rgba(33, 25, 81, 0.15); /* Soft shadow */
 }
 /* Click Animation */
 .nav-arrow:active {
     transform: translateY(0);   /* Pushes back down when clicked */
-    background-color: #3b337a;  /* Slightly lighter navy */
+    background-color: var(--aau-light-blue);
 }
 /* Refresh the Today button to match the premium look */
 .today-btn {
-    background-color: #F2F2F4;
-    border: 1px solid #E0E0E0;
+    background-color: white;
+    border: 1px solid var(--aau-dark-grey);
     padding: 8px 18px;
     border-radius: 20px;
     font-family: 'Barlow', sans-serif;
@@ -81,13 +81,13 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    color: #211951;
+    color: var(--aau-blue);
     transition: 0.3s ease;
 }
 
 .today-btn:hover {
-    background-color: #E0E0E0;
-    color: #211951;
+    background-color: var(--aau-dark-grey);
+    color: var(--aau-blue);
 }
 .nav-menu-header {
     display: flex;
@@ -105,7 +105,7 @@ body {
     font-family: "Barlow", sans-serif;
     font-weight: 700;
     font-style: normal;
-    color: #211951;
+    color: var(--aau-blue);
     font-size: 14px;
     letter-spacing: 0.1px;
     text-decoration: none;
@@ -113,8 +113,8 @@ body {
    width: 150px;
     height: 50px;
     border-radius: 25px;
-    background-color: #F2F2F4; 
-    color: #211951;
+    background-color: var(--aau-grey); 
+    color: var(--aau-blue);
     display: flex;
     justify-content: center; 
     align-items: center;     
@@ -123,12 +123,12 @@ body {
 }
 
 .nav-link.active {
-    background-color: #211951;
-    color: #F2F2F4;
+    background-color: var(--aau-blue);
+    color: var(--aau-grey);
 }
 
 .nav-link:hover {
-    background-color: #D1D1D4;
+    background-color: var(--aau-dark-grey);
 }
 
 
@@ -140,7 +140,6 @@ body {
     gap: 15px;
     width: 100%;
 }
-
 
 
 .control-btn {
@@ -167,7 +166,7 @@ body {
     height: 60px;
     padding: 0 20px;
     font-size: 18px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--aau-dark-grey);
     border-radius: 12px;
     background: white;
     cursor: pointer;
@@ -178,9 +177,9 @@ body {
 }
 
 .view-btn.active {
-    background-color: #211951; /* Dark Navy */
-    color: white;              /* White Text */
-    border: 2px solid #211951;
+    background-color: var(--aau-blue);
+    color: white;
+    cursor: default;
 }
 /*Month and Week Button Hover*/
 .view-btn.active .btn-icon {
@@ -188,15 +187,14 @@ body {
 }
 
 .view-btn:hover:not(.active) {
-    background-color: #F2F2F4;
+    background-color: var(--aau-grey);
 }
 
 /* Calender Grid */
-
 .calendar-container {
     background: white;
-    border: 1px solid #E0E0E0;
-    border-radius: 15px;
+    border: 1px solid var(--aau-dark-grey);
+    border-radius: 20px;
     padding: 25px;
     overflow-x: auto;
 }
@@ -216,7 +214,8 @@ body {
 
 .today-display {
     font-family: 'Barlow', sans-serif;
-    color: #666;
+    font-weight: 600;
+    color: var(--aau-blue);
 }
 
 
@@ -225,15 +224,15 @@ body {
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    border-top: 1px solid #EEE;
-    border-left: 1px solid #EEE;
-    min-width: 600px;
+    border: 1px solid var(--aau-dark-grey);
+    min-width: 750px;
+    border-radius: 20px;
 }
 /* When in weekly view, we use 8 columns (1 for time, 7 for days) */
 .calendar-grid.weekly-view {
     display: grid;
     grid-template-columns: 80px repeat(7, 1fr); 
-    border: 1px solid #EEE;
+    border: 1px solid var(--aau-grey);
     background-color: white;
     overflow-y: auto;
         /* change grid-auto-rows to auto so it can grow */
@@ -243,41 +242,40 @@ body {
     padding: 15px;
     text-align: center;
     font-weight: 500;
-    color: #666;
-    border-right: 1px solid #EEE;
-    border-bottom: 1px solid #EEE;
+    color: var(--aau-blue);
+    border-right: 1px solid var(--aau-grey);
+    border-bottom: 1px solid var(--aau-grey);
 }
 
 /* The header cells (Sun, Mon, etc.) in Weekly View */
 .calendar-grid.weekly-view .day-name {
     position: sticky;
 
-    background: #f8f9fa;
+    background: var(--aau-grey);
     z-index: 10;
     font-weight: 700;
-    border-bottom: 2px solid #EEE;
+    border-bottom: 1px solid var(--aau-dark-grey);
 }
 
 .day-cell {
     min-height: 120px;
     padding: 10px;
     background-color: white;
-    border-right: 1px solid #EEE;
-    border-bottom: 1px solid #EEE;
+    border: 1px solid var(--aau-grey);
     display: flex;
     flex-direction: column; 
     gap: 5px;
-    cursor: default;}
+    cursor: default;
+}
 
 /* The 00:00, 01:00 time labels */
 .time-cell {
     padding: 15px 5px;
     text-align: center;
-    font-size: 12px;
-    color: #888;
-    border-right: 1px solid #EEE;
-    border-bottom: 1px solid #F5F5F5;
-    background: #fafafa;
+    font-size: 14px;
+    color: var(--aau-blue);
+    border-right: 1px solid var(--aau-dark-grey);
+    background: var(--aau-grey);
 }
 
 .day-number {
@@ -309,14 +307,14 @@ body {
     position: sticky;
     top: 0;
     left: 0;
-    background: #f8f9fa;
+    background: var(--aau-grey);
     z-index: 11;
-    border-right: 1px solid #EEE;
-    border-bottom: 2px solid #EEE;
+    border-right: 2px solid var(--aau-dark-grey);
+    border-bottom: 2px solid var(--aau-dark-grey);
 }
 /* JS. will manualy add this box for the correct date.*/
 .day-cell.is-today .day-number {
-    background-color: #3B82F6;
+    background-color: var(--aau-light-blue);
     color: white;
     width: 30px;
     height: 30px;
@@ -333,7 +331,7 @@ body {
 }
 
 .day-cell.today {
-    background-color: #FFFFFF;
+    background-color: white;
 }
 
 /* --- Monthly View Styles --- */
@@ -345,8 +343,8 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s ease; /*Makes the hover effect fade in and out*/
-    
     border: 1.5px solid currentColor;;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     
     display: -webkit-box;
     -webkit-line-clamp: 1;      
@@ -355,7 +353,7 @@ body {
     
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
     
     cursor: pointer;
 }
@@ -373,28 +371,4 @@ body {
     font-size: 11px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     word-wrap: break-word; /* Ensures long titles don't break the layout */
-}
-
-
-.filter-panel {
-    display: none;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 15px;
-    width: 250px;
-    position: absolute;
-    right: 50px;
-    top: 220px;
-    z-index: 1000;
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-#save-filter-btn {
-    margin-top: 10px;
-    padding: 8px 14px;
-    cursor: pointer;
 }
