@@ -88,8 +88,14 @@ const btn = e.target.closest(".read-more-btn");
     }
 });
 
-// Closes the popup if the "X" button is clicked.
+// Closes the popup if the "Close" button is clicked.
 if (closeButton) closeButton.addEventListener("click", () => modal.classList.add("hidden"));
+
+// Closes the popup if clicking outside the modal content.
+window.addEventListener("click", (e) => {
+  if (e.target === modal) modal.classList.add("hidden");
+});
+
 
 // Handles the "Attend event" button click inside the popup.
 if (attendBtn) {
