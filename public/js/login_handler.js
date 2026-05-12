@@ -107,12 +107,3 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Header shows name correctly.");
   }
 });
-
-/* LOGOUT */
-function logout() {
-  localStorage.removeItem("userId");
-  localStorage.removeItem("userEmail");
-  localStorage.removeItem("realName");
-  localStorage.removeItem("userSemester");
-  window.location.href = "login_page.html";
-}
