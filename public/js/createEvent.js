@@ -148,6 +148,7 @@ function updateVisibilityTagDisplay() {
     visibilityTagsDisplay.appendChild(tag);
   });
 }
+
 // --- SUBMIT HANDLER ---
 // Runs when the "Create and post event" button is clicked
 document.getElementById("event-form").addEventListener("submit", async function (event) {
