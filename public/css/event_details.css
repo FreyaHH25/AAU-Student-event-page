@@ -253,3 +253,22 @@ body {
     flex: 2;
 }
 
+#attend-toast.not-attending {
+    background: var(--aau-red);
+}
+#attend-toast{
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    color: white;
+    background: var(--aau-light-blue);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    z-index: 9999;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+};
+

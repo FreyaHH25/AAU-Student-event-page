@@ -14,9 +14,14 @@ background-color: var(--aau-dark-grey);
 }
 
 /*The icon before the searchbar*/
-.search-icon {
+.search-icon{
     width: 30px;
     height: 30px;
+}
+.filter-icon,
+.info-icon {
+    width: 20px;
+    height: 20px;
 }
 
 /*Input for the searchbar*/
@@ -30,13 +35,13 @@ background-color: var(--aau-dark-grey);
     font-size: 16px;
     transition: 0.2s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-
 }
 
 
 
 /*The "Filters" button*/
-.filter-btn {
+.filter-btn,
+.info-btn {
     font-family: "Barlow", sans-serif;
     display: flex;
     align-items: center;
@@ -53,7 +58,8 @@ background-color: var(--aau-dark-grey);
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 
 }
-.filter-btn:hover{
+.filter-btn:hover,
+.info-btn:hover{
     background-color: var(--aau-dark-grey);
 }
 

@@ -1,5 +1,5 @@
 document.addEventListener("click", function (e) {
-const btn = e.target.closest(".read-more-btn");
+    const btn = e.target.closest(".read-more-btn");
     if (btn) {
         const eventId = btn.getAttribute("data-id");
         const eventData = window.allEvents.find(ev => (ev._id || ev.id) === eventId);
@@ -18,12 +18,12 @@ const btn = e.target.closest(".read-more-btn");
             // 2. Handle Tags
             const tagContainer = document.getElementById("modal-tags-container");
             if (tagContainer) {
-                tagContainer.innerHTML = ""; 
+                tagContainer.innerHTML = "";
                 const categories = eventData.categories || ["General"];
                 categories.forEach(cat => {
                     const span = document.createElement("span");
                     span.className = `tag-visuel tag-${cat.toLowerCase()}`;
-                    span.style.marginRight = "5px"; 
+                    span.style.marginRight = "5px";
                     span.innerText = cat;
                     tagContainer.appendChild(span);
                 });
@@ -67,7 +67,7 @@ const btn = e.target.closest(".read-more-btn");
                         });
                         if (response.ok) {
                             alert("Event deleted!");
-                            location.reload(); 
+                            location.reload();
                         } else {
                             alert("Failed to delete event.");
                         }
@@ -93,8 +93,9 @@ if (closeButton) closeButton.addEventListener("click", () => modal.classList.add
 
 // Closes the popup if clicking outside the modal content.
 window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.classList.add("hidden");
+    if (e.target === modal) modal.classList.add("hidden");
 });
+
 
 
 // Handles the "Attend event" button click inside the popup.
@@ -102,9 +103,13 @@ if (attendBtn) {
     attendBtn.addEventListener("click", async function () {
         const currentUserId = localStorage.getItem('userId');
         const eventId = modal.getAttribute("data-current-event-id");
+        const isCurrentlyAttending = this.classList.contains("attending");
 
         // Error handling: you must be logged in to sign up.
         if (!currentUserId) return alert("Please log in!");
+
+        // Makes sure that users do not accidentally leave events.
+        if (isCurrentlyAttending && !confirm("Are you sure you want to leave this event?")) return;
 
         try {
             // Tells the backend to toggle (add/remove) the current user from the attendance list.
@@ -112,14 +117,16 @@ if (attendBtn) {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: currentUserId })
+
             });
 
             if (response.ok) {
                 // If the server says "OK", we update the UI immediately without reloading.
                 const updatedData = await response.json();
                 const names = updatedData.attendeeNames || [];
-                
-                document.getElementById("modal-attendees").innerText = names.length;                
+
+                document.getElementById("modal-attendees").innerText = names.length;
+
                 const isNowAttending = updatedData.attending.includes(currentUserId);
                 this.classList.toggle("attending", isNowAttending);
                 this.textContent = isNowAttending ? "Attending ✓" : "Attend event";
@@ -133,6 +140,11 @@ if (attendBtn) {
                     window.allEvents[eventIndex].attending = updatedData.attending;
                     window.allEvents[eventIndex].attendeeNames = names;
                 }
+                if (isNowAttending) {
+                    showToast("You are now successfully attending this event!");
+                } else {
+                    showToast("You are no longer attending this event.", "not-attending");
+                }
             }
         } catch (error) { console.error("Attend Error:", error); }
     });
@@ -142,9 +154,9 @@ if (attendBtn) {
 function updateModalAttendeeList(names) {
     const list = document.getElementById("modal-list");
     if (!list) return;
-    
+
     list.innerHTML = ""; // Wipe the list clean first.
-    
+
     if (!names || names.length === 0) {
         list.innerHTML = "<li>No one attending yet.</li>";
         return;
@@ -172,4 +184,24 @@ function startSearch() {
             renderCalendar();
         }
     });
+}
+
+// --- Toast Notification Utility ---
+function showToast(message, type = 'attending') {
+    const toast = document.createElement('div');
+    toast.id = 'attend-toast';
+    toast.classList.add(type);
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
 }

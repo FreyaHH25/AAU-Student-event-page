@@ -14,6 +14,8 @@ function startFilter() {
         filterBox.style.display = isVisible ? 'none' : 'block';
     });
 
+    
+
     // Checkbox All/None logic
     const checkboxes = filterBox.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(cb => {
