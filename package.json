@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "node backend/server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/FreyaHH25/AAU-Student-event-page#readme",
   "devDependencies": {
-    "jest": "^30.3.0"
+    "jest": "^30.4.2"
   },
   "directories": {
     "test": "tests"

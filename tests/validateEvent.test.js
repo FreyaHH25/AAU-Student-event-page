@@ -2,11 +2,11 @@
 // These tests verify that the function correctly accepts valid events
 // and rejects invalid ones, returning appropriate error messages.
 
-const validateEvent = require("./scripts/validateEvent");
+const validateEvent = require("../public/js/validateEvent");
 
 describe("validateEvent", () => {
   // A reusable valid event object that we can spread into each test
-  // and override specific fields to test individual rules in isolation.
+  // and override specific fieldsto test individual rules in isolation.
   // This keeps tests short and focused on what is actually being tested.
   const validEvent = {
     title: "Fredagsbar",
