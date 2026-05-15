@@ -36,13 +36,11 @@ Express, MongoDB, dotenv, cors, and Jest.
 
 ### 3. Create a `.env` file
 
-Create a file called `.env` in the `backend/` folder with the following content:
+Create a file called `.env` in root with the following content:
 
-MONGO_URI=your_mongodb_connection_string_here
+MONGO_URI=
 PORT=3000
-
-Replace `your_mongodb_connection_string_here` with your actual MongoDB Atlas
-connection string.
+DB_NAME=
 
 > Note: The `.env` file is ignored by Git and should never be committed.
 
