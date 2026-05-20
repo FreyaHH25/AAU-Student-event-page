@@ -12,8 +12,6 @@ Built with Node.js, Express, and MongoDB.
 
 ## Prerequisites
 
-Before you start, make sure you have installed:
-
 - [Node.js](https://nodejs.org/)
 
 ## Setup
