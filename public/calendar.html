@@ -1,29 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/icons/x-icon-aau.png">
 
+    <!-- Google Fonts - Barlow (Loads faster than linking in CSS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/header_footer.css">
     <link rel="stylesheet" href="css/tags.css">
     <link rel="stylesheet" href="css/searchbar_filter.css">
     <link rel="stylesheet" href="css/event_details.css">
-
 </head>
 
 
 <body>
-    <!-- header -->
+
+    <!-- Main header with logo, navigation and user profile -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo-container">
@@ -42,36 +47,31 @@
                 </div>
             </nav>
 
-        <!-- User profile icon -->
-        <div class="user-container">
-          <div class="user-profile">
-            <img
-              src="images/user_icon.jpeg"
-              class="user-img"
-              alt="User Profile"
-            />
-            <p class="user-name">Null</p>
-          </div>
+            <!-- User profile icon and users name -->
+            <div class="user-container">
+                <div class="user-profile">
+                    <img src="images/user_icon.jpeg" class="user-img" alt="User Profile" />
+                    <p class="user-name">...</p>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
 
     <main>
-
+        <!-- Search bar -->
         <section class="search-section">
             <img src="images/icons/aau_search.svg" alt="icon" class="search-icon">
             <input type="text" class="search-input" placeholder="Search for events">
-
             <button class="filter-btn" id="open-filter-btn">
-                Filters 
+                Filters
                 <img src="images/icons/filter-icon.svg" alt="icon" class="filter-icon" />
             </button>
         </section>
 
+        <!-- Filter panel -->
         <aside class="filter-panel" id="filter-panel">
             <h3>Filter & sort</h3>
-
             <div class="filter-group">
                 <p>Categories</p>
                 <label><input type="checkbox" value="All" checked> All</label>
@@ -87,17 +87,16 @@
                 <label><input type="checkbox" value="Volunteering"> Volunteering</label>
                 <label><input type="checkbox" value="Wellness"> Wellness</label>
             </div>
-
             <button id="save-filter-btn">Save</button>
         </aside>
 
+        <!-- Calendar view with monthly/weekly toggle -->
         <section class="calendar-page">
             <section class="calendar-controls">
                 <h1 class="calendar-title">Calendar</h1>
                 <h2 class="calendar-description">View all events in monthly or weekly format</h2>
 
-
-
+                <!-- View toggle buttons for monthly/weekly -->
                 <div class="view-switch">
                     <button class="view-btn active" data-view="monthly">
                         <img src="images/icons/calendar.svg" alt="" class="btn-icon">
@@ -110,7 +109,7 @@
                 </div>
             </section>
 
-
+            <!-- Calendar grid -->
             <section class="calendar-container">
                 <div class="calendar-header">
                     <h2 id="display-month-year">Loading...</h2>
@@ -135,6 +134,7 @@
                 </div>
             </section>
         </section>
+
     </main>
 
     <!-- Footer with contact info and links -->
@@ -145,39 +145,40 @@
 
         <div class="footer-columns">
             <div class="footer-col col-left">
-                <h3>KONTAKT</h3>
+                <h3>CONTACT</h3>
                 <p>Fredrik Bajers Vej 7K</p>
                 <p>9220 Aalborg Ø</p>
-                <p>Tlf.: 9940 9940</p>
+                <p>Tel.: (+45) 9940 9940</p>
                 <p><a href="mailto:aau@aau.dk">aau@aau.dk</a></p>
                 <br />
                 <p>CVR: 29102384</p>
             </div>
 
             <div class="footer-col col-center">
-                <h3>OM AAU</h3>
-                <a href="https://www.studerende.aau.dk">For studerende</a>
-                <a href="https://www.ansatte.aau.dk">For ansatte</a>
+                <h3>ABOUT AAU</h3>
+                <a href="https://www.aau.dk/om-aau">About AAU</a>
+                <a href="https://www.aau.dk/om-aau/kontakt">Contact</a>
                 <a href="https://www.aau.dk/alumni">For alumni</a>
-                <a href="https://www.aau.dk/nyheder/pressen">For pressen</a>
-                <a href="https://www.aau.dk/om-aau">Om AAU</a>
-                <a href="https://www.aau.dk/om-aau/kontakt">Kontakt AAU</a>
+                <a href="https://www.studerende.aau.dk">For students</a>
+                <a href="https://www.ansatte.aau.dk">For staff</a>
+                <a href="https://www.aau.dk/nyheder/pressen">Press contact</a>
             </div>
 
             <div class="footer-col col-right">
-                <h3>GENVEJE</h3>
+                <h3>SHORTCUTS</h3>
                 <a href="https://www.design.aau.dk/">Designguide</a>
-                <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN</a>
-                <a href="https://www.stillinger.aau.dk/">Ledige stillinger</a>
-                <a href="https://www.aub.aau.dk/">Aalborg Universitetsbibliotek</a>
+                <a href="https://www.okonomi.aau.dk/om-okonomiafdelingen/ean-gln-numre">EAN numbers</a>
+                <a href="https://www.stillinger.aau.dk/">Vacant positions</a>
+                <a href="https://www.aub.aau.dk/">University Library (AUB)</a>
             </div>
         </div>
+
         <div class="footer-bottom">
             <div class="service-links">
-                <a href="https://www.aau.dk/om-websitet">Om websitet</a>
-                <a href="https://www.aau.dk/om-cookies">Privatlivspolitik & DPO</a>
-                <a href="https://was.digst.dk/aau-dk">Tilgængelighedserklæring</a>
-                <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowerordning</a>
+                <a href="https://www.aau.dk/om-websitet">About this website</a>
+                <a href="https://www.aau.dk/om-cookies">Privacy policy, DPO and cookies</a>
+                <a href="https://was.digst.dk/aau-dk">Accessibility statement</a>
+                <a href="https://www.aau.dk/om-aau/kontakt/whistleblowerordning">Whistleblowing scheme</a>
             </div>
 
             <div class="social-icons">
@@ -193,21 +194,19 @@
                         src="https://www.aaudxp-cms.aau.dk/media/wczkfqjh/snapchat.svg" alt="Snapchat" /></a>
             </div>
         </div>
+
     </footer>
 
-    </main>
-
-
-
-
-
-    <!-- Event read more-->
+    <!-- Event details modal -->
     <div id="event_info" class="modal hidden">
         <div class="modal-box">
-                <div class="modal-buttons-top">
-        <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
-        <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
-    </div>
+
+            <!-- Edit and delete buttons, only visible to event organizer -->
+            <div class="modal-buttons-top">
+                <button class="modal-button-edit hidden-btn" id="edit-button">Edit</button>
+                <button class="modal-button-delete hidden-btn" id="delete-button">Delete</button>
+            </div>
+
             <img id="modal-image" src="" alt="Event Image" class="modal-image">
 
             <div class="modal-title-bar">
@@ -215,6 +214,8 @@
             </div>
 
             <div class="modal-content">
+
+                <!-- Event info: tags, date, time, location, organizer, description -->
                 <div class="modal-left">
                     <div class="modal-tags" id="modal-tags-container">
                         <span class="modal-tags-list">Tags:</span>
@@ -223,43 +224,40 @@
                         <img src="images/icons/date.png" class="modal-info-icons">
                         <span id="modal-date"></span>
                     </p>
-
                     <p class="modal-information">
                         <img src="images/icons/time.png" class="modal-info-icons">
                         <span id="modal-time"></span>
                     </p>
-
                     <p class="modal-information">
                         <img src="images/icons/location.png" class="modal-info-icons">
                         <span id="modal-location"></span>
                     </p>
-
                     <p class="modal-information">
                         <img src="images/icons/organizer.png" class="modal-info-icons">
                         <span id="modal-organizer"></span>
                     </p>
-
                     <div class="modal-description-box">
                         <p id="modal-description"></p>
                     </div>
                 </div>
 
+                <!-- Attendee count and list -->
                 <div class="modal-right">
                     <p class="modal-attending-header"><span id="modal-attendees">0</span> Attending students</p>
-                    <ul class="modal-list" id="modal-list">
-                    </ul>
+                    <ul class="modal-list" id="modal-list"></ul>
                 </div>
+
             </div>
 
             <div class="modal-buttons-bottom">
                 <button class="modal-button-attending" id="attend-button">Attend event</button>
                 <button class="modal-button-close" id="modal-close-button">Close</button>
             </div>
+
         </div>
     </div>
 
-
-
+    <!-- Scripts -->
     <script src="js/calendar.js"></script>
     <script src="js/login_handler.js"></script>
     <script src="js/filter.js"></script>

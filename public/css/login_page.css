@@ -100,3 +100,11 @@ header p {
     margin-right: 8px;
     vertical-align: middle;
 }
+
+/* Error message shown on failed login */
+#error-message {
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}

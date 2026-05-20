@@ -142,7 +142,7 @@ function renderMonthly(grid, monthYearLabel) {
     // 1. Set the day number first
     dayCell.innerHTML = `<span class="day-number">${day}</span>`;
 
-    // 2. Add pills as objects (DO NOT use cellHTML here)
+    // 2. Add pills as objects
     todaysEvents.forEach((event) => {
       const category = Array.isArray(event.categories)
         ? event.categories[0]
