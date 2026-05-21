@@ -5,32 +5,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    overflow-x: hidden; 
+    overflow-x: hidden;
     font-family: 'Barlow', sans-serif;
     background-color: white;
     color: var(--aau-blue);
 }
 
 /*"Calendar"*/
-.calendar-title{
+.calendar-title {
     font-weight: 600;
     margin-bottom: 10px;
 }
+
 /*"View all events in monthly or weekly format"*/
 .calendar-description {
     font-weight: 300;
     font-size: 20px;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
+
 .calendar-page {
     padding: 0px 50px;
     min-width: 420px;
     margin-bottom: 40px;
 }
+
 /* Buttons for month/week*/
 .calendar-controls {
-    margin-bottom: 30px; /* space above calendar */
+    margin-bottom: 30px;
+    /* space above calendar */
 
 }
 
@@ -40,6 +45,7 @@ body {
     align-items: center;
     gap: 12px;
 }
+
 /*Arrows for changing month*/
 .nav-arrow {
     width: 38px;
@@ -54,21 +60,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Professional smooth timing */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Professional smooth timing */
 }
+
 /*Hover Animation for arrows*/
 .nav-arrow:hover {
     background-color: var(--aau-blue);
     color: White;
     border-color: var(--aau-blue);
-    transform: translateY(-2px); /* Lifts up slightly */
-    box-shadow: 0 4px 10px rgba(33, 25, 81, 0.15); /* Soft shadow */
+    transform: translateY(-2px);
+    /* Lifts up slightly */
+    box-shadow: 0 4px 10px rgba(33, 25, 81, 0.15);
+    /* Soft shadow */
 }
+
 /* Click Animation */
 .nav-arrow:active {
-    transform: translateY(0);   /* Pushes back down when clicked */
+    transform: translateY(0);
+    /* Pushes back down when clicked */
     background-color: var(--aau-light-blue);
 }
+
 /* Refresh the Today button to match the premium look */
 .today-btn {
     background-color: white;
@@ -89,11 +102,13 @@ body {
     background-color: var(--aau-dark-grey);
     color: var(--aau-blue);
 }
+
 .nav-menu-header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .nav-links-container-header {
     display: flex;
     flex-direction: row;
@@ -109,18 +124,18 @@ body {
     font-size: 14px;
     letter-spacing: 0.1px;
     text-decoration: none;
- /* Button Design */
+    /* Button Design */
     width: 150px;
     height: 50px;
     border-radius: 25px;
-    background-color: var(--aau-grey); 
+    background-color: var(--aau-grey);
     color: var(--aau-blue);
     display: flex;
-    justify-content: center; 
-    align-items: center;     
+    justify-content: center;
+    align-items: center;
     border: none;
     transition: 0.3s;
-    
+
 }
 
 .nav-link.active {
@@ -137,7 +152,8 @@ body {
 .left-controls {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Keeps items on the left */
+    justify-content: flex-start;
+    /* Keeps items on the left */
     gap: 15px;
     width: 100%;
 }
@@ -150,12 +166,13 @@ body {
     padding: 0 52px;
     cursor: pointer;
     font-weight: 500;
-    gap: 8px; 
+    gap: 8px;
 }
 
 .view-switch {
     display: flex;
-    justify-content: flex-start; /* Keeps buttons on the left */
+    justify-content: flex-start;
+    /* Keeps buttons on the left */
     gap: 15px;
     width: 100%;
 }
@@ -182,6 +199,7 @@ body {
     color: white;
     cursor: default;
 }
+
 /*Month and Week Button Hover*/
 .view-btn.active .btn-icon {
     filter: brightness(0) invert(1);
@@ -229,16 +247,18 @@ body {
     min-width: 750px;
     border-radius: 20px;
 }
+
 /* When in weekly view, we use 8 columns (1 for time, 7 for days) */
 .calendar-grid.weekly-view {
     display: grid;
-    grid-template-columns: 80px repeat(7, 1fr); 
+    grid-template-columns: 80px repeat(7, 1fr);
     border: 1px solid var(--aau-grey);
     background-color: white;
     overflow-y: auto;
-        /* change grid-auto-rows to auto so it can grow */
-    grid-auto-rows: minmax(60px, auto); 
+    /* change grid-auto-rows to auto so it can grow */
+    grid-auto-rows: minmax(60px, auto);
 }
+
 .day-name {
     padding: 15px;
     text-align: center;
@@ -264,7 +284,7 @@ body {
     background-color: white;
     border: 1px solid var(--aau-grey);
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 5px;
     cursor: default;
 }
@@ -289,9 +309,11 @@ body {
     width: 28px;
     height: 28px;
 }
+
 /* The actual clickable slots for events */
 .slot-cell {
-    height: 60px; /* Each hour is 60px tall */
+    height: 60px;
+    /* Each hour is 60px tall */
     border-right: 1px solid #EEE;
     border-bottom: 1px solid #F5F5F5;
     transition: background 0.1s;
@@ -299,7 +321,8 @@ body {
     border: 1px solid #eee;
     padding: 4px 0;
     display: flex;
-    flex-direction: column; /* Stacks events vertically */
+    flex-direction: column;
+    /* Stacks events vertically */
     gap: 2px;
 }
 
@@ -313,6 +336,7 @@ body {
     border-right: 2px solid var(--aau-dark-grey);
     border-bottom: 2px solid var(--aau-dark-grey);
 }
+
 /* JS. will manualy add this box for the correct date.*/
 .day-cell.is-today .day-number {
     background-color: var(--aau-light-blue);
@@ -324,6 +348,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 /* JS. will manualy add this box for the correct month.*/
 
 .day-cell.not-current-month {
@@ -343,33 +368,36 @@ body {
     margin: 2px 2px 0 2px;
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.2s ease; /*Makes the hover effect fade in and out*/
-    border: 1.5px solid currentColor;;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    
+    transition: 0.2s ease;
+    /*Makes the hover effect fade in and out*/
+    border: 1.5px solid currentColor;
+    ;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
     display: -webkit-box;
-    -webkit-line-clamp: 1;      
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     line-clamp: 1;
-    
+
     overflow: hidden;
     text-overflow: ellipsis;
 
-    
     cursor: pointer;
 }
+
 /*Simple hover Effect to set the brightness to 90%, darkening it*/
 .event-pill:hover {
     filter: brightness(0.9);
 }
 
-
 .weekly-event-block {
-    /* Remove any position: absolute; from your existing CSS for this class */
+    height: auto;
+    min-height: 40px;
+    cursor: pointer;
+    border: none;
     padding: 6px;
     border-radius: 4px;
-    color: white;
-    font-size: 11px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    word-wrap: break-word; /* Ensures long titles don't break the layout */
+    font-size: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
 }

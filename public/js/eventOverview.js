@@ -1,134 +1,126 @@
-/* 1. KONFIGURATION OG INITIALISERING (Setup and Startup) */
 
-// Sets up selected categories by loading them from the browser's storage (localStorage). 
-// If nothing is stored, it defaults to a full list of categories.
-window.selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || ['All', 'Sports', 'Party', 'Free', 'Wellness', 'Food', 'Music', 'Outdoors', 'Academic', 'Social'];
+// ===== CONFIGURATION =====
 
-// A global container (array) to keep track of all event data retrieved from the server.
+// Load saved category filters from localStorage, defaulting to All if none are saved
+window.selectedCategories = JSON.parse(localStorage.getItem("selectedCategories")) || ["All"];
+
+// Global array holding all events fetched from the server
 window.allEvents = [];
 
-// A global string variable to hold whatever the user types into the search bar.
+// Holds the current search bar input for filtering
 let searchText = "";
 
-// Grabs references to specific HTML elements for the event info popup (modal).
+// References to the event details modal and its action buttons
 const modal = document.getElementById("event_info");
 const closeButton = document.getElementById("modal-close-button");
 const attendBtn = document.getElementById("attend-button");
 
-// This runs as soon as the website finishes loading its basic structure.
+
+// ===== INITIALISATION =====
+
+// Fetch all events from the server on page load and distribute them into sections
 document.addEventListener("DOMContentLoaded", async () => {
-    // Retrieves the unique ID and semester of the logged-in user from storage.
     const currentUserId = localStorage.getItem('userId');
     const userSemester = localStorage.getItem('userSemester');
 
     try {
-        // --- COMMUNICATION WITH SERVER ---
-        // Sends a request to the backend server to get the list of events.
         const response = await fetch('http://localhost:3000/api/events');
-        // Converts the server's response into a usable JavaScript list (JSON).
         const dbEvents = await response.json();
 
-        // Saves the fetched events into our global variable.
         window.allEvents = dbEvents;
-
-        // Calls the logic to sort these events into 'Upcoming', 'Past', etc., based on user info.
         distributeEvents(dbEvents, userSemester, currentUserId);
-
-
     } catch (error) {
-        // If the server is down or there is a bug in the fetch, it logs the error here.
         console.error("Error fetching events:", error);
     }
 });
 
-/* 2. DISTRIBUTION LOGIK (Sorting events into categories) */
 
+// ===== EVENT DISTRIBUTION =====
+
+// Sorts events into sections (attending, upcoming, past etc.) based on date and user info
 function distributeEvents(events, userSemester, currentUserId) {
-    // Gets the current date/time and resets the clock to midnight for accurate day-to-day comparison.
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Internal check: determines if the user is allowed to see an event based on their semester.
+    // Returns true if the logged-in user's semester matches the event's visibility setting
     const hasAccess = (event) => {
-        if (!userSemester) return true; // If no user semester is set, show everything.
+        if (!userSemester) return true;
         const vis = Array.isArray(event.visibility) ? event.visibility : [event.visibility];
         return vis.some(v => {
             if (!v) return false;
-            if (v.toString().toUpperCase() === "ALL") return true; // Accessible to everyone.
-            return userSemester && v.toString().includes(userSemester); // Accessible if semester matches.
+            if (v.toString().toUpperCase() === "ALL") return true;
+            return userSemester && v.toString().includes(userSemester);
         });
     };
 
-    // Helper: Turns a date string from the database into a real JavaScript Date object.
+    // Converts a date string to a Date object, returns a zero date if invalid
     const parseDate = (dateStr) => {
         const d = new Date(dateStr);
-        return isNaN(d.getTime()) ? new Date(0) : d; // Returns a "zero date" if the date is broken.
+        return isNaN(d.getTime()) ? new Date(0) : d;
     };
 
-    // Filter: Events where the current user ID exists in the attending array
-    const attendingEvents = events.filter(e =>
-        Array.isArray(e.attending) &&
-        e.attending.includes(currentUserId) &&
-        parseDate(e.date) >= today
-    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    // Future events the user has signed up for
+    const attendingEvents = events
+        .filter((e) => Array.isArray(e.attending) && e.attending.includes(currentUserId) && parseDate(e.date) >= today)
+        .sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
-    // Filter: Finds events where the logged-in user is listed as the creator/organizer.
-    const myEvents = events.filter(e =>
-        (e.organizerId || e.organizer) === currentUserId &&
-        parseDate(e.date) >= today
-    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    // Future events created by the logged-in user
+    const myEvents = events
+        .filter((e) => (e.organizerId || e.organizer) === currentUserId && parseDate(e.date) >= today)
+        .sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
-    // Filter: Finds future events that the user has permission to see, sorted by date (closest first).
-    const upcoming = events.filter(e =>
-        parseDate(e.date) >= today && 
-        hasAccess(e) 
-    ).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    // All future events the user has access to, sorted by date
+    const upcoming = events
+        .filter((e) => parseDate(e.date) >= today && hasAccess(e))
+        .sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
-    // Filter: Takes events the user can see and reverses the order to show the most recently added first.
-    const newlyAdded = events.filter(e => 
-        hasAccess(e)&&
-        parseDate(e.date) >= today
-    ).slice().reverse();
+    // All future events the user has access to, sorted by most recently added
+    const newlyAdded = events
+        .filter((e) => hasAccess(e) && parseDate(e.date) >= today)
+        .slice()
+        .reverse();
 
-    // Filter: Finds events that have already happened, sorted newest to oldest.
-    const past = events.filter(e => {
-        const eventDate = parseDate(e.date);
-        return eventDate < today && eventDate.getTime() !== new Date(0).getTime();
-    }).sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    // All past events, sorted newest to oldest
+    const past = events
+        .filter((e) => {
+            const eventDate = parseDate(e.date);
+            return eventDate < today && eventDate.getTime() !== new Date(0).getTime();
+        })
+        .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
-        // Filter: Finds events where the logged-in user is listed as the creator/organizer, with the date in the past.
-    const myPastEvents = events.filter(e =>
-        (e.organizerId || e.organizer) === currentUserId &&
-        parseDate(e.date) < today
-    ).sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    // Past events created by the logged-in user
+    const myPastEvents = events
+        .filter((e) => (e.organizerId || e.organizer) === currentUserId && parseDate(e.date) < today)
+        .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
-    // Displays the filtered and sorted lists into the correct sections on the webpage.
-    visEventsPåSiden(filtrerEvents(attendingEvents), "attending-events");
-    visEventsPåSiden(filtrerEvents(myEvents), "my-events");
-    visEventsPåSiden(filtrerEvents(upcoming), "upcoming-events");
-    visEventsPåSiden(filtrerEvents(newlyAdded), "newly-added-events");
-    visEventsPåSiden(filtrerEvents(past), "past-events");
-    visEventsPåSiden(filtrerEvents(myPastEvents), "my-past-events");
+    // Render each filtered list into its corresponding section on the page
+    renderEvents(filterEvents(attendingEvents), "attending-events");
+    renderEvents(filterEvents(myEvents), "my-events");
+    renderEvents(filterEvents(upcoming), "upcoming-events");
+    renderEvents(filterEvents(newlyAdded), "newly-added-events");
+    renderEvents(filterEvents(past), "past-events");
+    renderEvents(filterEvents(myPastEvents), "my-past-events");
 }
 
-/* 3. UI FUNKTIONER (Building the visuals) */
+// ===== UI =====
 
-// This function creates the actual HTML code for one event card.
-function skabEventKortHTML(event) {
-    // Decides whether to show a specific time or a start/end range.
+// Builds and returns the HTML string for a single event card
+function buildEventCardHTML(event) {
     const timeDisplay = event.time || `${event.startTime} - ${event.endTime}`;
-    // Defaults to "Student" if no specific organizer name is found.
     const displayOrganizer = event.organizer || "Student";
-    // Calculates how many people are attending (counts the items in the attendee list).
-    const attendCount = event.attendeeNames ? event.attendeeNames.length : (event.attending ? event.attending.length : 0);
+    const attendCount = event.attendeeNames
+        ? event.attendeeNames.length
+        : event.attending
+            ? event.attending.length
+            : 0;
 
     // Returns a large string of HTML code filled with the event's data.
     return `
         <div class="event-card">
-            <img src="${event.imageUrl || 'images/basket.webp'}" alt="${event.title}" class="card-image">
+            <img src="${event.imageUrl || 'public/images/aau-entrance.png'}" alt="${event.title}" class="card-image">
             <div class="card-content">
                 <h3 class="card-title">${event.title}</h3>
-                <div class="tags-row" style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
+                <div class="tags-row">
                     ${(event.categories || ["General"]).map(cat => `<span class="tag-visuel tag-${cat.toLowerCase()}">${cat}</span>`).join('')}
                 </div>
                 <p class="card-desc">${event.description}</p>
@@ -144,42 +136,50 @@ function skabEventKortHTML(event) {
         </div>`;
 }
 
-// Injects the generated HTML into a specific container on the webpage.
-function visEventsPåSiden(eventListe, htmlKasseId) {
-    const kasse = document.getElementById(htmlKasseId);
-    if (kasse) {
-        // If the list is empty, show a grey message. Otherwise, clear the box and add cards.
-        kasse.innerHTML = eventListe.length === 0 ? "<p style='padding: 20px; color: grey;'>No events found here.</p>" : "";
-        eventListe.forEach(event => { kasse.innerHTML += skabEventKortHTML(event); });
+// Renders a list of events into the specified section container
+function renderEvents(eventList, htmlContainerId) {
+    const container = document.getElementById(htmlContainerId);
+    if (container) {
+        container.innerHTML =
+            eventList.length === 0
+                ? "<p class='no-events-message'>No events found here.</p>"
+                : "";
+        eventList.forEach(event => {
+            container.innerHTML += buildEventCardHTML(event);
+        });
     }
 }
 
-/* 4. FILTRERING (The Search and Category Filter) */
 
-function filtrerEvents(eventListe) {
-    return eventListe.filter(event => {
-        // Converts all categories to lowercase so the search isn't picky about capital letters.
+// ===== FILTERING =====
+
+// Filters an event list by the active category selection and current search text
+function filterEvents(eventList) {
+    return eventList.filter(event => {
         const eventCatsLower = (event.categories || []).map(cat => cat.toString().toLowerCase());
         const selectedLower = window.selectedCategories.map(cat => cat.toString().toLowerCase());
 
-        // Logic: matches if 'All' is picked OR if the event's category matches one of the user's picks.
-        const matchesCategory = selectedLower.includes('all') || selectedLower.some(cat => eventCatsLower.includes(cat));
+        const matchesCategory =
+            selectedLower.includes('all') ||
+            selectedLower.some(cat => eventCatsLower.includes(cat));
 
-        // Logic: matches if search is empty OR if the title/description contains the search text.
-        const matchesSearch = searchText === "" ||
+        const matchesSearch =
+            searchText === "" ||
             (event.title || "").toLowerCase().includes(searchText) ||
             (event.description || "").toLowerCase().includes(searchText);
 
-        // Returns true only if the event passes both the category AND search tests.
         return matchesCategory && matchesSearch;
     });
 }
 
+
+// ===== SCROLL BUTTONS =====
+
+// Adds left/right scroll functionality to each horizontal event section
 document.querySelectorAll(".events-wrapper").forEach(wrapper => {
     const grid = wrapper.querySelector(".events-grid");
     const leftBtn = wrapper.querySelector(".scroll-btn.left");
     const rightBtn = wrapper.querySelector(".scroll-btn.right");
-
     const scrollAmount = 800;
 
     leftBtn.addEventListener("click", () => {

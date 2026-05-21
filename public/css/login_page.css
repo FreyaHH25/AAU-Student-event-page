@@ -107,4 +107,5 @@ header p {
     font-size: 13px;
     margin-bottom: 10px;
     font-weight: 600;
+    color: var(--aau-red);
 }

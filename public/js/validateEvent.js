@@ -1,11 +1,12 @@
+// Makes sure events stay of reasonable proportions
 function validateEvent(event) {
   const errors = [];
 
   if (!event.title || event.title.trim() === "") {
     errors.push("Title is required");
   }
-  if (event.title && event.title.length > 100) {
-    errors.push("Title is too long (max 100 characters)");
+  if (event.title && event.title.length > 50) {
+    errors.push("Title is too long (max 50 characters)");
   }
   if (event.organizer && event.organizer.length > 30) {
   errors.push("Organizer name is too long (max 30 characters)");
@@ -46,6 +47,7 @@ function validateEvent(event) {
   };
 }
 
+// Used for testing:
 // Allows the function to be imported by Jest in Node.js,
 // while still working in the browser
 if (typeof module !== "undefined" && module.exports) {
