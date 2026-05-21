@@ -1,4 +1,5 @@
-/** --- CONFIGURATION --- **/
+// ===== CONFIGURATION =====
+
 // Load the .env file so process.env can access the variables
 // (dotenv loades in server.js, so it is not needed here)
 

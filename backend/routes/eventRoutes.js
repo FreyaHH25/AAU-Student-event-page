@@ -1,4 +1,5 @@
-/** --- EVENT ROUTES --- **/
+// ===== EVENT ROUTES =====
+
 // Defines which URLs exist for events - the actual logic lives in the controller
 const express = require("express");
 const router = express.Router();

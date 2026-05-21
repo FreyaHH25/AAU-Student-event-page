@@ -1,4 +1,5 @@
-/** --- AUTH ROUTES --- **/
+// ===== AUTH ROUTES =====
+
 // Defines which URLs exist for authentication
 const express = require("express");
 const router = express.Router();

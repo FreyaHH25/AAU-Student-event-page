@@ -1,7 +1,9 @@
 // Load environment variables FIRST
 require("dotenv").config();
 
-/** --- IMPORTING MODULES --- **/
+
+// ===== IMPORTING MODULES =====
+
 // Import the Express framework to create and manage the web server
 const express = require("express");
 
@@ -22,18 +24,24 @@ const authRoutes = require("./routes/authRoutes");
 // Initialize the Express application
 const app = express();
 
-/** --- MIDDLEWARE SETUP --- **/
+
+// ===== MIDDLEWARE SETUP =====
+
 // Allows the frontend to communicate with the backend without being blocked by security policies
 app.use(cors());
 // Tells the server to look for and understand JSON data sent in request bodies
 app.use(express.json());
 
-/** --- ROUTE REGISTRATION --- **/
+
+// ===== ROUTE REGISTRATION =====
+
 // Attach routes with their URL prefix
 app.use("/api/events", eventRoutes);
 app.use("/api", authRoutes);
 
-/** --- SERVER ACTIVATION --- **/
+
+// ===== SERVER ACTIVATION =====
+
 // Connect to the DB FIRST, then start the server
 connectDB().then(() => {
   app.listen(config.port, () => {

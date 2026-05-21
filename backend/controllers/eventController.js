@@ -1,9 +1,11 @@
-/** --- EVENT CONTROLLER --- **/
+// ===== EVENT CONTROLLER =====
+
 const { ObjectId } = require("mongodb");
 const { getDB } = require("../db");
 const config = require("../config");
 
-/** --- GET ALL EVENTS --- **/
+
+// ===== GET ALL EVENTS =====
 exports.getAllEvents = async (req, res) => {
   try {
     const db = getDB();
@@ -74,7 +76,9 @@ exports.getAllEvents = async (req, res) => {
   }
 };
 
-/** ---  GET A SINGLE EVENT BY ID --- **/
+
+// ===== GET A SINGLE EVENT BY ID =====
+
 // Fetches a single event's details based on its ID
 exports.getEventById = async (req, res) => {
   try {
@@ -95,7 +99,9 @@ exports.getEventById = async (req, res) => {
   }
 };
 
-/** --- POST NEW EVENT --- **/
+
+// ===== POST NEW EVENT =====
+
 // Receives data from the "Create Event" form and saves it as a new document
 exports.createEvent = async (req, res) => {
   try {
@@ -115,7 +121,9 @@ exports.createEvent = async (req, res) => {
   }
 };
 
-/** ---  UPDATE EVENT --- **/
+
+// ===== UPDATE EVENT =====
+
 // This handles the actual saving of the edited event
 exports.updateEvent = async (req, res) => {
   try {
@@ -143,7 +151,9 @@ exports.updateEvent = async (req, res) => {
   }
 };
 
-/** ---  DELETE EVENT --- **/
+
+// ===== DELETE EVENT =====
+
 exports.deleteEvent = async (req, res) => {
   try {
     const db = getDB();
@@ -162,7 +172,9 @@ exports.deleteEvent = async (req, res) => {
   }
 };
 
-/** --- TOGGLE ATTENDANCE --- **/
+
+// ===== TOGGLE ATTENDANCE =====
+
 // This adds or removes a user from the attendance list based on their current status
 exports.toggleAttendance = async (req, res) => {
   try {

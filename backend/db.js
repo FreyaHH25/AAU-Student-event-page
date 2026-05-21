@@ -1,4 +1,5 @@
-/** --- DATABASE CONNECTION --- **/
+// ===== DATABASE CONNECTION =====
+
 const { MongoClient } = require("mongodb");
 const config = require("./config");
 

@@ -1,7 +1,9 @@
-/** --- AUTH CONTROLLER --- **/
+// ===== AUTH CONTROLLER =====
 const { getDB } = require("../db");
 
-/** --- LOGIN VALIDATION --- **/
+
+// ===== LOGIN VALIDATION =====
+
 // Checks if the user's email and password exist in the "users" collection
 exports.login = async (req, res) => {
   try {
