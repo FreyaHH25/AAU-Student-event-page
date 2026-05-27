@@ -1,6 +1,6 @@
 // Load environment variables from the backend's .env file
 // This makes config.mongoUri available so db.js doesn't crash when required
-require("dotenv").config({ path: "./backend/.env" });
+require("dotenv").config({ path: "./.env" });
 
 // Import the login function we want to test
 const { login } = require("../backend/controllers/authController");
