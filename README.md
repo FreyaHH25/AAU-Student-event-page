@@ -34,11 +34,12 @@ Express, MongoDB, dotenv, cors, and Jest.
 
 ### 3. Create a `.env` file
 
-Create a file called `.env` in root with the following content:
+Create a file called `.env` in the root.
+You can copy the structure from .env.example and replace "your_mongodb_connection_string" with the connection string.
 
-MONGO_URI=
+MONGO_URI=your_mongodb_connection_string
 PORT=3000
-DB_NAME=
+DB_NAME=UniEventDB
 
 > Note: The `.env` file is ignored by Git and should never be committed.
 
@@ -73,8 +74,9 @@ Test files are located in the `tests/` folder and follow the naming convention
 
 ## Authors
 
-- Freya Hedegaard Hansen ([@FreyaHH25](https://github.com/FreyaHH25))
-- Marius Piasecki Frey Hansen
-- Filip Sukhanov
 - Abdulhady Ghabour
+- Freya Hedegaard Hansen ([@FreyaHH25](https://github.com/FreyaHH25))
+- Filip Sukhanov
+- Japjot Singh
+- Marius Piasecki Frey Hansen
 - Marzia Yousofi
