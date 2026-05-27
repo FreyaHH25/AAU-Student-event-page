@@ -59,6 +59,14 @@ The server will start on `http://localhost:3000`.
 
 Open `public/login_page.html` in VS Code, right click and choose "Open with Live Server"
 
+Example login
+To make it easy to test the application, you can log in with the following demo account:
+
+Username: stud1@student.aau.dk
+Password: 12345
+
+This account already contains sample data so you can explore the event overview, calendar view, and the personalized header.
+
 ## Running Tests
 
 The project uses [Jest](https://jestjs.io/) for unit testing.
