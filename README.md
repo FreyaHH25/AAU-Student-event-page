@@ -37,10 +37,6 @@ Express, MongoDB, dotenv, cors, and Jest.
 Create a file called `.env` in the root.
 You can copy the structure from .env.example and replace "your_mongodb_connection_string" with the connection string.
 
-MONGO_URI=your_mongodb_connection_string
-PORT=3000
-DB_NAME=UniEventDB
-
 > Note: The `.env` file is ignored by Git and should never be committed.
 
 ## Running the App
