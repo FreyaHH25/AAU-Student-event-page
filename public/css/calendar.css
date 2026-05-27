@@ -385,7 +385,6 @@ body {
     cursor: pointer;
 }
 
-/*Simple hover Effect to set the brightness to 90%, darkening it*/
 .event-pill:hover {
     filter: brightness(0.9);
 }
